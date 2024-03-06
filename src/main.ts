@@ -1,6 +1,27 @@
 import "./style.scss";
-import { ElementParams } from "./types";
-import ElementCreator from "./util/element-creator";
+
+let links = document.querySelectorAll(".menu-link");
+links.forEach((elem) => elem.addEventListener('click', (event) => {
+  links.forEach((elem) => elem.classList.remove("active"));
+  event.currentTarget.classList.add("active");
+  }),
+);
+
+let currentLanguage = "EN";
+
+function changeLanguage(event) {
+  if (currentLanguage === "EN") {
+    currentLanguage = "RU";
+  } else {
+    currentLanguage = "EN";
+  }
+  event.currentTarget.lastElementChild.textContent = currentLanguage;
+};
+
+let langChanger = document.getElementById("lang-changer");
+
+langChanger?.addEventListener('click', changeLanguage);
+
 
 // const param1: ElementParams = {
 //   tag: "div",
