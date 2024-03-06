@@ -1,9 +1,11 @@
 import "./style.scss";
 
-let links = document.querySelectorAll(".menu-link");
-links.forEach((elem) => elem.addEventListener('click', (event) => {
-  links.forEach((elem) => elem.classList.remove("active"));
-  event.currentTarget.classList.add("active");
+const links = document.querySelectorAll(".menu-link");
+links.forEach((elem) =>
+  elem.addEventListener("click", (event: MouseEvent) => {
+    links.forEach((elem) => elem.classList.remove("active"));
+    const targetEl = event.currentTarget as HTMLElement;
+    targetEl.classList.add("active");
   }),
 );
 
@@ -16,12 +18,11 @@ function changeLanguage(event) {
     currentLanguage = "EN";
   }
   event.currentTarget.lastElementChild.textContent = currentLanguage;
-};
+}
 
-let langChanger = document.getElementById("lang-changer");
+const langChanger = document.getElementById("lang-changer");
 
-langChanger?.addEventListener('click', changeLanguage);
-
+langChanger?.addEventListener("click", changeLanguage);
 
 // const param1: ElementParams = {
 //   tag: "div",
