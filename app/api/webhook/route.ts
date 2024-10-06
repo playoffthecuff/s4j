@@ -4,11 +4,7 @@ import { revalidatePath } from 'next/cache';
 
 const secret = process.env.SANITY_WEBHOOK_SECRET;
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
+export const runtime = 'nodejs';
 
 async function readBody(request: NextRequest): Promise<string> {
   const chunks: Uint8Array[] = [];
