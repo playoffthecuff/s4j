@@ -11,6 +11,8 @@ interface SimpleBlogCard {
   titleImage: unknown
 }
 
+export const revalidate = 3600
+
 async function getData() {
   const query = `
   *[_type == 'blog'] | order(_createdAt asc) {

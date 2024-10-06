@@ -11,7 +11,6 @@ interface BlogArticle {
 }
 
 async function getData(slug: string) {
-  slug = 'test-title-1'
 const query = `
 *[_type == "blog" && slug.current == "${slug}"] {
   "slug": slug.current,
@@ -25,7 +24,6 @@ return data
 
 async function BlogArticle({params}: {params: {slug: string}}) {
   const data: BlogArticle = await getData(params.slug)
-  console.log(data)
   return (
     <article className="mt-8">
       <h1 className='text-3xl text-center font-bold '>{data.title}</h1>
