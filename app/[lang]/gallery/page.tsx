@@ -1,6 +1,5 @@
 import MasonryLayout from "@/components/masonry/Masonry";
 import { client } from "@/sanity/lib/client";
-import { urlFor } from "@/sanity/lib/image";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
 export interface Img {

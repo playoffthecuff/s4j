@@ -8,6 +8,23 @@ import Footer from "@/components/footer/Footer";
 import { i18n, type Locale } from "../../i18n-config";
 import { getDictionary } from "@/get-dictionary";
 
+export interface Langs {
+      english: string;
+    russian: string;
+}
+
+export interface Menu {
+  blog: string;
+  gallery: string;
+  events: string;
+  about: string;
+}
+
+export interface Headr {
+  langs: Langs;
+  menu: Menu;
+}
+
 export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
 }

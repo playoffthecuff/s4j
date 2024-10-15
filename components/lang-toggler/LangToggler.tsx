@@ -13,9 +13,10 @@ import RuFlag from "../flags/RuFlag";
 import EnFlag from "../flags/EnFlag";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { i18n, type Locale } from "@/i18n-config";
+import { type Locale } from "@/i18n-config";
+import { Langs } from "@/app/[lang]/layout";
 
-export default function LangToggler(props: {langs: any}) {
+export default function LangToggler(props: {langs: Langs}) {
   const pathname = usePathname();
   const redirectedPathname = (locale: Locale) => {
     if (!pathname) return "/";

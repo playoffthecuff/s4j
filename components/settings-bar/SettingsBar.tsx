@@ -1,7 +1,8 @@
+import { Langs } from "@/app/[lang]/layout";
 import LangToggler from "../lang-toggler/LangToggler";
 import ModeToggler from "../mode-toggler/ModeToggler";
 
-export default function SettingsBar(props: {className?: string, langs: any}) {
+export default function SettingsBar(props: {className?: string, langs: Langs}) {
   return (
     <div className={`flex gap-5 items-center ${props.className}`}>
       <ModeToggler />

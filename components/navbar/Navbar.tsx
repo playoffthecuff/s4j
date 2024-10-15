@@ -2,12 +2,13 @@
 import Link from "next/link";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { usePathname } from "next/navigation";
+import { Menu } from "@/app/[lang]/layout";
 
 export default function Navbar(
   props: {
     orientation: "horizontal" | "vertical";
     className?: string;
-    menu: any;
+    menu: Menu;
     onChange?: () => void;
   },
 ) {

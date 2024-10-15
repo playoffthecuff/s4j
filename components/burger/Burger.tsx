@@ -3,8 +3,9 @@
 import { useState } from "react";
 import { Button } from "../ui/button";
 import Navbar from "../navbar/Navbar";
+import { Menu } from "@/app/[lang]/layout";
 
-export default function Burger(props: { className?: string, menu: any }) {
+export default function Burger(props: { className?: string, menu: Menu }) {
   const [open, setOpen] = useState(false);
 
   function handleClick() {
