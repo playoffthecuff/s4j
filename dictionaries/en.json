@@ -1,0 +1,21 @@
+{
+  "server-component": {
+    "welcome": "Welcome"
+  },
+  "counter": {
+    "increment": "Increment",
+    "decrement": "Decrement"
+  },
+  "header": {
+    "menu": {
+      "blog": "Blog",
+      "gallery": "Gallery",
+      "events": "Events",
+      "about": "About"
+    },
+    "langs": {
+      "english": "English",
+      "russian": "Russian"
+    }
+  }
+}

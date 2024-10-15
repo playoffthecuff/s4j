@@ -7,11 +7,14 @@
     "noEmit": true,
     "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "bundler",
+    "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "target": "ES2017", 
+    "forceConsistentCasingInFileNames": true,
+
     "plugins": [
       {
         "name": "next"
@@ -20,8 +23,7 @@
     "paths": {
       "@/*": ["./*"]
     },
-    "target": "ES2017"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/masonry/1.js"],
   "exclude": ["node_modules"]
 }

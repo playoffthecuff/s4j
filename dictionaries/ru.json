@@ -1,0 +1,21 @@
+{
+  "server-component": {
+    "welcome": "Привет"
+  },
+  "counter": {
+    "increment": "Увеличить",
+    "decrement": "Уменьшить"
+  },
+  "header": {
+    "menu": {
+      "blog": "Блог",
+      "gallery": "Гелерея",
+      "events": "События",
+      "about": "Обо мне"
+    },
+    "langs": {
+      "english": "Английский",
+      "russian": "Русский"
+    }
+  }
+}

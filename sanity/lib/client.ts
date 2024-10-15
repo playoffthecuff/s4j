@@ -1,16 +1,11 @@
 import { createClient } from 'next-sanity'
-import imageUrlBuilder from "@sanity/image-url"
 import { apiVersion, dataset, projectId } from '../env'
 
 export const client = createClient({
   projectId,
   dataset,
   apiVersion,
-  useCdn: false, // Set to false if statically generating pages, using ISR or tag-based revalidation
+  perspective: 'published',
+  useCdn: false,
+  token: process.env.NEXT_PUBLIC_SANITY_USER_ADDER_TOKEN // Set to false if statically generating pages, using ISR or tag-based revalidation
 })
-
-const builder = imageUrlBuilder(client)
-
-export function urlFor(src: any) {
-  return builder.image(src)
-}

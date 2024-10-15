@@ -9,6 +9,29 @@ const config: Config = {
   ],
   theme: {
   	extend: {
+			boxShadow: {
+				DEFAULT: '0 6px 10px 0 var(--shadow-color)',
+			},
+			transitionDuration: {
+        '400': '400ms',
+      },
+			transitionDelay: {
+        '400': '400ms',
+      },
+			gridRow: {
+				'span-15': 'span 15 / span 15',
+				'span-17': 'span 17 / span 17',
+				'span-18': 'span 18 / span 18',
+        'span-20': 'span 20 / span 20',
+				'span-25': 'span 25 / span 25',
+				'span-30': 'span 30 / span 30',
+				'span-40': 'span 40 / span 40',
+      },
+			gridColumn: {
+				'span-20': 'span 20 / span 20',
+				'span-30': 'span 30 / span 30',
+				'span-40': 'span 40 / span 40',
+			},
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
@@ -28,6 +51,7 @@ const config: Config = {
   				DEFAULT: 'hsl(var(--secondary))',
   				foreground: 'hsl(var(--secondary-foreground))'
   			},
+				tertiary: 'hsl(var(--tertiary-foreground))',
   			muted: {
   				DEFAULT: 'hsl(var(--muted))',
   				foreground: 'hsl(var(--muted-foreground))'
