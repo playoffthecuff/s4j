@@ -24,6 +24,6 @@
       "@/*": ["./*"]
     },
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/masonry/1.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/masonry/1.js", "components/share-menu/ShareMenuSWQuarter.tsx"],
   "exclude": ["node_modules"]
 }

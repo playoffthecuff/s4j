@@ -1,49 +1,21 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { client } from "@/sanity/lib/client";
-import { urlFor } from "@/sanity/lib/image";
-import { SanityImageSource } from "@sanity/image-url/lib/types/types";
-import Image from "next/image";
-import Link from "next/link";
+import SmokyText from "@/components/smoky-text/SmokyText";
+import { Locale } from "@/i18n-config";
+import { fetchGalleryImages, fetchGreetings } from "@/utils/apiService";
 
-interface SimpleBlogCard {
-  title: string;
-  smallDescription: string;
-  slug: string;
-  titleImage: SanityImageSource;
-}
-
-export const revalidate = 3600
-
-async function getData() {
-  const query = `
-  *[_type == 'blog'] | order(_createdAt asc) {
-  title,
-    smallDescription,
-    "slug": slug.current,
-    titleImage
-  }`;
-  const data = await client.fetch(query);
-  return data;
-}
-
-export default async function Home() {
-  const data: SimpleBlogCard[] = await getData()
+export default async function Page({ params }: { params: { lang: Locale } }) {
+  const images = await fetchGalleryImages();
+  const greetings = await fetchGreetings(params.lang);
   return (
-    <>
-      <h1>Hi</h1>
-      <div className="grid grid-cols-1 lg:grid-cols-2 mt-5 gap-4">
-        {data.map((post,i) => (<Card key={i}>
-          <Image src={urlFor(post.titleImage).url()} alt="" width={640} height={640} className="rounded-t-lg h-[200px] object-cover"/>
-        <CardContent>
-          <h3 className="text-lg line-clamp-2">{post.title}</h3>
-          <p className="line-clamp-4 text-sm text-gray-600 dark:text-gray-400">{post.smallDescription}</p>
-          <Button asChild className="w-full mt-7" variant='secondary'>
-            <Link href={`/blog/${post.slug}`}>Read More</Link>
-          </Button>
-          </CardContent>
-        </Card>))}
-      </div>
-    </>
+    <div className="h-[calc(100vh-126px)] relative">
+      <SmokyText
+        className="absolute z-10 bottom-1/2 right-1/2 translate-x-1/2 text-4xl translate-y-1/2 w-fit"
+        text={greetings}
+      />
+      {/* <video autoPlay loop muted className="opacity-50 absolute top-0 left-0 w-screen h-screen object-cover">
+        <source src="./media/hero.mp4" type="video/mp4"/>
+        Sorry, your browser doesn't support embedded videos.
+      </video> */}
+      {/* <HomeCarousel images={data} delay={5000}></HomeCarousel> */}
+    </div>
   );
 }

@@ -1,21 +1,42 @@
 {
-  "server-component": {
-    "welcome": "Привет"
-  },
-  "counter": {
-    "increment": "Увеличить",
-    "decrement": "Уменьшить"
-  },
-  "header": {
-    "menu": {
-      "blog": "Блог",
-      "gallery": "Гелерея",
-      "events": "События",
-      "about": "Обо мне"
-    },
-    "langs": {
-      "english": "Английский",
-      "russian": "Русский"
-    }
-  }
+  "blog": "Блог",
+  "gallery": "Галерея",
+  "events": "События",
+  "about": "Автор",
+  "english": "Английский",
+  "russian": "Русский",
+  "readMore": "Читать далее",
+  "light": "Светлый",
+  "dark": "Тёмный",
+  "system": "Система",
+  "writeMePlaceholder": "Введите ваше сообщение здесь",
+  "writeTooltip": "Написать сообщение",
+  "sendMessageTooltip": "Отправить сообщение",
+  "sendMessageSuccess": "Ваше сообщение  было успешно отправленно.",
+  "sendMessageFailed": "К сожалению сервис временно не доступен. Повторите попытку позже.",
+  "email": "Электронная почта",
+  "phone": "Телефон",
+  "shareTooltip": "Поделиться",
+  "copiedTooltip": "Скопировано",
+  "more": "Ещё",
+  "expand": "Развернуть",
+  "collapse": "Свернуть",
+  "startsIn": "До начала",
+  "addToCalendar": "Добавить в календарь",
+  "pastEvents": "Прощедшие события",
+  "upcomingEvents": "Предстоящие события",
+  "designedBy": "разработано",
+  "juliaRibetki": "Юлия Рибетки",
+  "facebookShareTooltip": "Facebook",
+  "copyToClipboard": "Скопировать ссылку",
+  "twitterShareTooltip": "Twitter",
+  "redditShareTooltip": "Reddit",
+  "linkedInShareTooltip": "LinkedIn",
+  "whatsappShareTooltip": "WhatsApp",
+  "telegramShareTooltip": "Telegram",
+  "vkShareTooltip": "VK",
+  "emailShareTooltip": "через Email",
+  "closeTooltip": "закрыть",
+  "zoomClickHintTooltip": "приблизить/отдалить",
+  "scrollHintTooltip": "показать/скрыть описание"
 }

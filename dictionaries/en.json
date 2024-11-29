@@ -1,21 +1,42 @@
 {
-  "server-component": {
-    "welcome": "Welcome"
-  },
-  "counter": {
-    "increment": "Increment",
-    "decrement": "Decrement"
-  },
-  "header": {
-    "menu": {
-      "blog": "Blog",
-      "gallery": "Gallery",
-      "events": "Events",
-      "about": "About"
-    },
-    "langs": {
-      "english": "English",
-      "russian": "Russian"
-    }
-  }
+  "blog": "Blog",
+  "gallery": "Gallery",
+  "events": "Events",
+  "about": "About",
+  "english": "English",
+  "russian": "Russian",
+  "readMore": "Read More",
+  "light": "Light",
+  "dark": "Dark",
+  "system": "System",
+  "writeMePlaceholder": "Type your message here",
+  "writeTooltip": "Write message",
+  "sendMessageTooltip": "Send message",
+  "sendMessageSuccess": "Your message has been sent successfully.",
+  "sendMessageFailed": "Unfortunately, the service is temporarily unavailable. Please try again later.",
+  "email": "Email",
+  "phone": "Phone",
+  "shareTooltip": "Share",
+  "copiedTooltip": "Link copied",
+  "more": "More",
+  "expand": "Expand",
+  "collapse": "Collapse",
+  "startsIn": "It starts in",
+  "addToCalendar": "Add to Calendar",
+  "pastEvents": "Past events",
+  "upcomingEvents": "Upcoming events",
+  "designedBy": "designed by",
+  "juliaRibetki": "Julia Ribetki",
+  "facebookShareTooltip": "Facebook",
+  "copyToClipboard": "Copy link",
+  "twitterShareTooltip": "Twitter",
+  "redditShareTooltip": "Reddit",
+  "linkedInShareTooltip": "LinkedIn",
+  "whatsappShareTooltip": "WhatsApp",
+  "telegramShareTooltip": "Telegram",
+  "vkShareTooltip": "VK",
+  "emailShareTooltip": "by Email",
+  "closeTooltip": "close",
+  "zoomClickHintTooltip": "zoom in/out",
+  "scrollHintTooltip": "show/hide description"
 }

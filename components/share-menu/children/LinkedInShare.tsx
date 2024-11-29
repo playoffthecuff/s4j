@@ -1,0 +1,54 @@
+"use client";
+
+import { Button } from "../../ui/button";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../../ui/tooltip";
+import { useI18n } from "@/utils/i18context";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { Linkedin } from "lucide-react";
+
+export default function LinkedInShare({
+  className,
+  text,
+  title,
+}: {
+  className?: string;
+  text: string;
+  title: string;
+}) {
+  const t = useI18n();
+  const [link, setLink] = useState("");
+  useEffect(() => {
+    if (typeof window !== undefined) setLink(window.location.href);
+  }, []);
+
+  return (
+    <div className={className}>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button
+            variant="outline"
+            size="icon"
+            className="h-12 w-12 rounded-full"
+          >
+            <a
+              target="_blank"
+              href={encodeURI(
+                `https://www.linkedin.com/shareArticle?mini=true&url=${link}&title=${title}&summary=${text}&source=Julia Ribetki official website`,
+              )}
+              aria-label="share on linkedin"
+            >
+              <Linkedin className="w-10 h-10 p-2" />
+            </a>
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent
+        align="end"
+          className={`bg-background/50 backdrop-blur-sm px-2 py-1 rounded-sm`}
+        >
+          <p>{t.linkedInShareTooltip}</p>
+        </TooltipContent>
+      </Tooltip>
+    </div>
+  );
+}

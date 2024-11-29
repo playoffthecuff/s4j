@@ -2,8 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+  --scrollbar-color-delay: scrollbar-color 0.4s;
+  --scrollbar-width: thin;
+  --scrollbar-width-legacy: 0.5rem;
+}
+
+@supports (scrollbar-width: auto) {
+  html {
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+    scrollbar-width: var(--scrollbar-width);
+    transition: var(--scrollbar-color-delay);
+  }
+}
+
+@supports selector(::-webkit-scrollbar) {
+  html::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 4px;
+  }
+
+  html::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+  }
+
+  html::-webkit-scrollbar {
+    max-width: var(--scrollbar-width-legacy);
+    max-height: var(--scrollbar-width-legacy);
+  }
+}
+
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: sans-serif;
+  width: 100vw;
 }
 
 @layer base {

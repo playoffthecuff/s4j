@@ -1,0 +1,42 @@
+.word {
+  white-space: nowrap;
+}
+
+.char {
+  display: inline-block;
+  text-shadow: 0 0 0 hsl(var(--foreground));
+  animation: smoky 5s 3s both;
+}
+
+.char:nth-child(even){
+  animation-name: smoky-mirror;
+}
+
+@keyframes smoky {
+  60% {
+    text-shadow: 0 0 40px hsl(var(--foreground));
+  }
+  to {
+    transform:
+      translate3d(15rem,-8rem,0)
+      rotate(-40deg)
+      skewX(70deg)
+      scale(1.5);
+    text-shadow: 0 0 20px hsl(var(--foreground));
+    opacity: 0;
+  }
+}
+
+@keyframes smoky-mirror {
+  60% {
+    text-shadow: 0 0 40px hsl(var(--foreground)); }
+  to {
+    transform:
+      translate3d(18rem,-8rem,0)
+      rotate(-40deg) 
+      skewX(-70deg)
+      scale(2);
+     text-shadow: 0 0 20px hsl(var(--foreground));
+    opacity: 0;
+  }
+}

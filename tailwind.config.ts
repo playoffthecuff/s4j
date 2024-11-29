@@ -1,37 +1,50 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-    darkMode: ["class"],
-    content: [
+  darkMode: ["class"],
+  content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+		fontFamily: {
+      "greet": "var(--greet-font)",
+    },
   	extend: {
-			boxShadow: {
-				DEFAULT: '0 6px 10px 0 var(--shadow-color)',
-			},
-			transitionDuration: {
-        '400': '400ms',
-      },
-			transitionDelay: {
-        '400': '400ms',
-      },
-			gridRow: {
-				'span-15': 'span 15 / span 15',
-				'span-17': 'span 17 / span 17',
-				'span-18': 'span 18 / span 18',
-        'span-20': 'span 20 / span 20',
-				'span-25': 'span 25 / span 25',
-				'span-30': 'span 30 / span 30',
-				'span-40': 'span 40 / span 40',
-      },
-			gridColumn: {
-				'span-20': 'span 20 / span 20',
-				'span-30': 'span 30 / span 30',
-				'span-40': 'span 40 / span 40',
-			},
+  		boxShadow: {
+  			DEFAULT: '0 6px 10px 0 var(--shadow-color)',
+  			up: '0 -6px 10px 0 var(--shadow-color)'
+  		},
+  		transitionDuration: {
+  			'250': '250ms',
+  			'400': '400ms',
+  			'600': '600ms'
+  		},
+  		transitionDelay: {
+  			'400': '400ms'
+  		},
+  		screens: {
+  			min720: '720px'
+  		},
+  		gridRow: {
+  			'span-15': 'span 15 / span 15',
+  			'span-17': 'span 17 / span 17',
+  			'span-18': 'span 18 / span 18',
+  			'span-20': 'span 20 / span 20',
+  			'span-25': 'span 25 / span 25',
+  			'span-30': 'span 30 / span 30',
+  			'span-40': 'span 40 / span 40'
+  		},
+  		filter: {
+  			'night-filter': 'grayscale(30%) invert(92%) contrast(83%) hue-rotate(180deg)'
+  		},
+  		gridColumn: {
+  			'span-20': 'span 20 / span 20',
+  			'span-30': 'span 30 / span 30',
+  			'span-40': 'span 40 / span 40'
+  		},
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
@@ -51,7 +64,7 @@ const config: Config = {
   				DEFAULT: 'hsl(var(--secondary))',
   				foreground: 'hsl(var(--secondary-foreground))'
   			},
-				tertiary: 'hsl(var(--tertiary-foreground))',
+  			tertiary: 'hsl(var(--tertiary-foreground))',
   			muted: {
   				DEFAULT: 'hsl(var(--muted))',
   				foreground: 'hsl(var(--muted-foreground))'
@@ -79,10 +92,39 @@ const config: Config = {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
+  		},
+  		fontFamily: {
+  			sans: ['var(--font-geist-sans)'],
+  			mono: ['var(--font-geist-mono)']
+  		},
+  		keyframes: {
+  			'accordion-down': {
+  				from: {
+  					height: '0'
+  				},
+  				to: {
+  					height: 'var(--radix-accordion-content-height)'
+  				}
+  			},
+  			'accordion-up': {
+  				from: {
+  					height: 'var(--radix-accordion-content-height)'
+  				},
+  				to: {
+  					height: '0'
+  				}
+  			}
+  		},
+  		animation: {
+  			'accordion-down': 'accordion-down 0.2s ease-out',
+  			'accordion-up': 'accordion-up 0.2s ease-out'
   		}
   	}
   },
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  plugins: [require("tailwindcss-animate"), require('@tailwindcss/typography')],
+  plugins: [
+    require("tailwindcss-animate"),
+    require("@tailwindcss/typography"),
+    require("tailwind-scrollbar")({ nocompatible: true }),
+  ],
 };
 export default config;
