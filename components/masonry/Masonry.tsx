@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { urlFor } from "@/sanity/lib/image";
+import { urlFor } from "@/lib/sanity/image";
 import { Eye } from "lucide-react";
 import Link from "next/link";
 import { Img } from "@/types/sanity-data";
@@ -14,7 +14,7 @@ interface ImgExt extends Img {
   fit: Fit;
 }
 
-export default function MasonryLayout({
+export default function Masonry({
   items,
   gap,
   rounding,
@@ -49,19 +49,25 @@ export default function MasonryLayout({
     <div className={className}>
       <div className={css.masonry}>
         {itemsExt.map((i, idx) => (
-          <Link href={`gallery/${idx}`} key={i.lqip} scroll={false} className="bg-neutral-950 group" prefetch>
-              <Image
-                className={`${i.fit} ${i.size} rounded-[${rounding}px] border group-hover:opacity-40 transition-opacity duration-250 relative`}
-                placeholder={i.lqip ? "blur" : undefined}
-                blurDataURL={i.lqip ?? undefined}
-                fill
-                alt={i.description}
-                src={urlFor(i.image).url()}
-              ></Image>
-              <Eye className="absolute bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-400 text-white" />
-              <p className="absolute bottom-4 right-1/2 translate-x-1/2 w-11/12 opacity-0 group-hover:opacity-100 transition-opacity duration-400 text-white">
-                {i.title}
-              </p>
+          <Link
+            href={`gallery/${idx}`}
+            key={i.lqip}
+            scroll={false}
+            className="bg-neutral-950 group"
+            prefetch
+          >
+            <Image
+              className={`${i.fit} ${i.size} rounded-[${rounding}px] border group-hover:opacity-40 transition-opacity duration-250 relative`}
+              placeholder={i.lqip ? "blur" : undefined}
+              blurDataURL={i.lqip ?? undefined}
+              fill
+              alt={i.description}
+              src={urlFor(i.image).url()}
+            ></Image>
+            <Eye className="absolute bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-400 text-white" />
+            <p className="absolute bottom-4 right-1/2 translate-x-1/2 w-11/12 opacity-0 group-hover:opacity-100 transition-opacity duration-400 text-white">
+              {i.title}
+            </p>
           </Link>
         ))}
       </div>

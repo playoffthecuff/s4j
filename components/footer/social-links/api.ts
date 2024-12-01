@@ -1,5 +1,5 @@
-import { client } from "@/sanity/lib/client";
-import { urlFor } from "@/sanity/lib/image";
+import { client } from "@/lib/sanity/client";
+import { urlFor } from "@/lib/sanity/image";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { defineQuery } from "next-sanity";
 

@@ -1,23 +1,24 @@
 "use client";
-import { CSSProperties, useEffect, useRef, useState } from "react";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import { urlFor } from "@/sanity/lib/image";
-import { usePathname } from "next/navigation";
-import InnerImageZoom from "react-inner-image-zoom";
-import { Button } from "../ui/button";
-import { ChevronLeft, ChevronRight, Info, Share2, X } from "lucide-react";
-import { ScrollArea } from "../ui/scroll-area";
+import { CSSProperties, useEffect, useState } from "react";
 import Link from "next/link";
+import { urlFor } from "@/lib/sanity/image";
+import { usePathname } from "next/navigation";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import InnerImageZoom from "react-inner-image-zoom";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
+import { ScrollArea } from "../ui/scroll-area";
 import { Separator } from "../ui/separator";
+import { Button } from "../ui/button";
+import { ChevronLeft, ChevronRight, Info, X } from "lucide-react";
+import ShareMenuQuarter from "../share-menu/ShareMenuQuarter";
+import ShareMenuQuadro from "../share-menu/ShareMenuQuadro";
+import ShareMenuRect from "../share-menu/ShareMenuRect";
+import ScrollIcon from "../icons/scroll";
+import TapIcon from "../icons/tap";
 import { useI18n } from "@/utils/i18context";
 import { Img } from "@/types/sanity-data";
 import "./styles.css";
-import ShareMenuQuarter from "../share-menu/ShareMenuQuarter";
-import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
-import ScrollIcon from "../icons/scroll";
-import TapIcon from "../icons/tap";
-import ShareMenuQuadro from "../share-menu/ShareMenuQuadro";
-import ShareMenuRect from "../share-menu/ShareMenuRect";
+
 
 export default function GalleryCarousel({
   images,

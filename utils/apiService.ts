@@ -1,5 +1,5 @@
 import { Locale } from "@/i18n-config";
-import { client } from "@/sanity/lib/client";
+import { client } from "@/lib/sanity/client";
 import { I18nString } from "@/types/i18n-string";
 import {
   Author,

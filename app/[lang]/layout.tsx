@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   publisher: "Julia Ribetki",
 };
 
-export default async function RootLayout({
+export default async function Layout({
   children,
   params,
 }: Readonly<{

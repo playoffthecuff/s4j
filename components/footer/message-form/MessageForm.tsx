@@ -1,20 +1,20 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { useI18n } from "@/utils/i18context";
 import {
   Popover,
-  PopoverTrigger,
   PopoverContent,
-} from "@radix-ui/react-popover";
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Tooltip,
-  TooltipTrigger,
   TooltipContent,
-} from "@radix-ui/react-tooltip";
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { sendEmailMessage, sendTelegramMessage } from "@/lib/actions";
+import { useI18n } from "@/utils/i18context";
 import { MessageSquareMore, SendHorizontal } from "lucide-react";
 import { ChangeEvent, useState } from "react";
-import emailjs from "@emailjs/browser";
 import { toast } from "sonner";
 
 export default function MessageForm() {
@@ -27,7 +27,6 @@ export default function MessageForm() {
   };
   const handleOpen = () => {
     setOpen(!open);
-    console.log("au");
   };
   const handleBlur = () => {
     setOpen(false);
@@ -37,20 +36,16 @@ export default function MessageForm() {
     let telegramSuccess = false;
     let emailSuccess = false;
     try {
-      const telegramResponse = await fetch("/api/telegram", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: v }),
-      });
-      const emailResponse = await fetch("/api/email", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ message: v }),
-      });
-      telegramSuccess = telegramResponse.ok;
-      emailSuccess = emailResponse.ok;
+      telegramSuccess = await sendTelegramMessage(v);
+      emailSuccess = await sendEmailMessage(v);
+      // const emailResponse = await fetch("/api/email", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({ message: v }),
+      // });
+      // emailSuccess = emailResponse.ok;
     } catch (e) {
       console.warn("Send telegram message failed", (e as Error).message);
     } finally {
@@ -66,30 +61,6 @@ export default function MessageForm() {
         });
         console.warn("Failed to send email");
       }
-      // emailjs
-      //   .send(
-      //     process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "",
-      //     process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "",
-      //     { message: v },
-      //     { publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "" },
-      //   )
-      //   .then(
-      //     () => {
-      //       if (telegramResponse.ok) {
-      //         toast(t.sendMessageSuccess, {
-      //           description: new Date().toLocaleString(),
-      //         });
-      //         setV("");
-      //         setOpen(false);
-      //       }
-      //     },
-      //     (e) => {
-      //       toast(t.sendMessageFailed, {
-      //         description: new Date().toLocaleString(),
-      //       });
-      //       console.warn("Send email failed", e.text);
-      //     },
-      //   );
     }
   };
 

@@ -1,4 +1,4 @@
-import { urlFor } from "@/sanity/lib/image";
+import { urlFor } from "@/lib/sanity/image";
 import { fetchBlogArticle } from "@/utils/apiService";
 import { PortableText } from "next-sanity";
 import { Image } from "next-sanity/image";
@@ -22,4 +22,3 @@ export default async function Page({ params }: { params: { slug: string } }) {
     </article>
   );
 }
-
