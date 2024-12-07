@@ -1,4 +1,4 @@
-export default function RedditIcon({
+export function RedditIcon({
   height = 24,
   width = 24,
   strokeWidth = 2,

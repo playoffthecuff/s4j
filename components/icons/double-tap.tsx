@@ -1,4 +1,4 @@
-export default function DoubleTapIcon({
+export function DoubleTapIcon({
   height = 24,
   width = 24,
 }: {

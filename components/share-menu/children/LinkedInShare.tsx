@@ -2,12 +2,11 @@
 
 import { Button } from "../../ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../ui/tooltip";
-import { useI18n } from "@/utils/i18context";
-import Link from "next/link";
+import { useI18n } from "@/lib/utils/i18context";
 import { useEffect, useState } from "react";
 import { Linkedin } from "lucide-react";
 
-export default function LinkedInShare({
+export function LinkedInShare({
   className,
   text,
   title,
@@ -43,7 +42,7 @@ export default function LinkedInShare({
           </Button>
         </TooltipTrigger>
         <TooltipContent
-        align="end"
+          align="end"
           className={`bg-background/50 backdrop-blur-sm px-2 py-1 rounded-sm`}
         >
           <p>{t.linkedInShareTooltip}</p>

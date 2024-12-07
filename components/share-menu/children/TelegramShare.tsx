@@ -1,12 +1,12 @@
 "use client";
 
+import { TelegramIcon } from "@/components/icons";
 import { Button } from "../../ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../ui/tooltip";
-import { useI18n } from "@/utils/i18context";
+import { useI18n } from "@/lib/utils/i18context";
 import { useEffect, useState } from "react";
-import TelegramIcon from "../../icons/telegram";
 
-export default function TelegramShare({
+export function TelegramShare({
   className,
   text,
 }: {

@@ -37,6 +37,7 @@
   "vkShareTooltip": "VK",
   "emailShareTooltip": "by Email",
   "closeTooltip": "close",
-  "zoomClickHintTooltip": "zoom in/out",
-  "scrollHintTooltip": "show/hide description"
+  "zoomClickHintTooltip": "zoom in / out",
+  "scrollHintTooltip": "show / hide",
+  "description": "описание"
 }

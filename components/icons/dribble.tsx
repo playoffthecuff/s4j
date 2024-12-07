@@ -1,4 +1,4 @@
-export default function DribbleIcon({
+export function DribbleIcon({
   height = 24,
   width = 24,
   strokeWidth = 2,

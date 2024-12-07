@@ -1,6 +1,6 @@
 import { CSSProperties } from "react";
 
-export default function IcsIcon({
+export function IcsIcon({
   height = 24,
   width = 24,
   style,

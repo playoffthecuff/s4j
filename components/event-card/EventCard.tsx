@@ -12,21 +12,21 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "../ui/accordion";
-import { useI18n } from "@/utils/i18context";
+import { useI18n } from "@/lib/utils/i18context";
 import { Separator } from "../ui/separator";
 import { useState } from "react";
 import { useTheme } from "next-themes";
 import dynamic from "next/dynamic";
-import { CalendarEvent, EventAndPlacename } from "@/types/sanity-data";
-import { DELTA } from "@/utils/isRubicon";
-import DateTimeBlock from "./date-time-blocks/DateTimeBlock";
-import LeftTime from "./date-time-blocks/LeftTime";
+import { CalendarEvent, EventAndPlacename } from "@/lib/types/sanity-data";
+import { DELTA } from "@/lib/utils/isRubicon";
+import { cn } from "@/lib/utils";
+import { DateTimeBlock, LeftTime } from "./children";
 
-const DynamicMenu = dynamic(() => import("../calendar-menu/CalendarMenu"), {
+const DynamicMenu = dynamic(() => import("../calendar-menu"), {
   ssr: false,
 });
 
-export default function EventCard({
+export function EventCard({
   lang,
   event,
   className,
@@ -61,7 +61,11 @@ export default function EventCard({
 
   return (
     <Card
-      className={`${className} ${!future && !expanded && "opacity-65"} transition-opacity duration-200 hover:opacity-100`}
+      className={cn(
+        "transition-opacity duration-200 hover:opacity-100",
+        !future && !expanded && "opacity-65",
+        className,
+      )}
     >
       <CardHeader className="px-4 pb-0 pt-2">
         <CardTitle className="flex justify-between font-normal items-center leading-[1.75]">

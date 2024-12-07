@@ -1,12 +1,12 @@
 "use client";
 
+import { EmailIcon } from "@/components/icons";
 import { Button } from "../../ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../ui/tooltip";
-import { useI18n } from "@/utils/i18context";
+import { useI18n } from "@/lib/utils/i18context";
 import { useEffect, useState } from "react";
-import EmailIcon from "../../icons/email";
 
-export default function EmailShare({
+export function EmailShare({
   className,
   text,
   title,

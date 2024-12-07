@@ -1,17 +1,19 @@
 "use client";
 
 import { useState } from "react";
-import ShareButton from "./children/ShareButton";
-import FacebookShare from "./children/FacebookShare";
-import LinkedInShare from "./children/LinkedInShare";
-import RedditShare from "./children/RedditShare";
-import TelegramShare from "./children/TelegramShare";
-import TwitterShare from "./children/TwitterShare";
-import VkShare from "./children/VkShare";
-import WhatsappShare from "./children/WhatsappShare";
-import CopyButton from "./children/CopyButton";
+import {
+  ShareButton,
+  FacebookShare,
+  LinkedInShare,
+  RedditShare,
+  TelegramShare,
+  CopyButton,
+  WhatsappShare,
+  VkShare,
+  TwitterShare,
+} from "./children";
 
-export default function ShareMenuQuadro({
+export function ShareMenuQuadro({
   className,
   text,
   title,
@@ -22,7 +24,8 @@ export default function ShareMenuQuadro({
 }) {
   const [open, setOpen] = useState(false);
   const handleClick = () => setOpen(!open);
-  return (<div className={className}>
+  return (
+    <div className={className}>
       <ShareButton
         handleClick={handleClick}
         open={open}

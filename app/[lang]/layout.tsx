@@ -1,23 +1,22 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import ThemeProvider from "@/components/theme-provider";
-import Header from "@/components/header/Header";
-import Footer from "@/components/footer/Footer";
 import { i18n, type Locale } from "@/i18n-config";
 import { getDictionary } from "@/get-dictionary";
-import { I18nProvider } from "@/utils/i18context";
-import { Toaster } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
+import { I18nProvider } from "@/lib/utils/i18context";
+import { TooltipProvider, SonnerToaster } from "@/components/ui";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import { Marck_Script } from "next/font/google";
-import { fetchFavicon } from "@/utils/apiService";
+import { fetchFavicon } from "@/lib/utils/apiService";
+import clsx from "clsx";
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
 
 export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
 }
 
-// If loading a variable font, you don't need to specify the font weight
 const marckScript = Marck_Script({
   weight: "400",
   display: "block",
@@ -32,12 +31,10 @@ export const metadata: Metadata = {
   authors: [
     {
       name: "Julia Ribetki",
-      url: "https://www.facebook.com/profile.php?id=100009528395129",
+      url: "https://ribetki.vercel.com",
     },
-    { name: "playoffthecuff", url: "https://github.com/playoffthecuff" },
   ],
   creator: "playoffthecuff",
-  publisher: "Julia Ribetki",
 };
 
 export default async function Layout({
@@ -54,7 +51,12 @@ export default async function Layout({
   return (
     <html
       lang={params.lang}
-      className={`h-full overflow-x-hidden scrollbar-thumb-muted-foreground scrollbar-track-muted ${GeistSans.variable} ${GeistMono.variable} ${marckScript.variable} antialiased`}
+      className={clsx(
+        "h-full overflow-x-hidden scrollbar-thumb-muted-foreground scrollbar-track-muted antialiased",
+        GeistSans.variable,
+        GeistMono.variable,
+        marckScript.variable,
+      )}
     >
       <head>
         {data.png96Url && (
@@ -87,7 +89,7 @@ export default async function Layout({
         {data.manifestUrl && <link rel="manifest" href={data.manifestUrl} />}
         <meta name="apple-mobile-web-app-title" content="Julia Ribetki" />
       </head>
-      <body className="antialiased min-h-full flex flex-col font-sans overflow-x-hidden">
+      <body className="min-h-full flex flex-col font-sans overflow-x-hidden">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -97,7 +99,7 @@ export default async function Layout({
           <I18nProvider dictionary={dictionary}>
             <TooltipProvider delayDuration={400}>
               <Header svg={svg} />
-              <Toaster />
+              <SonnerToaster />
               <main className="max-w-7xl mx-auto w-full">{children}</main>
               <Footer />
             </TooltipProvider>

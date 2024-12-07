@@ -1,6 +1,6 @@
 import { CSSProperties } from "react";
 
-export default function HourGlassClockIcon({
+export function HourGlassClockIcon({
   height = 24,
   width = 24,
   style,

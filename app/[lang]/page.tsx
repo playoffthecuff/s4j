@@ -1,12 +1,12 @@
-import SmokyText from "@/components/smoky-text/SmokyText";
+import { SmokyText } from "@/components/smoky-text";
 import { Locale } from "@/i18n-config";
-import { fetchGalleryImages, fetchGreetings } from "@/utils/apiService";
+import { fetchGalleryImages, fetchGreetings } from "@/lib/utils/apiService";
 
 export default async function Page({ params }: { params: { lang: Locale } }) {
   const images = await fetchGalleryImages();
   const greetings = await fetchGreetings(params.lang);
   return (
-    <div className="h-[calc(100vh-126px)] relative">
+    <div className="min-h-[calc(100vh-236px)] mt-28 mb-14 relative">
       <SmokyText
         className="absolute z-10 bottom-1/2 right-1/2 translate-x-1/2 text-4xl translate-y-1/2 w-fit"
         text={greetings}

@@ -1,4 +1,4 @@
-export default function WhatsappIcon({
+export function WhatsappIcon({
   height = 24,
   width = 24,
 }: {

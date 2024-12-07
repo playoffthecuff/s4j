@@ -1,4 +1,4 @@
-export default function FacebookIcon({
+export function FacebookIcon({
   height = 24,
   width = 24,
   strokeWidth = 2,

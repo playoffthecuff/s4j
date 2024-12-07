@@ -1,6 +1,6 @@
 import { CSSProperties } from "react";
 
-export default function YahooIcon({
+export function YahooIcon({
   height = 24,
   width = 24,
   style,

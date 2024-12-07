@@ -1,4 +1,4 @@
-export default function VkIcon({
+export function VkIcon({
   height = 24,
   width = 24,
 }: {

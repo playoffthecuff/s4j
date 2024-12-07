@@ -1,4 +1,4 @@
-export default function BezierTransitionIcon({
+export function BezierTransitionIcon({
   height = 24,
   width = 24,
   className,

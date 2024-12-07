@@ -1,18 +1,19 @@
 "use client";
-import { Card, CardContent } from "@/components/ui/card";
 import {
+  Card,
+  CardContent,
   Carousel,
   CarouselContent,
   CarouselItem,
-} from "@/components/ui/carousel";
-import { Img } from "@/app/[lang]/gallery/page";
+} from "@/components/ui";
 import Image from "next/image";
 import { urlFor } from "@/lib/sanity/image";
 import Autoplay from "embla-carousel-autoplay";
 import Fade from "embla-carousel-fade";
 import { useRef } from "react";
+import { Img } from "@/lib/types/sanity-data";
 
-export default function HomeCarousel({
+export function HomeCarousel({
   images,
   delay,
 }: {

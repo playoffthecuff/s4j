@@ -1,15 +1,11 @@
 "use client";
 
-import { Share2, X } from "lucide-react";
+import { Share2 } from "lucide-react";
 import { Button } from "../../ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../ui/tooltip";
-import { useI18n } from "@/utils/i18context";
+import { useI18n } from "@/lib/utils/i18context";
 
-export default function Tez({
-  className,
-}: {
-  className?: string;
-}) {
+export function Tez({ className }: { className?: string }) {
   const t = useI18n();
   return (
     <div className={className}>

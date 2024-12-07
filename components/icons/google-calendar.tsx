@@ -1,6 +1,6 @@
 import { CSSProperties } from "react";
 
-export default function GoogleCalendarIcon({
+export function GoogleCalendarIcon({
   height = 24,
   width = 24,
   style,

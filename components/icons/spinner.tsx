@@ -1,4 +1,4 @@
-export default function SpinnerIcon({
+export function SpinnerIcon({
   height = 24,
   width = 24,
   className,

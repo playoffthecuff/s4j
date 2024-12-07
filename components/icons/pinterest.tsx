@@ -1,4 +1,4 @@
-export default function PinterestIcon({
+export function PinterestIcon({
   height = 24,
   width = 24,
 }: {

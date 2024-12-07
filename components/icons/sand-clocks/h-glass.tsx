@@ -1,6 +1,6 @@
 import { CSSProperties } from "react";
 
-export default function HGlassIcon({
+export function HGlassIcon({
   height = 24,
   width = 24,
   style,

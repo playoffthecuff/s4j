@@ -1,4 +1,4 @@
-export default function EmailIcon({
+export function EmailIcon({
   height = 24,
   width = 24,
   strokeWidth = 2,

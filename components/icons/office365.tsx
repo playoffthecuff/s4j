@@ -1,6 +1,6 @@
 import { CSSProperties } from "react";
 
-export default function Office365Icon({
+export function Office365Icon({
   height = 24,
   width = 24,
   style,

@@ -1,4 +1,4 @@
-export default function TwitterIcon({
+export function TwitterIcon({
   height = 24,
   width = 24,
   strokeWidth = 2,

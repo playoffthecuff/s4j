@@ -1,12 +1,12 @@
 "use client";
 
+import { VkIcon } from "@/components/icons";
 import { Button } from "../../ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../ui/tooltip";
-import { useI18n } from "@/utils/i18context";
+import { useI18n } from "@/lib/utils/i18context";
 import { useEffect, useState } from "react";
-import VkIcon from "../../icons/vk";
 
-export default function VkShare({
+export function VkShare({
   className,
   text,
   title,

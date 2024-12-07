@@ -1,4 +1,4 @@
-export default function LinkedinIcon({
+export function LinkedinIcon({
   height = 24,
   width = 24,
   strokeWidth = 2,

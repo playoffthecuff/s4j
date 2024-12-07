@@ -1,4 +1,4 @@
-export default function YoutubeIcon({
+export function YoutubeIcon({
   height = 24,
   width = 24,
   strokeWidth = 2,

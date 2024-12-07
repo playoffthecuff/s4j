@@ -1,7 +1,6 @@
-import EventsDivider from "@/components/event-card/EventsDivider";
-import EventCard from "@/components/event-card/EventCard";
-import { fetchEventsAndPlaceNames } from "@/utils/apiService";
-import { isRubicon } from "@/utils/isRubicon";
+import { EventCard, EventsDivider } from "@/components/event-card";
+import { fetchEventsAndPlaceNames } from "@/lib/utils/apiService";
+import { isRubicon } from "@/lib/utils/isRubicon";
 
 export default async function Page({
   params,
@@ -10,7 +9,7 @@ export default async function Page({
 }) {
   const d = await fetchEventsAndPlaceNames();
   return (
-    <div className="px-4 mx-auto mt-20 mb-8 w-fit">
+    <div className="px-4 mx-auto mt-28 mb-14 w-fit min-h-[calc(100vh-236px)]">
       {d.map((e, i) => (
         <>
           {isRubicon(e, d[i - 1]) && <EventsDivider />}

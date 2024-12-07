@@ -1,4 +1,4 @@
-export default function PhoneIcon({
+export function PhoneIcon({
   height = 24,
   width = 24,
   strokeWidth = 2,

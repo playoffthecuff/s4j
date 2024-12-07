@@ -9,117 +9,124 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-		fontFamily: {
-      "greet": "var(--greet-font)",
+    fontFamily: {
+      greet: "var(--greet-font)",
     },
-  	extend: {
-  		boxShadow: {
-  			DEFAULT: '0 6px 10px 0 var(--shadow-color)',
-  			up: '0 -6px 10px 0 var(--shadow-color)'
-  		},
-  		transitionDuration: {
-  			'250': '250ms',
-  			'400': '400ms',
-  			'600': '600ms'
-  		},
-  		transitionDelay: {
-  			'400': '400ms'
-  		},
-  		screens: {
-  			min720: '720px'
-  		},
-  		gridRow: {
-  			'span-15': 'span 15 / span 15',
-  			'span-17': 'span 17 / span 17',
-  			'span-18': 'span 18 / span 18',
-  			'span-20': 'span 20 / span 20',
-  			'span-25': 'span 25 / span 25',
-  			'span-30': 'span 30 / span 30',
-  			'span-40': 'span 40 / span 40'
-  		},
-  		filter: {
-  			'night-filter': 'grayscale(30%) invert(92%) contrast(83%) hue-rotate(180deg)'
-  		},
-  		gridColumn: {
-  			'span-20': 'span 20 / span 20',
-  			'span-30': 'span 30 / span 30',
-  			'span-40': 'span 40 / span 40'
-  		},
-  		colors: {
-  			background: 'hsl(var(--background))',
-  			foreground: 'hsl(var(--foreground))',
-  			card: {
-  				DEFAULT: 'hsl(var(--card))',
-  				foreground: 'hsl(var(--card-foreground))'
-  			},
-  			popover: {
-  				DEFAULT: 'hsl(var(--popover))',
-  				foreground: 'hsl(var(--popover-foreground))'
-  			},
-  			primary: {
-  				DEFAULT: 'hsl(var(--primary))',
-  				foreground: 'hsl(var(--primary-foreground))'
-  			},
-  			secondary: {
-  				DEFAULT: 'hsl(var(--secondary))',
-  				foreground: 'hsl(var(--secondary-foreground))'
-  			},
-  			tertiary: 'hsl(var(--tertiary-foreground))',
-  			muted: {
-  				DEFAULT: 'hsl(var(--muted))',
-  				foreground: 'hsl(var(--muted-foreground))'
-  			},
-  			accent: {
-  				DEFAULT: 'hsl(var(--accent))',
-  				foreground: 'hsl(var(--accent-foreground))'
-  			},
-  			destructive: {
-  				DEFAULT: 'hsl(var(--destructive))',
-  				foreground: 'hsl(var(--destructive-foreground))'
-  			},
-  			border: 'hsl(var(--border))',
-  			input: 'hsl(var(--input))',
-  			ring: 'hsl(var(--ring))',
-  			chart: {
-  				'1': 'hsl(var(--chart-1))',
-  				'2': 'hsl(var(--chart-2))',
-  				'3': 'hsl(var(--chart-3))',
-  				'4': 'hsl(var(--chart-4))',
-  				'5': 'hsl(var(--chart-5))'
-  			}
-  		},
-  		borderRadius: {
-  			lg: 'var(--radius)',
-  			md: 'calc(var(--radius) - 2px)',
-  			sm: 'calc(var(--radius) - 4px)'
-  		},
-  		fontFamily: {
-  			sans: ['var(--font-geist-sans)'],
-  			mono: ['var(--font-geist-mono)']
-  		},
-  		keyframes: {
-  			'accordion-down': {
-  				from: {
-  					height: '0'
-  				},
-  				to: {
-  					height: 'var(--radix-accordion-content-height)'
-  				}
-  			},
-  			'accordion-up': {
-  				from: {
-  					height: 'var(--radix-accordion-content-height)'
-  				},
-  				to: {
-  					height: '0'
-  				}
-  			}
-  		},
-  		animation: {
-  			'accordion-down': 'accordion-down 0.2s ease-out',
-  			'accordion-up': 'accordion-up 0.2s ease-out'
-  		}
-  	}
+    extend: {
+      boxShadow: {
+        DEFAULT: "0 6px 10px 0 var(--shadow-color)",
+        up: "0 -6px 10px 0 var(--shadow-color)",
+        "night-up": "0 -2px 14px 0 var(--shadow-color)",
+        "night-down": "0 2px 14px 0 var(--shadow-color)",
+        small: "0 1px 8px 0 var(--shadow-color)",
+      },
+      transitionDuration: {
+        250: "250ms",
+        400: "400ms",
+        600: "600ms",
+      },
+      transitionDelay: {
+        400: "400ms",
+      },
+      screens: {
+        min720: "720px",
+      },
+      minHeight: {
+        "over-scroll": "calc(100% + 24px)",
+      },
+      gridRow: {
+        "span-15": "span 15 / span 15",
+        "span-17": "span 17 / span 17",
+        "span-18": "span 18 / span 18",
+        "span-20": "span 20 / span 20",
+        "span-25": "span 25 / span 25",
+        "span-30": "span 30 / span 30",
+        "span-40": "span 40 / span 40",
+      },
+      filter: {
+        "night-filter":
+          "grayscale(30%) invert(92%) contrast(83%) hue-rotate(180deg)",
+      },
+      gridColumn: {
+        "span-20": "span 20 / span 20",
+        "span-30": "span 30 / span 30",
+        "span-40": "span 40 / span 40",
+      },
+      colors: {
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        tertiary: "hsl(var(--tertiary-foreground))",
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        chart: {
+          1: "hsl(var(--chart-1))",
+          2: "hsl(var(--chart-2))",
+          3: "hsl(var(--chart-3))",
+          4: "hsl(var(--chart-4))",
+          5: "hsl(var(--chart-5))",
+        },
+      },
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
+      },
+      fontFamily: {
+        sans: ["var(--font-geist-sans)"],
+        mono: ["var(--font-geist-mono)"],
+      },
+      keyframes: {
+        "accordion-down": {
+          from: {
+            height: "0",
+          },
+          to: {
+            height: "var(--radix-accordion-content-height)",
+          },
+        },
+        "accordion-up": {
+          from: {
+            height: "var(--radix-accordion-content-height)",
+          },
+          to: {
+            height: "0",
+          },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+      },
+    },
   },
   plugins: [
     require("tailwindcss-animate"),

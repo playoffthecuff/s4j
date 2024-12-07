@@ -1,17 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import ShareButton from "./children/ShareButton";
-import FacebookShare from "./children/FacebookShare";
-import LinkedInShare from "./children/LinkedInShare";
-import RedditShare from "./children/RedditShare";
-import TelegramShare from "./children/TelegramShare";
-import TwitterShare from "./children/TwitterShare";
-import VkShare from "./children/VkShare";
-import WhatsappShare from "./children/WhatsappShare";
-import CopyButton from "./children/CopyButton";
+import { ShareButton, FacebookShare, LinkedInShare, RedditShare, TelegramShare, CopyButton, WhatsappShare, VkShare, TwitterShare } from "./children";
 
-export default function ShareMenuQuarter({
+export function ShareMenuQuarter({
   className,
   text,
   title,

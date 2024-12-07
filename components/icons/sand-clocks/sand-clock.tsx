@@ -1,6 +1,6 @@
 import { CSSProperties } from "react";
 
-export default function SandClockIcon({
+export function SandClockIcon({
   height = 24,
   width = 24,
   style,

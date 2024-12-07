@@ -1,4 +1,4 @@
-export default function TelegramIcon({
+export function TelegramIcon({
   height = 24,
   width = 24,
 }: {

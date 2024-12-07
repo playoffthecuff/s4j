@@ -45,7 +45,7 @@ export async function sendEmailMessage(text: string) {
     const mailOptions: Mail.Options = {
       from: "j.ribetki@mail.ee",
       to: "jribetki@gmail.com",
-      subject: "Сообщение из формы обратной связи личного сайта",
+      subject: "Сообщение из формы обратной связи личного сайта (ribetki.vercel.com)",
       text,
     };
     await transporter.sendMail(mailOptions);

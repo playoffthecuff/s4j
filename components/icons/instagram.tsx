@@ -1,4 +1,4 @@
-export default function InstagramIcon({
+export function InstagramIcon({
   height = 24,
   width = 24,
   strokeWidth = 2,

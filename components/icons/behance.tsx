@@ -1,4 +1,4 @@
-export default function BehanceIcon({
+export function BehanceIcon({
   height = 24,
   width = 24,
 }: {

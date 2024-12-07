@@ -3,10 +3,10 @@
 import { Facebook } from "lucide-react";
 import { Button } from "../../ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../ui/tooltip";
-import { useI18n } from "@/utils/i18context";
+import { useI18n } from "@/lib/utils/i18context";
 import { useEffect, useState } from "react";
 
-export default function FacebookShare({ className }: { className?: string }) {
+export function FacebookShare({ className }: { className?: string }) {
   const t = useI18n();
   const [link, setLink] = useState("");
   useEffect(() => {

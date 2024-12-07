@@ -1,7 +1,8 @@
-import { MentionType } from "@/types/sanity-data";
-import Quote from "../quote/Quote";
+import { MentionType } from "@/lib/types/sanity-data";
+import { cn } from "@/lib/utils";
+import { Quote } from "./children";
 
-export default function Mentions({
+export function Mentions({
   className,
   data,
 }: {
@@ -9,11 +10,13 @@ export default function Mentions({
   data: MentionType[];
 }) {
   return (
-    <section className={className}>
-      <div className="min-[576px]:columns-2 columns-1" style={{columnGap: 16}}>
-        {data &&
-          data.map((m, i) => <Quote className="mb-4 break-inside-avoid-column" data={m} key={i} />)}
-      </div>
+    <section
+      className={cn("min-[576px]:columns-2 columns-1 gap-x-6", className)}
+    >
+      {data &&
+        data.map((m, i) => (
+          <Quote className="mb-6 break-inside-avoid-column" data={m} key={i} />
+        ))}
     </section>
   );
 }

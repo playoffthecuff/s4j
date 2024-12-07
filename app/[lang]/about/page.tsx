@@ -1,16 +1,15 @@
-import MainInfo from "@/components/author/MainInfo";
-import Mentions from "@/components/author/Mentions";
-import Timeline from "@/components/author/timeline/Timeline";
-import { Separator } from "@/components/ui/separator";
+import { MainInfo, Mentions } from "@/components/author";
+import { Timeline } from "@/components/author/children";
+import { Separator } from "@/components/ui";
 import { Locale } from "@/i18n-config";
-import { fetchAuthor } from "@/utils/apiService";
+import { fetchAuthor } from "@/lib/utils/apiService";
 import React from "react";
 
 export default async function Page({ params }: { params: { lang: Locale } }) {
   const d = await fetchAuthor(params.lang);
 
   return (
-    <article className="min-h-[calc(100vh-126px)] px-6 min-[576px]:px-4 max-w-[720px] mx-auto my-16">
+    <div className="min-h-[calc(100vh-236px)] px-6 min-[576px]:px-4 max-w-3xl mx-auto mt-28 mb-14">
       {d.mainInfo && <MainInfo data={d.mainInfo} />}
       {d.timeline && (
         <>
@@ -28,6 +27,6 @@ export default async function Page({ params }: { params: { lang: Locale } }) {
           <Mentions data={d.mentions} />
         </>
       )}
-    </article>
+    </div>
   );
 }

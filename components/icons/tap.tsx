@@ -1,4 +1,4 @@
-export default function TapIcon({
+export function TapIcon({
   height = 24,
   width = 24,
 }: {

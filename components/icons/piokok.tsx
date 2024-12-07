@@ -1,4 +1,4 @@
-export default function PiokokIcon({
+export function PiokokIcon({
   height = 24,
   width = 24,
 }: {
