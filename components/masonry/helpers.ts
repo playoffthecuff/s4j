@@ -15,6 +15,7 @@ export type CommonProps = {
 interface DataForRender extends CommonProps {
   columnWidth: number;
   matches: boolean[];
+  windowWidth: number;
 }
 
 interface ImgExt extends Img {
@@ -57,6 +58,7 @@ export const getRenderData = (data: DataForRender) => {
     maxCells,
     pX,
     rowsByImgCount,
+    windowWidth,
   } = data;
   const spacers = 2 * pX + (columnsCount - 1) * gap;
   const computedHeight = Math.round((columnWidth * 10) / aspect) / 10;
@@ -97,14 +99,16 @@ export const getRenderData = (data: DataForRender) => {
   const totalBreakPoints = [...defaultBreakPoint, ...breakPoints];
   const itemsExt: ImgExt[] = items.map((i) => {
     const step = (maxWidth - minWidth) / maxCells;
-    const maxWindowColumns = window ? Math.floor((window.innerWidth - 2 * pX + gap) / (columnWidth + gap)) : columnsCount;
+
     const computedColumnCells = Math.ceil(Math.max(i.width - minWidth, 1) / step);
-    const columnCells = Math.min(computedColumnCells, maxWindowColumns);
+
     const computedRowCells = Math.round(
       (i.height * (columnWidth * computedColumnCells - (computedColumnCells - 1) * gap)) /
         (initRowHeight + gap) /
         i.width,
     );
+    const maxWindowColumns = Math.floor((windowWidth - 2 * pX + gap) / (columnWidth + gap));
+    const columnCells = Math.min(computedColumnCells, maxWindowColumns);
     const rowCells = Math.round(computedRowCells / (columnCells === computedColumnCells ? 1 : computedColumnCells / maxWindowColumns));
     return { ...i, columnCells, rowCells };
   });

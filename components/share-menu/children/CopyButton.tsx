@@ -30,13 +30,13 @@ export function CopyButton({ className }: { className?: string }) {
             <Button
               variant="outline"
               size="icon"
-              className="h-12 w-12 rounded-full"
+              className="h-10 w-10 rounded-full bg-background/60 hover:bg-border/60 backdrop-blur-md"
             >
-              <Check className="w-10 h-10 p-2" />
+              <Check className="w-8 h-8 p-2" />
             </Button>
           </TooltipTrigger>
           <TooltipContent
-            className={`bg-background/50 backdrop-blur-sm px-2 py-1 rounded-sm`}
+            className={`bg-background/60 backdrop-blur-md px-2 py-1 rounded-sm`}
           >
             <p>{t.copiedTooltip}</p>
           </TooltipContent>
@@ -47,15 +47,15 @@ export function CopyButton({ className }: { className?: string }) {
             <Button
               variant="outline"
               size="icon"
-              className="h-12 w-12 rounded-full"
+              className="h-10 w-10 rounded-full bg-background/60 hover:bg-border/60"
             >
-              <Copy className="w-10 h-10 p-2" onClick={handleCopy} />
+              <Copy className="w-9 h-9 p-2" onClick={handleCopy} />
             </Button>
           </TooltipTrigger>
           <TooltipContent
-            className={`bg-background/50 backdrop-blur-sm px-2 py-1 rounded-sm z-20`}
+            className={`bg-background/60 backdrop-blur-md px-2 py-1 rounded-sm z-20 text-base`}
           >
-            <p>{t.copyToClipboard}</p>
+            <p>{t.copyToClipboardTooltip}</p>
           </TooltipContent>
         </Tooltip>
       )}

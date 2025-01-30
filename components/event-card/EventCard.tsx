@@ -1,30 +1,25 @@
 "use client";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "../ui/card";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "../ui/accordion";
 import { useI18n } from "@/lib/utils/i18context";
 import { Separator } from "../ui/separator";
 import { useState } from "react";
-import { useTheme } from "next-themes";
-import dynamic from "next/dynamic";
 import { CalendarEvent, EventAndPlacename } from "@/lib/types/sanity-data";
 import { DELTA } from "@/lib/utils/isRubicon";
 import { cn } from "@/lib/utils";
 import { DateTimeBlock, LeftTime } from "./children";
-
-const DynamicMenu = dynamic(() => import("../calendar-menu"), {
-  ssr: false,
-});
+import { GoogleMap } from "./children/GoogleMap";
+import css from "./event-card.module.css";
+import CalendarMenu from "./children/CalendarMenu";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  CardFooter,
+} from "../ui";
 
 export function EventCard({
   lang,
@@ -54,8 +49,6 @@ export function EventCard({
 
   const future = new Date(Date.now() + DELTA) < new Date(event.date);
 
-  const { theme } = useTheme();
-
   const testText =
     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis deserunt ducimus dolor libero nostrum enim, ex assumenda culpa, at amet, atque eaque? Eaque quas accusamus, facere recusandae nulla dignissimos vel itaque dicta nisi reprehenderit quasi dolorem inventore natus maxime aliquid perferendis nemo reiciendis, illum repellat deserunt nam sapiente voluptatem, ea a. Autem iusto, dolor magnam aut cum non. Quibusdam error perferendis repellat numquam neque dolorem ipsam optio voluptates, possimus illum a est voluptatem. Saepe a excepturi ipsam deserunt voluptas, unde totam possimus modi consequuntur? Deserunt excepturi velit aut expedita molestias eveniet repellendus esse possimus doloremque. Rerum a aliquid aliquam nulla.";
 
@@ -67,12 +60,12 @@ export function EventCard({
         className,
       )}
     >
-      <CardHeader className="px-4 pb-0 pt-2">
-        <CardTitle className="flex justify-between font-normal items-center leading-[1.75]">
+      <CardHeader className="px-4 py-0">
+        <CardTitle className="flex justify-between font-normal items-center leading-tight pt-2 pb-1">
           <span>{event.title[lang]}</span>
           {future ? (
             <div className="float-right leading-[0.68]">
-              <DynamicMenu e={e} />
+              <CalendarMenu e={e} />
             </div>
           ) : (
             <p className="text-2xl float-right text-muted-foreground font-bold">
@@ -82,7 +75,12 @@ export function EventCard({
         </CardTitle>
         <Separator style={{ marginTop: 2 }} />
         <div
-          className={`text-base pt-0.5 ${!expanded ? "line-clamp-6 max-h-[144px]" : "max-h-[2000px]"} transition-all duration-100`}
+          className={cn(
+            "text-base pt-0.5 transition-all duration-100",
+            css.dropdown,
+            !expanded && "line-clamp-6",
+            !expanded && css.collapsed,
+          )}
         >
           <DateTimeBlock
             dt={event.date}
@@ -98,34 +96,35 @@ export function EventCard({
         (testText.length ?? 0) >
           Math.abs(window.innerWidth - 300) * 0.7 + 80) && (
         <Accordion type="single" collapsible onValueChange={handleChange}>
-          <AccordionItem value="item-1">
-            <AccordionTrigger className="px-6 sm:px-4 py-2 mb-2 hover:bg-muted hover:no-underline">
+          <AccordionItem value="item-1" className="border-0">
+            <AccordionTrigger
+              className={cn(
+                "px-4 py-2 mt-2 hover:bg-muted hover:no-underline border-y",
+              )}
+            >
               {expanded ? t.collapse : t.expand}
             </AccordionTrigger>
-            <AccordionContent className="pb-2">
-              <CardContent className="p-0 sm:px-4 pb-2">
+            <AccordionContent className="py-0">
+              <CardContent className="p-0 sm:p-4 pt-3 border-b">
                 {paramountAddress && <p className="pl-4">{paramountAddress}</p>}
-                {secondaryAddress && <p className="pl-4">{secondaryAddress}</p>}
-                <div className="flex gap-3 flex-col sm:flex-row">
+                {secondaryAddress && (
+                  <p className="pl-4 mb-1">{secondaryAddress}</p>
+                )}
+                <div className="flex flex-col sm:flex-row">
                   {event.place && (
-                    <div
-                      className={`h-80 min-w-80 w-full ${event.links?.length ? "sm:w-80" : ""} ${theme === "dark" && "hue-rotate-180 contrast-75 invert-[1] grayscale-[25%]"}`}
-                    >
-                      <iframe
-                        width="100%"
-                        height="100%"
-                        title="map"
-                        src={`https://maps.google.com/maps?q=${event.place.lat},${event.place.lng}&hl=${"ru"}&z=14&amp&output=embed`}
-                        loading="lazy"
-                        referrerPolicy="no-referrer-when-downgrade"
-                      />
-                    </div>
+                    <GoogleMap
+                      className="h-80 min-w-80 w-full"
+                      lang={lang}
+                      lat={event.place.lat}
+                      lng={event.place.lng}
+                      variant={event.links?.length ? "thin" : "wide"}
+                    />
                   )}
                   {event.links?.length && (
-                    <div className="max-w-1/2 flex flex-col pl-6 sm:pl-1">
+                    <div className="max-w-1/2 flex flex-col gap-3 p-4 sm:py-0">
                       {event.links.map((l, i) => (
                         <a
-                          className="text-base hover:bg-border w-fit px-2 py-1 mb-2 relative before:content-[''] after:content-[''] before:absolute after:absolute before:bg-border after:bg-border before:w-0.5 after:w-3 before:h-3 after:h-0.5 before:bottom-0 before:left-0 after:bottom-0 after:left-0"
+                          className="text-base hover:bg-border w-fit px-2 py-1 relative before:content-[''] after:content-[''] before:absolute after:absolute before:bg-border after:bg-border before:w-0.5 after:w-3 before:h-3 after:h-0.5 before:bottom-0 before:left-0 after:bottom-0 after:left-0"
                           href={l.link}
                           target="_blank"
                           key={i}
@@ -141,9 +140,9 @@ export function EventCard({
           </AccordionItem>
         </Accordion>
       )}
-      <CardFooter className="px-6 sm:px-4 py-1 justify-end">
+      <CardFooter className="px-4 py-1 justify-end">
         <LeftTime
-          className={`text-base py-2 ${future ? "text-foreground font-semibold" : "text-muted-foreground"} flex gap-2`}
+          className={`${future ? "text-foreground font-semibold" : "text-muted-foreground"}`}
           lng={lang}
           dt={event.date}
         />

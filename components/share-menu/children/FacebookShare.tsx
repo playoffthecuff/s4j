@@ -20,7 +20,7 @@ export function FacebookShare({ className }: { className?: string }) {
           <Button
             variant="outline"
             size="icon"
-            className="h-12 w-12 rounded-full"
+            className="h-10 w-10 rounded-full bg-background/60 hover:bg-border/60 backdrop-blur-md"
           >
             <a
               target="_blank"
@@ -29,13 +29,13 @@ export function FacebookShare({ className }: { className?: string }) {
               )}
               aria-label="share on facebook"
             >
-              <Facebook className="w-10 h-10 p-2" />
+              <Facebook className="w-9 h-9 p-2" />
             </a>
           </Button>
         </TooltipTrigger>
         <TooltipContent
           align="end"
-          className={`bg-background/50 backdrop-blur-sm px-2 py-1 rounded-sm`}
+          className={`bg-background/60 backdrop-blur-md px-2 py-1 rounded-sm text-base`}
         >
           <p>{t.facebookShareTooltip}</p>
         </TooltipContent>

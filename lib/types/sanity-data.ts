@@ -1,25 +1,29 @@
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { TypedObject } from "sanity";
 
-export type Img = {
-  lqip: string | null;
-  image: SanityImageSource;
-  width: number;
-  height: number;
-  title: string;
-  description: string;
-};
-
 export type Settings = {
   mentionsVisible: boolean;
   timelineVisible: boolean;
   aboutVisible: boolean;
 };
 
+export type ImgData = {
+  lqip: string | null;
+  width: number;
+  height: number;
+  url: string;
+};
+
+export type Img = {
+  image: ImgData;
+  slug: string;
+  title: string;
+  description: string;
+};
+
 export type MainInfoType = {
   authorName: string;
-  image?: SanityImageSource;
-  lqip: string | null;
+  image: ImgData | null;
   annotation?: TypedObject | TypedObject[];
 };
 
@@ -47,11 +51,52 @@ export type Author = {
   mentions?: MentionType[];
 };
 
-export type BlogArticle = {
+type SanityImage = {
+  asset: {
+    url: string;
+    metadata: {
+      lqip: string;
+      dimensions: {
+        width: number;
+        height: number;
+      };
+    };
+  };
+};
+
+export type ImageData = {
+  url: string;
+  lqip: string;
+  width: number;
+  height: number;
+  description: string;
   title: string;
-  content: TypedObject | TypedObject[];
   slug: string;
-  titleImage: SanityImageSource;
+};
+
+export type Blog = {
+  title: string;
+  slug: string;
+  titleImageData: ImageData | null;
+  publishedAt: string;
+};
+
+export interface BlogArticle extends Blog {
+  content: TypedObject | TypedObject[];
+}
+
+export interface BlogLightArticle extends Blog {
+  content: string[] | null;
+}
+
+export interface SearchedContent extends Blog {
+  text: string | null;
+}
+
+export type BlogImageSlugs = {
+  titleImageSlug: string | null;
+  imageSlugs: (string | null)[] | null;
+  title: string;
 };
 
 export type CalendarEvent = {

@@ -10,7 +10,7 @@ import {
   Textarea,
 } from "@/components/ui";
 
-import useSendMessage from "@/lib/hooks/use-sand-message";
+import useSendMessage from "@/lib/hooks/use-send-message";
 import clsx from "clsx";
 import { MessageSquareMore, SendHorizontal } from "lucide-react";
 
@@ -26,7 +26,7 @@ export function MessageForm() {
   return (
     <Popover onOpenChange={handleOpen} open={open}>
       <PopoverTrigger asChild>
-        <Button variant="secondary" className="p-0" disabled={!v && open}>
+        <Button variant="secondary" className="p-0" disabled={!v && open} aria-label="send message">
           <Tooltip>
             <TooltipTrigger asChild>
               {open ? (
@@ -40,9 +40,10 @@ export function MessageForm() {
             </TooltipTrigger>
             <TooltipContent
               className={clsx(
-                "bg-background/50 backdrop-blur-sm px-2 py-1 text-base rounded-sm mb-1",
-                open && "z-20",
+                "bg-background/60 backdrop-blur-md px-2 py-1 text-base rounded-sm mb-1",
+                open && "z-50",
               )}
+              side={open ? "right" : "top"}
             >
               <p>{open ? t.sendMessageTooltip : t.writeTooltip}</p>
             </TooltipContent>
@@ -51,7 +52,7 @@ export function MessageForm() {
       </PopoverTrigger>
       <PopoverContent
         onCloseAutoFocus={handleBlur}
-        className="w-72 p-2 bg-background/50 backdrop-blur-sm rounded-xl mb-3"
+        className="w-72 p-2 bg-background/60 backdrop-blur-md rounded-xl mb-3 z-40"
       >
         <Textarea
           placeholder={t.writeMePlaceholder}

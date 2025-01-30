@@ -4,31 +4,31 @@ import * as React from "react";
 import * as ScrollAreaPrimitive from "@radix-ui/react-scroll-area";
 
 import { cn } from "@/lib/utils";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 
 const ScrollArea = React.forwardRef<
   React.ElementRef<typeof ScrollAreaPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof ScrollAreaPrimitive.Root>
 >(({ className, hidden, children, ...props }, ref) => {
   const scrollAreaRef = useRef<HTMLDivElement>(null);
-  const [isScrolled, setIsScrolled] = useState(false);
-  useEffect(() => {
-    const header = document.getElementById("header");
-    if (header) {
-      if (isScrolled) {
-        header.style.transform = "translateY(0)";
-      } else {
-        header.style.transform = "translateY(-100%)";
-      }
-    }
-    return () => {if (header) header.style.transform = "";}
-  }, [isScrolled]);
-  const handleScroll = () => {
-    if (scrollAreaRef.current) {
-      const scrollTop = scrollAreaRef.current.scrollTop;
-      setIsScrolled(scrollTop > 100);
-    }
-  };
+  // const [isScrolled, setIsScrolled] = useState(false);
+  // useEffect(() => {
+  //   const header = document.getElementById("header");
+  //   if (header) {
+  //     if (isScrolled) {
+  //       header.style.transform = "translateY(0)";
+  //     } else {
+  //       header.style.transform = "translateY(-100%)";
+  //     }
+  //   }
+  //   return () => {if (header) header.style.transform = "";}
+  // }, [isScrolled]);
+  // const handleScroll = () => {
+  //   if (scrollAreaRef.current) {
+  //     const scrollTop = scrollAreaRef.current.scrollTop;
+  //     setIsScrolled(scrollTop > 100);
+  //   }
+  // };
   return (
     <ScrollAreaPrimitive.Root
       ref={ref}
@@ -37,7 +37,7 @@ const ScrollArea = React.forwardRef<
     >
       <ScrollAreaPrimitive.Viewport
         ref={scrollAreaRef}
-        onScroll={handleScroll}
+        // onScroll={handleScroll}
         className="h-full w-full rounded-[inherit]"
         style={{ overflowY: hidden ? "hidden" : "scroll" }}
       >

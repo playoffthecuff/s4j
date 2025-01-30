@@ -19,6 +19,9 @@ const config: Config = {
         "night-up": "0 -2px 14px 0 var(--shadow-color)",
         "night-down": "0 2px 14px 0 var(--shadow-color)",
         small: "0 1px 8px 0 var(--shadow-color)",
+        menu: "-1px 4px 4px 0 var(--shadow-color)",
+        "view-top": "0px 32px 48px -20px rgba(0, 0, 0, 1) inset",
+        "view-bottom": "0px -32px 48px -20px rgba(0, 0, 0, 1) inset"
       },
       transitionDuration: {
         250: "250ms",
@@ -26,10 +29,20 @@ const config: Config = {
         600: "600ms",
       },
       transitionDelay: {
+        10: "10ms",
+        15: "15ms",
+        25: "25ms",
+        40: "40ms",
+        250: "250ms",
         400: "400ms",
+      },
+      transitionProperty: {
+        width: "width",
+        padding: "padding",
       },
       screens: {
         min720: "720px",
+        min760: "760px",
       },
       minHeight: {
         "over-scroll": "calc(100% + 24px)",
@@ -121,10 +134,27 @@ const config: Config = {
             height: "0",
           },
         },
+        "fade-out": {
+          '0%': {
+            opacity: "0",
+          },
+          '10%': {
+            opacity: "0",
+          },
+          '100%': {
+            opacity: "1",
+          }
+        }
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "fade-out": "fade-out 500ms ease-out",
+      },
+      cursor: {
+        "chevron-right": `url("data:image/svg+xml,%3Csvg width='20' height='32' viewBox='0 0 10 16' fill='none' xmlns='http://www.w3.org/2000/svg'%0Astyle='filter:url(%23shadow);'%3E%3Cdefs%3E%3Cfilter id='shadow'%3E%3CfeDropShadow dx='0.4' dy='0.4' stdDeviation='0.8' /%3E%3C/filter%3E%3C/defs%3E%3Cpath d='M2 14L8 8L2 2' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E "), auto`,
+        "chevron-left": `url("data:image/svg+xml,%3Csvg width='20' height='32' viewBox='0 0 10 16' fill='none' xmlns='http://www.w3.org/2000/svg'%0Astyle='filter:url(%23shadow);'%3E%3Cdefs%3E%3Cfilter id='shadow'%3E%3CfeDropShadow dx='0.4' dy='0.4' stdDeviation='0.8' /%3E%3C/filter%3E%3C/defs%3E%3Cpath d='M8 14L2 8L8 2' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E "), auto`,
+        "custom-zoom-in": `url("data:image/svg+xml,%3Csvg width='36' height='36' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%0Astyle='filter:url(%23shadow);'%3E%3Cdefs%3E%3Cfilter id='shadow'%3E%3CfeDropShadow dx='0.4' dy='0.4' stdDeviation='0.8' /%3E%3C/filter%3E%3C/defs%3E%3Cpath d='M9 16C12.866 16 16 12.866 16 9C16 5.13401 12.866 2 9 2C5.13401 2 2 5.13401 2 9C2 12.866 5.13401 16 9 16Z' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M18 18L14 14' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M9 6V12' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M6 9L12 9' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E "), auto`,
       },
     },
   },

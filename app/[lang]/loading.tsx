@@ -1,5 +1,10 @@
-import { SpinnerIcon } from "@/components/icons";
+// import { SpinnerIcon } from "@/components/icons";
+import ClockSpinner from "@/components/spinner/clock";
 
 export default function Loading() {
-  return <SpinnerIcon className="absolute bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2" />
+  return (
+    <div className="relative w-screen h-screen flex justify-center items-center">
+      <ClockSpinner className="" />
+    </div>
+  );
 }

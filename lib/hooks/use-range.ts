@@ -12,5 +12,5 @@ export default function useRange(images: Img[]) {
     setStart(i === 0);
     setEnd(i === images.length - 1);
   }, [i, images.length]);
-  return { start, end, i, pathname };
+  return { start, end, pathname };
 }

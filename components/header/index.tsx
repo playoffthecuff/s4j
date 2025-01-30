@@ -2,28 +2,32 @@
 
 import useScrollDirection from "@/lib/hooks/use-scroll-direction";
 import clsx from "clsx";
-import { Logo, Navbar, SettingsBar, Burger } from "./children";
+import { Logo, Navbar, Burger, Settings } from "./children";
+import useLocale from "@/lib/hooks/useLocale";
 
-export function Header({ svg }: { svg: string }) {
+export const pages = ["blog", "gallery", "events", "about"];
+
+export function Header({ svg, }: { svg: string }) {
   const scrollDirection = useScrollDirection();
-
+  const locale = useLocale();
   return (
     <header
       id="header"
       className={clsx(
-        "w-full shadow dark:shadow-night-down fixed z-20 max-[720px]:pr-16 bg-background top-0 transform-gpu duration-400",
-        scrollDirection === "down" ? "-translate-y-full" : "-translate-y-0",
+        "w-screen shadow dark:shadow-night-down fixed z-20 bg-background top-0 left-0 transition-all duration-400",
+        scrollDirection === "down" ? "-translate-y-[64px]" : "-translate-y-0",
       )}
     >
-      <div className="max-w-7xl mx-auto px-4 py-2 flex justify-between">
-        <Logo svg={svg} />
+      <div className="max-w-7xl mx-auto px-4 py-2 flex gap-10 justify-between">
+        <Logo svg={svg} locale={locale} />
         <Navbar
-          className="max-[720px]:hidden pl-[98px]"
+          className="max-[759px]:hidden w-full"
           orientation="horizontal"
+          values={pages}
         />
-        <SettingsBar />
+        <Settings className="max-[759px]:hidden relative" />
         <Burger
-          className="min720:hidden fixed -right-[122px] z-0"
+          className="min760:hidden"
           isClose={scrollDirection === "down"}
         />
       </div>

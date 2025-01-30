@@ -4,67 +4,63 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useI18n } from "@/lib/utils/i18context";
+import { cn } from "@/lib/utils";
+import clsx from "clsx";
+import { SearchForm } from "./SearchFrom";
+import useLocale from "@/lib/hooks/useLocale";
 
 export function Navbar({
   orientation,
   className,
   onChange,
-  tabbed,
+  values,
 }: {
   orientation: "horizontal" | "vertical";
   className?: string;
   onChange?: () => void;
   tabbed?: boolean;
+  values: string[];
 }) {
   const pathName = usePathname();
   const t = useI18n();
   const [v, setV] = useState(pathName.split("/")[2]);
-  useEffect(() => setV(pathName.split("/")[2]), [pathName])
-
+  useEffect(() => setV(pathName.split("/")[2]), [pathName]);
+  const locale = useLocale();
   function handleClick() {
     if (onChange) onChange();
   }
 
   return (
-    <nav
-      className={className}
-    >
-      <Tabs orientation={orientation} value={v} className="relative flex items-center justify-between max-w-7xl mx-auto">
+    <nav className={cn("flex", className)}>
+      <Tabs
+        orientation={orientation}
+        value={v}
+        className={clsx("relative flex items-center justify-between mx-auto")}
+      >
         <TabsList
-          className={`${orientation === "vertical" ? "flex-col gap-4 w-[90px]" : ""} h-fit select-none`}
+          className={clsx(
+            "h-fit select-none p-0.5 flex-1 max-w-none gap-1",
+            orientation === "vertical" && "flex-col gap-4 w-[90px]",
+          )}
           onClick={handleClick}
+          tabIndex={-1}
         >
-          <TabsTrigger
-            className={`w-14 ${orientation === "vertical" ? "w-full" : ""}`}
-            value="blog"
-          >
-            <Link href="/blog" tabIndex={tabbed ? 0 : -1} prefetch>
-              {t.blog}
-            </Link>
-          </TabsTrigger>
-          <TabsTrigger
-            className={`w-[78px] ${orientation === "vertical" ? "w-full" : ""}`}
-            value="gallery"
-          >
-            <Link href="/gallery" tabIndex={tabbed ? 0 : -1} prefetch>
-              {t.gallery}
-            </Link>
-          </TabsTrigger>
-          <TabsTrigger
-            className={`w-[82px] ${orientation === "vertical" ? "w-full" : ""}`}
-            value="events"
-          >
-            <Link href="/events" tabIndex={tabbed ? 0 : -1} prefetch>
-              {t.events}
-            </Link>
-          </TabsTrigger>
-          <TabsTrigger
-            className={`w-20 ${orientation === "vertical" ? "w-full" : ""}`}
-            value="about"
-          >
-            <Link href="/about" tabIndex={tabbed ? 0 : -1} prefetch>
-              {t.about}
-            </Link>
+          {values.map((el) => (
+            <TabsTrigger
+              value={el}
+              disabled={v === el && pathName.split("/").length < 4}
+              className="hover:text-muted-foreground text-base data-[disabled]:pointer-events-none"
+              tabIndex={0}
+              asChild
+              key={el}
+            >
+              <Link href={`/${locale}/${el}`} prefetch>
+                {t[el]}
+              </Link>
+            </TabsTrigger>
+          ))}
+          <TabsTrigger className="p-0" value="search">
+            <SearchForm />
           </TabsTrigger>
         </TabsList>
       </Tabs>

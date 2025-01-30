@@ -1,6 +1,12 @@
 export { Burger } from "./Burger";
+export { EnFlag } from "./EnFlag";
 export { LangToggler } from "./LangToggler";
 export { Logo } from "./Logo";
-export { ModeToggler } from "./ModeToggler";
+export { RuFlag } from "./RuFlag";
 export { Navbar } from "./Navbar";
+export { SearchForm } from "./SearchFrom";
 export { SettingsBar } from "./SettingsBar";
+export { SettingsMenu as Settings } from "./Settings";
+export { Sidebar } from "./Sidebar";
+export { ThemeToggler } from "./ThemeToggler";
+export { ThemeSubbar } from "./ThemeSubbar";

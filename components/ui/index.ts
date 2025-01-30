@@ -1,10 +1,12 @@
 export * from "./accordion";
 export { Alert } from "./alert";
+export * from "./breadcrumb";
 export { Button } from "./button";
 export * from "./card";
 export * from "./carousel";
 export * from "./dropdown-menu";
 export { Input } from "./input";
+export * from "./pagination";
 export * from "./popover";
 export { ScrollArea } from "./scroll-area";
 export { Separator } from "./separator";

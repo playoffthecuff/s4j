@@ -25,6 +25,9 @@
     text-shadow: 0 0 20px hsl(var(--foreground));
     opacity: 0;
   }
+  100% {
+    visibility: hidden;
+  }
 }
 
 @keyframes smoky-mirror {
@@ -38,5 +41,8 @@
       scale(2);
      text-shadow: 0 0 20px hsl(var(--foreground));
     opacity: 0;
+  }
+  100% {
+    visibility: hidden;
   }
 }

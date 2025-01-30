@@ -1,15 +1,19 @@
 import { SmokyText } from "@/components/smoky-text";
+import ClockSpinner from "@/components/spinner/clock";
 import { Locale } from "@/i18n-config";
-import { fetchGalleryImages, fetchGreetings } from "@/lib/utils/apiService";
+import { fetchGreetings } from "@/lib/utils/apiService";
 
 export default async function Page({ params }: { params: { lang: Locale } }) {
-  const images = await fetchGalleryImages();
+  // const images = await fetchGalleryImages();
   const greetings = await fetchGreetings(params.lang);
   return (
-    <div className="min-h-[calc(100vh-236px)] mt-28 mb-14 relative">
+    <div className="relative w-full h-screen">
       <SmokyText
         className="absolute z-10 bottom-1/2 right-1/2 translate-x-1/2 text-4xl translate-y-1/2 w-fit"
         text={greetings}
+      />
+      <ClockSpinner
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
       />
       {/* <video autoPlay loop muted className="opacity-50 absolute top-0 left-0 w-screen h-screen object-cover">
         <source src="./media/hero.mp4" type="video/mp4"/>

@@ -4,6 +4,8 @@ import { I18nString } from "@/lib/types/i18n-string";
 import {
   Author,
   BlogArticle,
+  BlogImageSlugs,
+  BlogLightArticle,
   Credentials,
   EmailWithSvg,
   EventAndPlacename,
@@ -13,21 +15,49 @@ import {
   MainInfoType,
   MentionType,
   PhoneWithSvg,
+  SearchedContent,
   Settings,
   SocialWithSvg,
   TimelineType,
 } from "@/lib/types/sanity-data";
 import { urlFor } from "../sanity/image";
 
-export const fetchGalleryImages = async () => {
+export const fetchGalleryImage = async (slug: string, l: Locale) => {
   const query = `
-    * [_type == 'galleryImage'] {
+    * [_type == 'galleryImage' && slug.current == '${slug}'] {
+          "image": image.asset->{
+            'width': metadata.dimensions.width,
+            'height': metadata.dimensions.height,
+            'lqip': metadata.lqip,
+            url,
+          },
+          'description': description.${l},
+          'title': title.${l},
+          'slug': slug.current,
+        }[0]`;
+  const d: Img | null = await client.fetch(query);
+  return d;
+};
+
+export const fetchGalleryImageSlugs = async () => {
+  const query = `
+    * [_type == 'galleryImage' && visible == true] {
+        'slug': slug.current,
+      }.slug`;
+  const d: string[] = await client.fetch(query);
+  return d;
+};
+
+export const fetchGalleryImages = async (l: Locale) => {
+  const query = `
+    * [_type == 'galleryImage' && visible == true] {
         image,
-        description,
-        title,
+        'slug': slug.current,
+        'description': description.${l},
+        'title': title.${l},
         'lqip': image.asset->metadata.lqip,
         'width': image.asset->metadata.dimensions.width,
-        'height': image.asset->metadata.dimensions.height
+        'height': image.asset->metadata.dimensions.height,
       }`;
   const d: Img[] = await client.fetch(query);
   return d;
@@ -52,8 +82,12 @@ const fetchAuthorSettings = async () => {
 
 const fetchMainInfo = async (l: Locale) => {
   const q = `* [_type == 'author'][0]{
-    "image": mainInfo.image,
-    "lqip": mainInfo.image.asset->metadata.lqip,
+    "image": mainInfo.image.asset->{
+      "lqip": metadata.lqip,
+      "width": metadata.dimensions.width,
+      "height": metadata.dimensions.height,
+      url,
+    },
     "annotation": mainInfo.annotation.${l},
     "authorName": mainInfo.authorName.${l},
   }`;
@@ -91,24 +125,160 @@ export const fetchAuthor = async (l: Locale): Promise<Author> => {
   return { mainInfo, timeline, mentions };
 };
 
-export const fetchBlogArticle = async (slug: string) => {
+export const fetchBlogArticle = async (slug: string, l: Locale) => {
   const query = `
-  *[_type == "blog" && slug.current == "${slug}"] {
-    "slug": slug.current,
-      title,
-      content,
-      titleImage
+  *[_type == "blog" && slug.current == "${slug}"]{
+    "title": title.${l},
+    "content": content.${l}[]{
+    ...,
+    _type == "ref" => {
+      ...,
+      "imageData": @->{
+        "url": image.asset->url,
+        "lqip": image.asset->metadata.lqip,
+        "width": image.asset->metadata.dimensions.width,
+        "height": image.asset->metadata.dimensions.height,
+        "description": description.${l},
+        "title": title.${l},
+        "slug": slug.current,
+        }
+      }
+    },
+    publishedAt,
+    "titleImageData": titleImage->{
+    "url": image.asset->url,
+    "lqip": image.asset->metadata.lqip,
+    "width": image.asset->metadata.dimensions.width,
+    "height": image.asset->metadata.dimensions.height,
+    'description': description.${l},
+    'title': title.${l},
+    'slug': slug.current,
+    }
   }[0]`;
-  const d: BlogArticle = await client.fetch(query);
+  const d: BlogArticle | null = await client.fetch(query);
   return d;
 };
 
-const API_URL = "https://nominatim.openstreetmap.org/reverse?";
+// export const fetchBlogArticle = async (slug: string, l: Locale) => {
+//   const query = `
+//   *[_type == "blog" && slug.current == "${slug}"]{
+//     "title": title.${l},
+//     "content": content.${l}[]{
+//     ...,
+//     _type == "ref" => {
+//       ...,
+//       "imageData": @->{
+//         "imageUrl": image.asset->url,
+//         "lqip": image.asset->metadata.lqip,
+//         "width": image.asset->metadata.dimensions.width,
+//         "height": image.asset->metadata.dimensions.height,
+//         "description": description.${l},
+//         "title": title.${l},
+//         "slug": slug.current,
+//       }
+//     }
+//   },
+//     publishedAt,
+//     'titleImage': titleImage->{
+//       image {
+//         asset->{
+//           url,
+//           metadata {
+//             lqip,
+//             dimensions {
+//               width,
+//               height
+//             }
+//           }
+//         }
+//       },
+//     'description': description.${l},
+//     'title': title.${l},
+//     'slug': slug.current,
+//     }
+//   }[0]`;
+//   const d: BlogArticle = await client.fetch(query);
+//   return d;
+// };
+
+export const fetchBlogArticles = async (l: Locale) => {
+  const query = `
+  *[_type == "blog"]{
+    "slug": slug.current,
+    "title": title.${l},
+    publishedAt,
+    'titleImageData': titleImage->{
+    "url": image.asset->url,
+    "lqip": image.asset->metadata.lqip,
+    "width": image.asset->metadata.dimensions.width,
+    "height": image.asset->metadata.dimensions.height,
+    'description': description.${l},
+    'title': title.${l},
+    'slug': slug.current,
+    },
+    "content": content.${l}[style == "normal" && !defined(listItem)].children[].text,
+  } | order(publishedAt desc)`;
+  const d: BlogLightArticle[] | null = await client.fetch(query);
+  return d;
+};
+
+export const fetchSearchedBlogArticles = async (l: Locale, s: string) => {
+  const query = `*[_type == "blog" && (pt::text(content.${l}) match "${s}" || title.${l} match "${s}")]
+  {
+    "title": title.${l},
+    "slug": slug.current,
+    "text": pt::text(content.${l}),
+    'titleImageData': titleImage->{
+    "url": image.asset->url,
+    "lqip": image.asset->metadata.lqip,
+    "width": image.asset->metadata.dimensions.width,
+    "height": image.asset->metadata.dimensions.height,
+    'title': title.${l},
+    },
+    publishedAt,
+  } | order(publishedAt desc)`;
+  const d: SearchedContent[] = await client.fetch(query);
+  return d;
+};
+
+export const fetchSearchedGalleryImages = async (l: Locale, s: string) => {
+  const query = `*[_type == "galleryImage" && visible == true  && (title.${l} match "${s}" || description.${l} match "${s}")]
+  {
+    publishedAt,
+    "slug": slug.current,
+    "title": title.${l},
+    "text": description.${l},
+    "titleImageData": image.asset->{
+      url,
+      "lqip": metadata.lqip,
+      "width": metadata.dimensions.width,
+      "height": metadata.dimensions.height,
+  }
+} | order(publishedAt desc)`;
+  const d: SearchedContent[] = await client.fetch(query);
+  return d;
+};
+
+export const fetchBlogArticleSlugs = async () => {
+  const query = `*[_type == "blog"].slug.current`;
+  const d: string[] | null = await client.fetch(query);
+  return d;
+};
+
+export const fetchBlogImageSlugs = async (l: Locale, slug: string) => {
+  const q = `*[_type == "blog" && slug.current == "${slug}"]{
+    "titleImageSlug": titleImage->slug.current,
+    "imageSlugs": content.${l}[_type == "ref"][]->slug.current,
+    "title": title.${l},
+}[0]`;
+  const d: BlogImageSlugs = await client.fetch(q);
+  return d;
+};
 
 const fetchPlaceName = async (lat: number, lon: number, lng: string) => {
   try {
     const r = await fetch(
-      `${API_URL}lat=${lat}&lon=${lon}&format=json&accept-language=${lng}`,
+      `${process.env.NOMINATIM_API_URL}lat=${lat}&lon=${lon}&format=json&accept-language=${lng}`,
     );
     const d = await r.json();
     return d.display_name;

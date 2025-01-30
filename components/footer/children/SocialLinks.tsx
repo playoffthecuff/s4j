@@ -1,11 +1,11 @@
-import { TooltipButton } from "@/components/tooltip-button";
 import { fetchCredentials } from "@/lib/utils/apiService";
 import { MessageForm } from "./MessageForm";
+import { InlineSvgTooltipButton } from "@/components/buttons";
 
 export async function SocialLinks() {
   const data = await fetchCredentials();
   return (
-    <div className="max-w-7xl mx-auto px-4 flex justify-center gap-x-5 gap-y-4 flex-wrap">
+    <div className="max-w-7xl mx-auto px-4 flex justify-center gap-5 flex-wrap">
       {data.socialsWithSvg &&
         data.socialsWithSvg.map(
           (d) =>
@@ -15,8 +15,9 @@ export async function SocialLinks() {
                 key={d.link}
                 target="_blank"
                 className="rounded-md"
+                aria-label={d.label.en}
               >
-                <TooltipButton label={d.label} svg={d.svg} />
+                <InlineSvgTooltipButton label={d.label} svg={d.svg} />
               </a>
             ),
         )}
@@ -26,7 +27,10 @@ export async function SocialLinks() {
           className="rounded-md"
           aria-label="email"
         >
-          <TooltipButton translation="email" svg={data.emailWithSvg.svg} />
+          <InlineSvgTooltipButton
+            translation="email"
+            svg={data.emailWithSvg.svg}
+          />
         </a>
       )}
       {data.phoneWithSvg.visibility && (
@@ -35,7 +39,10 @@ export async function SocialLinks() {
           className="rounded-md"
           aria-label="phone number"
         >
-          <TooltipButton translation="phone" svg={data.phoneWithSvg.svg} />
+          <InlineSvgTooltipButton
+            translation="phone"
+            svg={data.phoneWithSvg.svg}
+          />
         </a>
       )}
       <MessageForm />

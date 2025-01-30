@@ -14,13 +14,13 @@ export function Tez({ className }: { className?: string }) {
           <Button
             size="icon"
             variant="outline"
-            className="h-12 w-12 rounded-full"
+            className="h-10 w-10 rounded-full"
           >
             <Share2 />
           </Button>
         </TooltipTrigger>
         <TooltipContent
-          className={`bg-background/50 backdrop-blur-sm px-2 py-1 rounded-sm`}
+          className={`bg-background/60 backdrop-blur-md px-2 py-1 rounded-sm`}
         >
           <p>{t.shareTooltip}</p>
         </TooltipContent>

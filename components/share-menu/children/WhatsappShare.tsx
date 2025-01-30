@@ -26,7 +26,7 @@ export function WhatsappShare({
           <Button
             variant="outline"
             size="icon"
-            className="h-12 w-12 rounded-full"
+            className="h-10 w-10 rounded-full bg-background/60 hover:bg-border/60 backdrop-blur-md"
           >
             <a
               target="_blank"
@@ -35,12 +35,12 @@ export function WhatsappShare({
               )}
               aria-label="share on whatsapp"
             >
-              <WhatsappIcon width={28} height={28} />
+              <WhatsappIcon width={20} height={20} />
             </a>
           </Button>
         </TooltipTrigger>
         <TooltipContent
-          className={`bg-background/50 backdrop-blur-sm px-2 py-1 rounded-sm z-30`}
+          className={`bg-background/60 backdrop-blur-md px-2 py-1 rounded-sm z-30 text-base`}
         >
           <p>{t.whatsappShareTooltip}</p>
         </TooltipContent>

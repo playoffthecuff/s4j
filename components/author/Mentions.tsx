@@ -12,6 +12,7 @@ export function Mentions({
   return (
     <section
       className={cn("min-[576px]:columns-2 columns-1 gap-x-6", className)}
+      id="mentions"
     >
       {data &&
         data.map((m, i) => (

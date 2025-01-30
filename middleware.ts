@@ -10,15 +10,14 @@ function getLocale(request: NextRequest): string | undefined {
   // Negotiator expects plain object so we need to transform headers
   const negotiatorHeaders: Record<string, string> = {};
   request.headers.forEach((value, key) => (negotiatorHeaders[key] = value));
-
   // @ts-expect-error locales are readonly
   const locales: string[] = i18n.locales;
-
+  // const segment = negotiatorHeaders["next-url"].split("/")[1];
+  // if (locales.includes(segment)) return segment;
   // Use negotiator and intl-localematcher to get best locale
   const languages = new Negotiator({ headers: negotiatorHeaders }).languages(
     locales,
   );
-
   const locale = matchLocale(languages, locales, i18n.defaultLocale);
 
   return locale;
@@ -28,16 +27,25 @@ export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
   // // `/_next/` and `/api/` are ignored by the watcher, but we need to ignore files in `public` manually.
   // // If you have one
-  if ([
-      '/manifest.json',
-      '/favicon/favicon.ico',
-      '/favicon/apple-touch-icon.png',
-      '/favicon/favicon-48x48.png',
-      '/favicon/favicon.svg',
-      '/favicon/site.webmanifest',
-      '/favicon/web-app-manifest-192x192.png',
-      '/favicon/web-app-manifest-512x512.png',
-      '/media/hero.mp4',
+  if (
+    [
+      "/manifest.json",
+      "/feed.xml",
+      "/favicon.ico",
+      "/icon.png",
+      "/apple-icon.png",
+      "/favicon/favicon.ico",
+      "/favicon/apple-touch-icon.png",
+      "/favicon/favicon-48x48.png",
+      "/favicon/logo.svg",
+      "/favicon/logo.png",
+      "/favicon/icon.png",
+      "/favicon/apple-icon.png",
+      "/favicon/favicon.svg",
+      "/favicon/site.webmanifest",
+      "/favicon/web-app-manifest-192x192.png",
+      "/favicon/web-app-manifest-512x512.png",
+      "/media/hero.mp4",
     ].includes(pathname)
   ) {
     return;

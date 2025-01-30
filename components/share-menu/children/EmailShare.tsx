@@ -28,7 +28,7 @@ export function EmailShare({
           <Button
             variant="outline"
             size="icon"
-            className="h-12 w-12 rounded-full"
+            className="h-10 w-10 rounded-full"
           >
             <a
               target="_blank"
@@ -37,12 +37,12 @@ export function EmailShare({
               )}
               aria-label="share by email"
             >
-              <EmailIcon width={28} height={28} />
+              <EmailIcon width={24} height={24} />
             </a>
           </Button>
         </TooltipTrigger>
         <TooltipContent
-          className={`bg-background/50 backdrop-blur-sm px-2 py-1 rounded-sm z-20`}
+          className={`bg-background/60 backdrop-blur-md px-2 py-1 rounded-sm z-20`}
         >
           <p>{t.emailShareTooltip}</p>
         </TooltipContent>

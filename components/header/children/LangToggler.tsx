@@ -9,8 +9,9 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { type Locale } from "@/i18n-config";
-import { EnFlag, RuFlag } from "./flags";
 import { useI18n } from "@/lib/utils/i18context";
+import { EnFlag } from "./EnFlag";
+import { RuFlag } from "./RuFlag";
 
 export function LangToggler() {
   const pathname = usePathname();

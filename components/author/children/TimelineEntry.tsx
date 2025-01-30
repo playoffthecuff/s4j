@@ -5,9 +5,8 @@ import {
 } from "@/components/ui";
 import { Tag } from "lucide-react";
 import { PortableText } from "next-sanity";
-import { Locale } from "@/i18n-config";
 import { Stage } from "@/lib/types/sanity-data";
-import { formatDate } from "./formatDate";
+import { filterDate } from "./helpers";
 import clsx from "clsx";
 import { BezierTransitionIcon } from "@/components/icons";
 
@@ -15,21 +14,19 @@ export interface TimelineEntryProps extends Stage {
   index?: number;
   isLast?: boolean;
   monthVisible: boolean;
-  lng: Locale;
 }
 
 export function TimelineEntry({
   startDate,
   endDate,
   index,
-  lng,
   heading,
   monthVisible,
   isLast = false,
   content,
 }: TimelineEntryProps) {
-  startDate = formatDate(monthVisible, startDate, lng);
-  if (endDate) endDate = formatDate(monthVisible, endDate, lng);
+  startDate = filterDate(monthVisible, startDate);
+  if (endDate) endDate = filterDate(monthVisible, endDate);
   return (
     <AccordionItem
       disabled={!content}
@@ -37,13 +34,13 @@ export function TimelineEntry({
       className="text-muted-foreground hover:text-foreground border-0 data-[state=open]:text-foreground"
     >
       <div
-        className={clsx("w-full h-3 ml-[14px]", index && "border-l-[4px]")}
+        className={clsx("w-full h-3 ml-[14px]", index && "border-l-4")}
       ></div>
       <AccordionTrigger disabled={!content} className="p-0 hover:no-underline">
-        <div className="flex">
+        <div className="flex w-full">
           <div className="relative">
             <div
-              className={clsx("h-2 ml-[14px]", index && "border-l-[4px]")}
+              className={clsx("h-2 ml-[14px]", index && "border-l-4")}
             ></div>
             {index !== 0 && (
               <BezierTransitionIcon
@@ -61,10 +58,10 @@ export function TimelineEntry({
               />
             )}
             <div
-              className={clsx("h-2 ml-[14px]", !isLast && "border-l-[2px]")}
+              className={clsx("h-2 ml-[14px]", !isLast && "border-l-2")}
             ></div>
           </div>
-          <div className="px-3 text-start w-full">
+          <div className="px-4 text-start">
             <p className="flex justify-between">
               <span className="font-mono">{startDate}</span>
               {endDate && (
@@ -79,9 +76,9 @@ export function TimelineEntry({
         </div>
       </AccordionTrigger>
       <div
-        className={clsx("w-full h-2 ml-[14px]", !isLast && "border-l-[4px]")}
+        className={clsx("w-full h-2 ml-[14px]", !isLast && "border-l-4")}
       ></div>
-      <AccordionContent className="ml-[14px] pl-6 pr-4 border-l-[4px] pb-1 prose dark:prose-invert">
+      <AccordionContent className="ml-[14px] pl-[30px] pr-6 border-l-4 border-t-4 pt-1 pb-4 prose dark:prose-invert">
         {content && <PortableText value={content} />}
       </AccordionContent>
     </AccordionItem>

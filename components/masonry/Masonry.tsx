@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 import useMediaQueries from "@/lib/hooks/use-media-queries";
 import { CommonProps, getRenderData } from "./helpers";
 import { useMemo } from "react";
+import useWindowWidth from "@/lib/hooks/use-window-with";
 
 interface Props extends CommonProps {
   className: string;
@@ -18,7 +19,7 @@ export default function Masonry({
   items = [],
   className,
   gap = 12,
-  pX = 12,
+  pX = 0,
   rounding = 0,
   blockWidth = 1280,
   aspect = 4 / 3,
@@ -26,6 +27,7 @@ export default function Masonry({
   rowsByImgCount = 2,
   maxCells = 3,
 }: Partial<Props>) {
+  const windowWidth = useWindowWidth();
   const spacers = 2 * pX + (columnsCount - 1) * gap;
   const contentWidth = blockWidth - spacers;
   const columnWidth = Math.round((10 * contentWidth) / columnsCount) / 10;
@@ -50,8 +52,8 @@ export default function Masonry({
     maxCells,
     pX,
     rowsByImgCount,
+    windowWidth,
   });
-
   return (
     <div
       className={cn(
@@ -60,34 +62,33 @@ export default function Masonry({
       )}
       style={totalBreakPoints.findLast((v) => v.matches)?.styles}
     >
-      {itemsExt.map((i, idx) => (
-        <figure key={i.lqip}>
-          <Link
-            href={`gallery/${idx}`}
-            scroll={false}
-            className="relative bg-neutral-950 group"
-            style={{
-              gridRow: `span ${i.rowCells}`,
-              gridColumn: `span ${i.columnCells}`,
-            }}
-            prefetch
-          >
-            <Image
-              className="border group-hover:opacity-50 transition-opacity duration-250 relative object-cover"
-              style={{ borderRadius: rounding }}
-              placeholder={i.lqip ? "blur" : undefined}
-              blurDataURL={i.lqip ?? undefined}
-              fill
-              alt={i.description}
-              sizes={`(max-width: 1280px) ${33 * i.columnCells}vw, (max-width: 980px) ${Math.min(50 * i.columnCells, 100)}vw, (max-width: 680px) 100vw, ${(25 * i.columnCells, 100)}vw`}
-              src={urlFor(i.image).url()}
-            />
-            <Eye className="absolute bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-400 text-white" />
-            <figcaption className="absolute bottom-4 right-1/2 translate-x-1/2 w-11/12 opacity-0 group-hover:opacity-100 transition-opacity duration-400 text-white">
-              {i.title}
-            </figcaption>
-          </Link>
-        </figure>
+      {itemsExt.map((i) => (
+        <Link
+          key={i.slug}
+          href={`gallery/${i.slug}`}
+          scroll={false}
+          className="relative bg-neutral-950 group"
+          style={{
+            gridRow: `span ${i.rowCells}`,
+            gridColumn: `span ${i.columnCells}`,
+          }}
+          prefetch
+        >
+          <Image
+            className="border group-hover:opacity-50 transition-opacity duration-250 relative object-cover"
+            style={{ borderRadius: rounding }}
+            placeholder="blur"
+            blurDataURL={i.lqip ?? undefined}
+            fill
+            alt={i.description}
+            sizes={`(max-width: 1280px) ${33 * i.columnCells}vw, (max-width: 980px) ${Math.min(50 * i.columnCells, 100)}vw, (max-width: 680px) 100vw, ${(25 * i.columnCells, 100)}vw`}
+            src={urlFor(i.image).url()}
+          />
+          <Eye className="absolute bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-400 text-white" />
+          <figcaption className="absolute bottom-4 right-1/2 translate-x-1/2 w-11/12 opacity-0 group-hover:opacity-100 transition-opacity duration-400 text-white">
+            {i.title}
+          </figcaption>
+        </Link>
       ))}
     </div>
   );
