@@ -1,4 +1,4 @@
-import { EventType } from "@/lib/types/sanity-data";
+import { EventType } from "../../app/[lang]/(with-footer)/events/fetchEvents";
 
 export const DELTA = 3600 * 24;
 

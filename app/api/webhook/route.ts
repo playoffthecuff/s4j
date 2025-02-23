@@ -1,6 +1,7 @@
+import { readBody } from "@/app/api/readBody";
+import { sendNotification } from "@/lib/actions";
 import { isValidSignature, SIGNATURE_HEADER_NAME } from "@sanity/webhook";
 import { revalidatePath } from "next/cache";
-import { readBody } from "@/app/api/readBody";
 
 const secret = process.env.SANITY_WEBHOOK_SECRET;
 
@@ -12,17 +13,21 @@ export async function POST(request: Request) {
     if (!(await isValidSignature(body, signature, secret || ""))) {
       return Response.json(
         { success: false, message: "Invalid signature" },
-        { status: 401 },
+        { status: 401 }
       );
     }
 
     revalidatePath("/");
 
-    return Response.json({ success: true });
+    const message = "Content updated. Контент обновлён.";
+    const title = "Check the site. Проверьте сайт.";
+    const notificationResult = await sendNotification(title, message);
+
+    return Response.json({ success: true, notificationSent: notificationResult.success });
   } catch (error) {
     return Response.json(
       { success: false, message: `Webhook error: ${(error as Error).message}` },
-      { status: 400 },
+      { status: 400 }
     );
   }
 }

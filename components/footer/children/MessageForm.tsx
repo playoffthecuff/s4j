@@ -4,15 +4,15 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
+  Textarea,
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-  Textarea,
 } from "@/components/ui";
 
-import useSendMessage from "@/lib/hooks/use-send-message";
 import clsx from "clsx";
 import { MessageSquareMore, SendHorizontal } from "lucide-react";
+import useSendMessage from "./use-send-message";
 
 export function MessageForm() {
   const { open, setOpen, v, handleChange, sendMessage, t } = useSendMessage();
@@ -22,28 +22,51 @@ export function MessageForm() {
   const handleBlur = () => {
     setOpen(false);
   };
+  const handleClick = () => {
+    if (v && open) sendMessage();
+  }
 
   return (
-    <Popover onOpenChange={handleOpen} open={open}>
+    <Popover open={open} onOpenChange={handleOpen} defaultOpen>
       <PopoverTrigger asChild>
-        <Button variant="secondary" className="p-0" disabled={!v && open} aria-label="send message">
+        <Button
+          variant="secondary"
+          className="p-0 w-10"
+          disabled={open && !v}
+        >
           <Tooltip>
             <TooltipTrigger asChild>
-              {open ? (
-                <SendHorizontal
-                  className="w-10 h-10 p-2"
-                  onClick={sendMessage}
-                />
-              ) : (
-                <MessageSquareMore className="w-10 h-10 p-2" />
-              )}
+              <div
+                className={clsx("grid content-center")}
+                style={{ gridTemplateAreas: "icon" }}
+                onClick={handleClick}
+              >
+                <span
+                  style={{ gridArea: "icon" }}
+                  className={clsx(
+                    "transition-all duration-250",
+                    open ? "opacity-100 scale-100" : "opacity-0 scale-0"
+                  )}
+                >
+                  <SendHorizontal />
+                </span>
+                <span
+                  style={{ gridArea: "icon" }}
+                  className={clsx(
+                    "transition-all duration-250",
+                    open ? "opacity-0 scale-0" : "opacity-100 scale-100"
+                  )}
+                >
+                  <MessageSquareMore />
+                </span>
+              </div>
             </TooltipTrigger>
             <TooltipContent
-              className={clsx(
-                "bg-background/60 backdrop-blur-md px-2 py-1 text-base rounded-sm mb-1",
-                open && "z-50",
-              )}
               side={open ? "right" : "top"}
+              sideOffset={20}
+              className={clsx(
+                "bg-background/60 backdrop-blur-md px-2 py-1 text-base font-normal",
+              )}
             >
               <p>{open ? t.sendMessageTooltip : t.writeTooltip}</p>
             </TooltipContent>
@@ -51,8 +74,9 @@ export function MessageForm() {
         </Button>
       </PopoverTrigger>
       <PopoverContent
+        side="top"
         onCloseAutoFocus={handleBlur}
-        className="w-72 p-2 bg-background/60 backdrop-blur-md rounded-xl mb-3 z-40"
+        className="w-72 p-2 bg-background/60 backdrop-blur-md rounded-[14px] mb-3 z-10 tracking-wide"
       >
         <Textarea
           placeholder={t.writeMePlaceholder}

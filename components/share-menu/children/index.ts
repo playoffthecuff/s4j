@@ -5,7 +5,7 @@ export { LinkedInShare } from "./LinkedInShare";
 export { RedditShare } from "./RedditShare";
 export { ShareButton } from "./ShareButton";
 export { TelegramShare } from "./TelegramShare";
-export { Tez } from "./tez";
+export { TezShare } from "./TezShare";
 export { TwitterShare } from "./TwitterShare";
 export { VkShare } from "./VkShare";
 export { WhatsappShare } from "./WhatsappShare";

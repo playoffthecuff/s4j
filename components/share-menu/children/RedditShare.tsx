@@ -1,10 +1,10 @@
 "use client";
 
 import { RedditIcon } from "@/components/icons";
-import { Button } from "../../ui/button";
-import { Tooltip, TooltipContent, TooltipTrigger } from "../../ui/tooltip";
 import { useI18n } from "@/lib/utils/i18context";
 import { useEffect, useState } from "react";
+import { Button } from "../../ui/button";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../../ui/tooltip";
 
 export function RedditShare({
   className,
@@ -31,7 +31,7 @@ export function RedditShare({
             <a
               target="_blank"
               href={encodeURI(
-                `https://www.reddit.com/submit?url=${link}&title=${text}`,
+                `https://www.reddit.com/submit?url=${link}&title=${text}`
               )}
               aria-label="share on reddit"
             >
@@ -39,9 +39,7 @@ export function RedditShare({
             </a>
           </Button>
         </TooltipTrigger>
-        <TooltipContent
-          className={`bg-background/60 backdrop-blur-md px-2 py-1 rounded-sm z-20 text-base`}
-        >
+        <TooltipContent>
           <p>{t.redditShareTooltip}</p>
         </TooltipContent>
       </Tooltip>

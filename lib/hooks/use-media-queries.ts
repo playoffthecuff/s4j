@@ -6,14 +6,14 @@ export default function useMediaQueries(queries: string[]) {
     const mediaQueryLists = queries.map((mql) => window.matchMedia(mql));
     setMatches(mediaQueryLists.map((mql) => mql.matches));
     const handleChange = () => {
-      setMatches(mediaQueryLists.map(mql => mql.matches));
+      setMatches(mediaQueryLists.map((mql) => mql.matches));
     };
     mediaQueryLists.forEach((mql) =>
-      mql.addEventListener("change", handleChange),
+      mql.addEventListener("change", handleChange)
     );
     return () =>
       mediaQueryLists.forEach((mql) =>
-        mql.removeEventListener("change", handleChange),
+        mql.removeEventListener("change", handleChange)
       );
   }, [queries]);
   return matches;

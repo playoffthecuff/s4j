@@ -1,5 +1,7 @@
 "use client";
+import useLocale from "@/lib/hooks/use-locale";
 import { Home } from "lucide-react";
+import Link from "next/link";
 import {
   Breadcrumb,
   BreadcrumbEllipsis,
@@ -7,7 +9,6 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-  Button,
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
@@ -16,8 +17,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "../ui";
-import useLocale from "@/lib/hooks/useLocale";
-import Link from "next/link";
+import { Fragment } from "react";
 
 export type BreadCrumbLink = {
   link: string;
@@ -36,27 +36,27 @@ export default function BreadCrumbs({
   const locale = useLocale();
   return (
     <Breadcrumb>
-      <BreadcrumbList className="text-base justify-center text-foreground">
+      <BreadcrumbList className="justify-center text-foreground tracking-wide text-lg">
         <BreadcrumbItem>
           <Link
             className="transition-colors  hover:text-muted-foreground"
             href={`/${locale}`}
           >
-            <Home className="p-0.5" />
+            <Home className="p-0.5" style={{strokeWidth: 1.5}}/>
           </Link>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
           <DropdownMenu>
             <DropdownMenuTrigger className="flex items-center gap-1">
-              <BreadcrumbEllipsis className="transition-color h-6 w-6 hover:text-muted-foreground" />
+              <BreadcrumbEllipsis className="transition-color h-6 w-6 hover:text-muted-foreground hover:cursor-pointer" />
               <span className="sr-only">Toggle menu</span>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="start">
-              {menuLinks.map((ml) => (
-                <DropdownMenuItem className="text-base p-0">
+            <DropdownMenuContent align="start" className="tracking-wide">
+              {menuLinks.map((ml, i) => (
+                <DropdownMenuItem className="p-0 text-lg" key={i}>
                   <Link
-                    className="transition-colors hover:text-muted-foreground inline-block w-full h-full px-2 py-1.5 capitalize"
+                    className="transition-colors w-full h-full px-2 py-1.5 capitalize -mt-px mb-px"
                     href={`/${locale}/${ml.link}`}
                   >
                     {ml.text}
@@ -67,14 +67,14 @@ export default function BreadCrumbs({
           </DropdownMenu>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
-        {crumbLinks.map((cl) => (
-          <>
+        {crumbLinks.map((cl, i) => (
+          <Fragment key={i}>
             <BreadcrumbItem>
-              <Tooltip delayDuration={100}>
+              <Tooltip >
                 <TooltipTrigger asChild>
                   <Link
                     className="transition-color hover:text-muted-foreground underline truncate max-w-16"
-                    href={`/${locale}/${cl.link}`}
+                    href={`${cl.link}`}
                   >
                     {cl.text}
                   </Link>
@@ -87,10 +87,10 @@ export default function BreadCrumbs({
               </Tooltip>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
-          </>
+          </Fragment>
         ))}
         <BreadcrumbItem>
-          <Tooltip delayDuration={100}>
+          <Tooltip >
             <TooltipTrigger asChild>
               <BreadcrumbPage className="capitalize truncate max-w-16 text-muted-foreground">
                 {paigeLink}

@@ -1,4 +1,10 @@
-export function RuFlagIcon({ width = 24, height = 24 }: { width: number, height: number }) {
+export function RuFlagIcon({
+  width = 24,
+  height = 24,
+}: {
+  width: number;
+  height: number;
+}) {
   return (
     <svg
       width={width}

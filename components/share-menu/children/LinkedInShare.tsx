@@ -1,10 +1,10 @@
 "use client";
 
+import { useI18n } from "@/lib/utils/i18context";
+import { Linkedin } from "lucide-react";
+import { useEffect, useState } from "react";
 import { Button } from "../../ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../ui/tooltip";
-import { useI18n } from "@/lib/utils/i18context";
-import { useEffect, useState } from "react";
-import { Linkedin } from "lucide-react";
 
 export function LinkedInShare({
   className,
@@ -33,18 +33,15 @@ export function LinkedInShare({
             <a
               target="_blank"
               href={encodeURI(
-                `https://www.linkedin.com/shareArticle?mini=true&url=${link}&title=${title}&summary=${text}&source=Julia Ribetki official website`,
+                `https://www.linkedin.com/shareArticle?mini=true&url=${link}&title=${title}&summary=${text}&source=Julia Ribetki official website`
               )}
               aria-label="share on linkedin"
             >
-              <Linkedin className="w-9 h-9 p-2" />
+              <Linkedin />
             </a>
           </Button>
         </TooltipTrigger>
-        <TooltipContent
-          align="end"
-          className={`bg-background/60 backdrop-blur-md px-2 py-1 rounded-sm text-base`}
-        >
+        <TooltipContent align="end">
           <p>{t.linkedInShareTooltip}</p>
         </TooltipContent>
       </Tooltip>

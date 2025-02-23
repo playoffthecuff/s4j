@@ -1,6 +1,6 @@
 import { DELTA } from "@/lib/utils/isRubicon";
-import { localeDateData, months } from "./helpers";
 import clsx from "clsx";
+import { localeDateData, months } from "./helpers";
 
 export function DateTimeBlock({
   dt,
@@ -24,35 +24,33 @@ export function DateTimeBlock({
   return (
     <time
       dateTime={`${year}-${("" + (month + 1)).padStart(2, "0")}-${fDate}`}
-      className={clsx(className)}
+      className={clsx("rounded-sm px-2 py-1", className)}
     >
       <div className="flex gap-2 items-end">
         <p className="text-[42px] leading-none font-mono">{fDate}</p>
-        <div className={clsx(lng === "en" && "order-first", "w-full")}>
+        <div className={clsx("w-full")}>
           {past && (
             <p className="font-mono text-muted-foreground font-bold leading-tight"></p>
           )}
           <p
             className={clsx(
-              "text-base leading-tight mb-[2px]",
-              lng === "en" && "order-first",
+              "text-lg leading-tight mb-[2px]",
             )}
           >
             {months[lng][month]}
           </p>
         </div>
       </div>
-      <div className="flex gap-2 text-base mt-1">
-        <p className="font-mono">
+      <div className="flex gap-2 text-base">
+        <p className="font-mono mt-0.75 tracking-normal px-0.5">
           <span>{("" + hour).padStart(2, "0")}</span>
           <span>:</span>
           <span>{("" + minutes).padStart(2, "0")}</span>
         </p>
         <p
           className={clsx(
-            "text-muted-foreground",
-            lng === "en" && "order-first",
-            past && "w-full",
+            "text-muted-foreground text-lg",
+            past && "w-full"
           )}
         >
           {localeDateData[lng][day]}

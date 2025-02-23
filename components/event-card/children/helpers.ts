@@ -1,4 +1,11 @@
-import { CalendarEvent } from "@/lib/types/sanity-data";
+export type CalendarEvent = {
+  start: Date;
+  title: string;
+  end?: Date;
+  duration?: number;
+  description?: string;
+  location?: string;
+};
 
 const MS_IN_HOUR = 3600000;
 const DEFAULT_DURATION = 1;
@@ -13,8 +20,8 @@ const calculateEndTime = (event: CalendarEvent) => {
     : formatTime(
         new Date(
           event.start.getTime() +
-            (event.duration ?? DEFAULT_DURATION) * MS_IN_HOUR,
-        ),
+            (event.duration ?? DEFAULT_DURATION) * MS_IN_HOUR
+        )
       );
 };
 
@@ -33,7 +40,7 @@ export const calendarLinksGenerator = {
         "&details=" + (event.description || ""),
         "&location=" + (event.location || ""),
         "&sprop=&sprop=name:",
-      ].join(""),
+      ].join("")
     );
   },
 
@@ -51,7 +58,7 @@ export const calendarLinksGenerator = {
         "&st=" + startTime,
         "&title=" + (event.title ?? ""),
         "&v=60",
-      ].join(""),
+      ].join("")
     );
   },
 
@@ -73,7 +80,7 @@ export const calendarLinksGenerator = {
           "LOCATION:" + (event.location || ""),
           "END:VEVENT",
           "END:VCALENDAR",
-        ].join("\n"),
+        ].join("\n")
     );
   },
 
@@ -94,7 +101,7 @@ export const calendarLinksGenerator = {
         "&rru=addevent",
         "&startdt=" + startTime.slice(0, startTime.length - 1),
         "&subject=" + event.title,
-      ].join(""),
+      ].join("")
     );
   },
 
@@ -112,7 +119,7 @@ export const calendarLinksGenerator = {
         "&rru=addevent",
         "&startdt=" + startTime.slice(0, startTime.length - 1),
         "&subject=" + event.title,
-      ].join(""),
+      ].join("")
     );
   },
 };
@@ -216,7 +223,7 @@ export function getTimeDifference(d1: Date, d2: Date) {
     const previousMonth = new Date(
       endDate.getFullYear(),
       endDate.getMonth(),
-      0,
+      0
     );
     days += previousMonth.getDate();
     months -= 1;

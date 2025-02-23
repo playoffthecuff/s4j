@@ -5,12 +5,12 @@ import { useI18n } from "@/lib/utils/i18context";
 export function Authors() {
   const t = useI18n();
   return (
-    <div className="flex justify-between mx-auto pt-4 px-4 text-[10px] text-tertiary">
-      <p className="font-semibold h-4">
+    <div className="flex justify-between mx-auto pt-4 px-4 text-[10px] text-tertiary tracking-wide">
+      <p className="font-semibold h-4 hover:text-muted-foreground">
         ©{" " + t.juliaRibetki + ", "}
-        <span>2024</span>
+        <span>2015</span>
       </p>
-      <p className="h-4">
+      <p className="h-4 hover:text-muted-foreground">
         {t.designedBy + " "}
         <a
           target="_blank"

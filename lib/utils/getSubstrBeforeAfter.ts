@@ -4,7 +4,7 @@ export default function getSubstrBeforeAfter(
   pre: number,
   long: number,
   prefix: string = "",
-  postfix: string = "",
+  postfix: string = ""
 ) {
   const startIndex = s.match(new RegExp(w, "i"))?.index ?? 0;
   const start = s.slice(0, startIndex).slice(-pre);

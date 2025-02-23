@@ -7,7 +7,7 @@ function ClockSpinner({ className }: { className: string }) {
     <span
       className={clsx(
         className,
-        "border-2 border-foreground rounded-full w-14 h-14 relative block",
+        "border-2 border-foreground rounded-full w-14 h-14 relative block"
       )}
     >
       <span

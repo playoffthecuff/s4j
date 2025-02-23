@@ -2,7 +2,7 @@ import { RefObject, useEffect, useRef } from "react";
 
 export function useClickOutside(
   ref: RefObject<HTMLElement | null>,
-  cb: (e: MouseEvent) => void,
+  cb: (e: MouseEvent) => void
 ) {
   const cbRef = useRef(cb);
   cbRef.current = cb;

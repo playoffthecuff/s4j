@@ -16,7 +16,7 @@ export function SmokyText({
       className={className}
       style={{ backfaceVisibility: "hidden", color: "transparent" }}
     >
-      <p className="flex flex-wrap gap-x-2 justify-center min-w-[320px] max-w-[380px] font-greet">
+      <p className="flex flex-wrap gap-x-2 justify-center min-w-[320px] max-w-[380px] font-rabbit">
         {text &&
           text.split(" ").map((w, i) => (
             <span key={i} className={css.word}>

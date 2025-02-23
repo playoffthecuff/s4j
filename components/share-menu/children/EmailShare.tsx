@@ -1,10 +1,10 @@
 "use client";
 
 import { EmailIcon } from "@/components/icons";
-import { Button } from "../../ui/button";
-import { Tooltip, TooltipContent, TooltipTrigger } from "../../ui/tooltip";
 import { useI18n } from "@/lib/utils/i18context";
 import { useEffect, useState } from "react";
+import { Button } from "../../ui/button";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../../ui/tooltip";
 
 export function EmailShare({
   className,
@@ -33,7 +33,7 @@ export function EmailShare({
             <a
               target="_blank"
               href={encodeURI(
-                `mailto:?subject=${title}&body=${text}%0A${link}`,
+                `mailto:?subject=${title}&body=${text}%0A${link}`
               )}
               aria-label="share by email"
             >
@@ -42,7 +42,7 @@ export function EmailShare({
           </Button>
         </TooltipTrigger>
         <TooltipContent
-          className={`bg-background/60 backdrop-blur-md px-2 py-1 rounded-sm z-20`}
+          className={`bg-background/60 backdrop-blur-md px-2 py-1 rounded-xs z-20`}
         >
           <p>{t.emailShareTooltip}</p>
         </TooltipContent>

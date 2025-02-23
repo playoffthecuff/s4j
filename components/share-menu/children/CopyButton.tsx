@@ -1,10 +1,10 @@
 "use client";
 
+import { useI18n } from "@/lib/utils/i18context";
 import { Check, Copy } from "lucide-react";
+import { useState } from "react";
 import { Button } from "../../ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../ui/tooltip";
-import { useI18n } from "@/lib/utils/i18context";
-import { useState } from "react";
 
 export function CopyButton({ className }: { className?: string }) {
   const t = useI18n();
@@ -32,12 +32,10 @@ export function CopyButton({ className }: { className?: string }) {
               size="icon"
               className="h-10 w-10 rounded-full bg-background/60 hover:bg-border/60 backdrop-blur-md"
             >
-              <Check className="w-8 h-8 p-2" />
+              <Check />
             </Button>
           </TooltipTrigger>
-          <TooltipContent
-            className={`bg-background/60 backdrop-blur-md px-2 py-1 rounded-sm`}
-          >
+          <TooltipContent>
             <p>{t.copiedTooltip}</p>
           </TooltipContent>
         </Tooltip>
@@ -48,13 +46,12 @@ export function CopyButton({ className }: { className?: string }) {
               variant="outline"
               size="icon"
               className="h-10 w-10 rounded-full bg-background/60 hover:bg-border/60"
+              onClick={handleCopy}
             >
-              <Copy className="w-9 h-9 p-2" onClick={handleCopy} />
+              <Copy />
             </Button>
           </TooltipTrigger>
-          <TooltipContent
-            className={`bg-background/60 backdrop-blur-md px-2 py-1 rounded-sm z-20 text-base`}
-          >
+          <TooltipContent>
             <p>{t.copyToClipboardTooltip}</p>
           </TooltipContent>
         </Tooltip>

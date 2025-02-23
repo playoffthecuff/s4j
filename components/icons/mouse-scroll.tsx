@@ -17,11 +17,7 @@ export function MouseScrollIcon({
     >
       <path d="M4.90039 11H10.9004" />
       <path d="M13.5 11H19" />
-      <path
-        d="M13 10L11.0555 11.9445"
-        strokeOpacity="0.5"
-        strokeWidth="0.75"
-      />
+      <path d="M13 10L11.0555 11.9445" strokeOpacity="0.5" strokeWidth="0.75" />
       <path
         d="M12.8496 8.15039L10.9758 10.0242"
         strokeOpacity="0.5"

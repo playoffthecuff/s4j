@@ -48,7 +48,7 @@ export function PopoverToggleTooltipButton({
           variant="outline"
           className="px-2 bg-background/60 hover:bg-border/60 backdrop-blur-md w-10"
         >
-          <Tooltip delayDuration={100}>
+          <Tooltip >
             <TooltipTrigger asChild>
               <div
                 className={clsx("grid content-center", hide && "hidden")}
@@ -58,7 +58,7 @@ export function PopoverToggleTooltipButton({
                   style={{ gridArea: "icon" }}
                   className={clsx(
                     "transition-all duration-250",
-                    open ? "opacity-100 scale-100" : "opacity-0 scale-0",
+                    open ? "opacity-100 scale-100" : "opacity-0 scale-0"
                   )}
                 >
                   {activeIcon}
@@ -67,7 +67,7 @@ export function PopoverToggleTooltipButton({
                   style={{ gridArea: "icon" }}
                   className={clsx(
                     "transition-all duration-250",
-                    open ? "opacity-0 scale-0" : "opacity-100 scale-100",
+                    open ? "opacity-0 scale-0" : "opacity-100 scale-100"
                   )}
                 >
                   {initIcon}
@@ -79,8 +79,7 @@ export function PopoverToggleTooltipButton({
               sideOffset={16}
               align="center"
               className={clsx(
-                "bg-background/60 backdrop-blur-md px-2 py-1 text-base rounded-sm left-4 font-normal",
-                open && "opacity-0",
+                open && "opacity-0"
               )}
             >
               <p>{open ? activeText : initText}</p>
@@ -91,7 +90,7 @@ export function PopoverToggleTooltipButton({
       <PopoverContent
         side={popoverSide}
         onCloseAutoFocus={handleBlur}
-        className="z-30 bg-transparent p-0 w-fit rounded-md overflow-hidden ml-4"
+        className="z-30 bg-transparent p-0 w-fit rounded-md overflow-hidden ml-4 tracking-wide font-medium"
       >
         {content}
       </PopoverContent>

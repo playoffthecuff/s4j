@@ -1,10 +1,10 @@
 "use client";
 
+import { useI18n } from "@/lib/utils/i18context";
 import { Facebook } from "lucide-react";
+import { useEffect, useState } from "react";
 import { Button } from "../../ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../ui/tooltip";
-import { useI18n } from "@/lib/utils/i18context";
-import { useEffect, useState } from "react";
 
 export function FacebookShare({ className }: { className?: string }) {
   const t = useI18n();
@@ -25,18 +25,15 @@ export function FacebookShare({ className }: { className?: string }) {
             <a
               target="_blank"
               href={encodeURI(
-                `https://www.facebook.com/sharer/sharer.php?u=${link}`,
+                `https://www.facebook.com/sharer/sharer.php?u=${link}`
               )}
               aria-label="share on facebook"
             >
-              <Facebook className="w-9 h-9 p-2" />
+              <Facebook />
             </a>
           </Button>
         </TooltipTrigger>
-        <TooltipContent
-          align="end"
-          className={`bg-background/60 backdrop-blur-md px-2 py-1 rounded-sm text-base`}
-        >
+        <TooltipContent align="end">
           <p>{t.facebookShareTooltip}</p>
         </TooltipContent>
       </Tooltip>

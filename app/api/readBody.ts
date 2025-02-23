@@ -1,7 +1,7 @@
 export async function readBody(request: Request): Promise<string> {
   const chunks: Uint8Array[] = [];
   const reader = request.body?.getReader();
-  
+
   if (reader) {
     let done = false;
     while (!done) {
@@ -12,6 +12,6 @@ export async function readBody(request: Request): Promise<string> {
       done = doneReading;
     }
   }
-  
-  return Buffer.concat(chunks).toString('utf8');
+
+  return Buffer.concat(chunks).toString("utf8");
 }

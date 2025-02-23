@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
-import { ThemeToggler } from "./ThemeToggler";
 import { LangToggler } from "./LangToggler";
+import { ThemeToggler } from "./ThemeToggler";
 
 export function SettingsBar({ className }: { className?: string }) {
   return (

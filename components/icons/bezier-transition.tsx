@@ -16,7 +16,7 @@ export function BezierTransitionIcon({
       fill="currentColor"
       className={className}
     >
-      <path d="M0 0C9.69946 4.53782 16.9999 24.3038 16.9999 48C16.9999 24.3038 24.3007 4.53782 34 0H0Z"/>
+      <path d="M0 0C9.69946 4.53782 16.9999 24.3038 16.9999 48C16.9999 24.3038 24.3007 4.53782 34 0H0Z" />
     </svg>
   );
 }

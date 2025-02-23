@@ -10,15 +10,17 @@ export default function TransitionLink({
   children,
   className,
   scroll = true,
+  disabled = false,
 }: {
   href: string;
   children: ReactNode;
   scroll?: boolean;
   className?: string;
+  disabled?: boolean;
 }) {
   const router = useRouter();
-  const main = document.querySelector("main");
   const handleClick: MouseEventHandler<HTMLAnchorElement> = async (e) => {
+    const main = document.querySelector("main");
     e.preventDefault();
     if (main) main.style.opacity = "0";
     await sleep(100);
@@ -30,7 +32,7 @@ export default function TransitionLink({
       onClick={handleClick}
       scroll={scroll}
       className={className}
-      prefetch
+      aria-disabled={disabled}
     >
       {children}
     </Link>

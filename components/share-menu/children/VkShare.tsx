@@ -1,10 +1,10 @@
 "use client";
 
 import { VkIcon } from "@/components/icons";
-import { Button } from "../../ui/button";
-import { Tooltip, TooltipContent, TooltipTrigger } from "../../ui/tooltip";
 import { useI18n } from "@/lib/utils/i18context";
 import { useEffect, useState } from "react";
+import { Button } from "../../ui/button";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../../ui/tooltip";
 
 export function VkShare({
   className,
@@ -33,7 +33,7 @@ export function VkShare({
             <a
               target="_blank"
               href={encodeURI(
-                `https://vk.com/share.php?url=${link}&title=${title}&description=${text}%&noparse=true`,
+                `https://vk.com/share.php?url=${link}&title=${title}&description=${text}%&noparse=true`
               )}
               aria-label="share on vk"
             >
@@ -41,9 +41,7 @@ export function VkShare({
             </a>
           </Button>
         </TooltipTrigger>
-        <TooltipContent
-          className={`bg-background/60 backdrop-blur-md px-2 py-1 rounded-sm z-20 text-base`}
-        >
+        <TooltipContent>
           <p>{t.vkShareTooltip}</p>
         </TooltipContent>
       </Tooltip>

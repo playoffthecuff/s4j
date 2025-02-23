@@ -1,7 +1,7 @@
 export function MySpaceIcon({
   height = 24,
   width = 24,
-  strokeWidth = 8
+  strokeWidth = 8,
 }: {
   height?: number;
   width?: number;

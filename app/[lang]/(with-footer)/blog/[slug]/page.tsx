@@ -1,13 +1,16 @@
-import { BlogPost } from "@/components/blog-post/Post";
-import { Locale } from "@/i18n-config";
 import {
   fetchBlogArticle,
   fetchBlogArticleSlugs,
-} from "@/lib/utils/apiService";
+} from "@/app/[lang]/(with-footer)/blog/[slug]/fetchBlogArticle";
+import { BlogPost } from "@/components/blog-post/Post";
+import { Locale } from "@/i18n-config";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-export async function generateMetadata({ params }: { params: { lang: Locale, slug: string } }): Promise<Metadata> {
+export async function generateMetadata(props: {
+  params: Promise<{ lang: Locale; slug: string }>;
+}): Promise<Metadata> {
+  const params = await props.params;
   const data = await fetchBlogArticle(params.slug, params.lang);
   const siteName = params.lang === "ru" ? `Юлия Рибетки` : `Julia Ribetki`;
   const title = `${data?.title ?? ""} | ${siteName}`;
@@ -28,7 +31,7 @@ export async function generateMetadata({ params }: { params: { lang: Locale, slu
       },
     ],
     locale: `${params.lang}`,
-    type: 'website',
+    type: "website",
   };
   return {
     alternates: {
@@ -41,20 +44,19 @@ export async function generateMetadata({ params }: { params: { lang: Locale, slu
     title,
     description,
     openGraph,
-  }
+  };
 }
 
-export default async function Page({
-  params,
-}: {
-  params: { slug: string; lang: Locale };
+export default async function Page(props: {
+  params: Promise<{ slug: string; lang: Locale }>;
 }) {
+  const params = await props.params;
   const data = await fetchBlogArticle(params.slug, params.lang);
   if (!data) notFound();
   const slugs = await fetchBlogArticleSlugs();
-  const i = slugs?.findIndex((v) => v === params.slug);
-  const prev = slugs ? slugs[(i ?? 0) - 1] : null;
-  const next = slugs ? slugs[(i ?? -2) + 1] : null;
+  const i = slugs?.indexOf(params.slug);
+  const prev = slugs ? (slugs[(i ?? 0) - 1] ?? null) : null;
+  const next = slugs ? (slugs[(i ?? -2) + 1] ?? null) : null;
   return (
     <BlogPost
       data={data}

@@ -1,18 +1,18 @@
-import { fetchBlogArticles } from '@/lib/utils/apiService';
-import RSS from 'rss';
+import { fetchBlogArticles } from "@/app/[lang]/(with-footer)/blog/fetchBlogArticles";
+import RSS from "rss";
 
 export async function GET() {
   const posts = await fetchBlogArticles("ru");
   const feed = new RSS({
-    title: 'Юлия Рибетки',
-    description: 'Персональный веб-сайт',
-    site_url: 'https://ribetki.vercel.com/ru',
+    title: "Юлия Рибетки",
+    description: "Персональный веб-сайт",
+    site_url: "https://ribetki.vercel.com/ru",
     feed_url: `https://ribetki.vercel.com/ru/feed.xml`,
     copyright: `${new Date().getFullYear()} Юлия Рибетки`,
-    language: 'ru',
+    language: "ru",
     pubDate: new Date(),
   });
-  posts?.map(p => {
+  posts?.map((p) => {
     feed.item({
       title: p.title,
       guid: `https://ribetki.vercel.com/ru/blog/${p.slug}`,
@@ -23,7 +23,7 @@ export async function GET() {
   });
   return new Response(feed.xml({ indent: true }), {
     headers: {
-      'Content-Type': 'application/atom+xml; charset=utf-8',
+      "Content-Type": "application/atom+xml; charset=utf-8",
     },
   });
 }

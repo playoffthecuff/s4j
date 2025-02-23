@@ -1,14 +1,6 @@
 "use client";
-import { CalendarPlus } from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "../../ui/dropdown-menu";
-import { Tooltip, TooltipContent, TooltipTrigger } from "../../ui/tooltip";
 import { useI18n } from "@/lib/utils/i18context";
-import { CalendarEvent } from "@/lib/types/sanity-data";
+import { CalendarPlus } from "lucide-react";
 import {
   GoogleCalendarIcon,
   IcsIcon,
@@ -16,6 +8,14 @@ import {
   OutlookIcon,
   YahooIcon,
 } from "../../icons";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "../../ui/dropdown-menu";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../../ui/tooltip";
+import { CalendarEvent } from "./helpers";
 import useLinks from "./use-links";
 
 export default function CalendarMenu({ e }: { e: CalendarEvent }) {
@@ -25,22 +25,20 @@ export default function CalendarMenu({ e }: { e: CalendarEvent }) {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="hover:bg-muted rounded transition-colors">
-        <Tooltip delayDuration={100}>
+      <DropdownMenuTrigger className="hover:bg-muted rounded-sm transition-colors hover:cursor-pointer">
+        <Tooltip >
           <TooltipTrigger asChild>
-            <CalendarPlus className="w-10 h-10 p-2" />
+            <CalendarPlus className="w-10 h-10 p-2 stroke-2" />
           </TooltipTrigger>
-          <TooltipContent
-            className={`bg-background/60 backdrop-blur-md px-2 py-1 rounded-sm z-0 mb-4}`}
-          >
+          <TooltipContent>
             <p>{t.addToCalendar}</p>
           </TooltipContent>
         </Tooltip>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="mr-4" onCloseAutoFocus={p}>
+      <DropdownMenuContent className="mr-4 tracking-wider" onCloseAutoFocus={p}>
         <DropdownMenuItem>
           <a
-            className="flex gap-3 items-center text-base"
+            className="flex gap-3 items-center text-lg"
             href={googleLink}
             target="_blank"
           >
@@ -50,7 +48,7 @@ export default function CalendarMenu({ e }: { e: CalendarEvent }) {
         </DropdownMenuItem>
         <DropdownMenuItem>
           <a
-            className="flex gap-3 items-center text-base"
+            className="flex gap-3 items-center text-lg"
             href={o365Link}
             target="_blank"
           >
@@ -60,7 +58,7 @@ export default function CalendarMenu({ e }: { e: CalendarEvent }) {
         </DropdownMenuItem>
         <DropdownMenuItem>
           <a
-            className="flex gap-3 items-center text-base"
+            className="flex gap-3 items-center text-lg"
             href={outlookLink}
             target="_blank"
           >
@@ -71,7 +69,7 @@ export default function CalendarMenu({ e }: { e: CalendarEvent }) {
         <DropdownMenuItem>
           <a
             href={yahooLink}
-            className="flex gap-3 items-center text-base"
+            className="flex gap-3 items-center text-lg"
             target="_blank"
           >
             <YahooIcon style={{ width: "24px", height: "24px" }} />
@@ -79,7 +77,7 @@ export default function CalendarMenu({ e }: { e: CalendarEvent }) {
           </a>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <a href={icsLink} className="flex gap-3 items-center text-base">
+          <a href={icsLink} className="flex gap-3 items-center text-lg" >
             <IcsIcon style={{ width: "24px", height: "24px" }} />
             File .ics
           </a>

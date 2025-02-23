@@ -1,10 +1,10 @@
 "use client";
 
 import { TelegramIcon } from "@/components/icons";
-import { Button } from "../../ui/button";
-import { Tooltip, TooltipContent, TooltipTrigger } from "../../ui/tooltip";
 import { useI18n } from "@/lib/utils/i18context";
 import { useEffect, useState } from "react";
+import { Button } from "../../ui/button";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../../ui/tooltip";
 
 export function TelegramShare({
   className,
@@ -31,7 +31,7 @@ export function TelegramShare({
             <a
               target="_blank"
               href={encodeURI(
-                `https://telegram.me/share/url?url=${link}&text=${text}`,
+                `https://telegram.me/share/url?url=${link}&text=${text}`
               )}
               aria-label="share on telegram"
             >
@@ -39,9 +39,7 @@ export function TelegramShare({
             </a>
           </Button>
         </TooltipTrigger>
-        <TooltipContent
-          className={`bg-background/60 backdrop-blur-md px-2 py-1 rounded-sm z-20 text-base`}
-        >
+        <TooltipContent>
           <p>{t.telegramShareTooltip}</p>
         </TooltipContent>
       </Tooltip>

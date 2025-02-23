@@ -1,7 +1,7 @@
-import { CSSProperties, MouseEventHandler, ReactNode } from "react";
-import { Button } from "../ui/button";
-import { Tooltip, TooltipContent, TooltipTrigger } from "../ui";
 import clsx from "clsx";
+import { CSSProperties, MouseEventHandler, ReactNode } from "react";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui";
+import { Button } from "../ui/button";
 
 export function TooltipButton({
   text,
@@ -9,7 +9,6 @@ export function TooltipButton({
   disabled = false,
   className,
   style,
-  tooltipStyle,
   offset,
   side,
   onClick,
@@ -42,11 +41,10 @@ export function TooltipButton({
         side={side}
         className={
           (clsx(
-            "bg-background/60 backdrop-blur-md text-base px-2 py-1 rounded-sm",
+            ""
           ),
           zClass)
         }
-        style={tooltipStyle}
       >
         <p>{text}</p>
       </TooltipContent>

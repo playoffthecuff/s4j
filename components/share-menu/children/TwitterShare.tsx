@@ -1,10 +1,10 @@
 "use client";
 
+import { useI18n } from "@/lib/utils/i18context";
 import { Twitter } from "lucide-react";
+import { useEffect, useState } from "react";
 import { Button } from "../../ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../ui/tooltip";
-import { useI18n } from "@/lib/utils/i18context";
-import { useEffect, useState } from "react";
 
 export function TwitterShare({
   className,
@@ -31,17 +31,15 @@ export function TwitterShare({
             <a
               target="_blank"
               href={encodeURI(
-                `https://twitter.com/intent/tweet?url=${link}&text=${text}`,
+                `https://twitter.com/intent/tweet?url=${link}&text=${text}`
               )}
               aria-label="share on twitter"
             >
-              <Twitter className="w-9 h-9 p-2" />
+              <Twitter className="w-9 h-9" />
             </a>
           </Button>
         </TooltipTrigger>
-        <TooltipContent
-          className={`bg-background/60 backdrop-blur-md px-2 py-1 rounded-sm z-20 text-base`}
-        >
+        <TooltipContent>
           <p>{t.twitterShareTooltip}</p>
         </TooltipContent>
       </Tooltip>

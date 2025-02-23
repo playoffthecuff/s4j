@@ -1,12 +1,10 @@
 "use client";
+import { useI18n } from "@/lib/utils/i18context";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@radix-ui/react-tooltip";
-import React from "react";
-import { usePathname } from "next/navigation";
-import { useI18n } from "@/lib/utils/i18context";
 import { Button } from "../ui";
 
 export function InlineSvgTooltipButton({
@@ -14,25 +12,29 @@ export function InlineSvgTooltipButton({
   label,
   translation,
 }: {
-  svg?: string;
-  label?: { ru: string; en: string };
+  svg: string;
+  label?: string;
   translation?: string;
 }) {
-  const pathname = usePathname();
-  const l = pathname.split("/")[2];
   const t = useI18n();
 
   return (
     <Tooltip>
-      <TooltipContent className="relative bg-background/60 backdrop-blur-md px-2 py-1 rounded-sm z-20 bottom-2 left-0 border">
-        {label && <p>{l === "ru" ? label?.ru : label?.en}</p>}
+      <TooltipTrigger asChild>
+        <Button
+          variant="outline"
+          size="icon"
+          tabIndex={-1}
+          dangerouslySetInnerHTML={{ __html: svg }}
+        ></Button>
+      </TooltipTrigger>
+      <TooltipContent
+        sideOffset={8}
+        className="bg-background/60 backdrop-blur-md px-2 py-1 z-20 bottom-2 border"
+      >
+        {label && <p>{label}</p>}
         {translation && <p>{t[translation]}</p>}
       </TooltipContent>
-      <TooltipTrigger asChild>
-        <Button variant="outline" size="icon" tabIndex={-1}>
-          {svg && <div dangerouslySetInnerHTML={{ __html: svg }}></div>}
-        </Button>
-      </TooltipTrigger>
     </Tooltip>
   );
 }

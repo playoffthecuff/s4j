@@ -1,126 +1,57 @@
-import type { Metadata, Viewport } from "next";
-import "./globals.css";
-import ThemeProvider from "@/components/ThemeProvider";
-import { i18n, type Locale } from "@/i18n-config";
-import { getDictionary } from "@/get-dictionary";
-import { I18nProvider } from "@/lib/utils/i18context";
-import { TooltipProvider, SonnerToaster } from "@/components/ui";
-import { GeistSans } from "geist/font/sans";
-import { GeistMono } from "geist/font/mono";
-import { Marck_Script } from "next/font/google";
-import { fetchFavicon } from "@/lib/utils/apiService";
-import clsx from "clsx";
 import { Header } from "@/components/header";
+import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster, TooltipProvider } from "@/components/ui";
+import { i18n, Locale } from "@/i18n-config";
+import { getDictionary } from "@/lib/utils/getDictionary";
+import { I18nProvider } from "@/lib/utils/i18context";
+import clsx from "clsx";
+import type { Metadata, Viewport } from "next";
+import { JetBrains_Mono } from "next/font/google";
+import localFont from "next/font/local";
+import "../globals.css";
 
 export async function generateStaticParams() {
-  return i18n.locales.map((locale) => ({ lang: locale }));
+  return i18n.locales.map((l) => ({ lang: l }));
 }
 
-const marckScript = Marck_Script({
-  weight: "400",
-  display: "block",
-  variable: "--greet-font",
-  subsets: ["cyrillic"],
+const fontMono = JetBrains_Mono({
+  variable: "--font-mono",
+  subsets: ["latin"],
 });
 
-// type Props = {
-//   params: { lang: string };
-// };
+// const fontScript = Marck_Script({
+//   weight: "400",
+//   display: "block",
+//   variable: "--font-script",
+//   subsets: ["cyrillic"],
+// });
 
-// export const metadata: Metadata = {
-//   creator: "playoffthecuff",
-//   generator: "Next.js",
-//   description: "root description",
-//   metadataBase: new URL("https://ribetki.vercel.com/"),
-//   alternates: {
-//     canonical: "/",
-//     languages: {
-//       en: "/en",
-//       ru: "/ru",
-//     },
-//   },
-// };
+const fontSans = localFont({
+  src: [
+    { path: "../../public/fonts/Akrobat-Regular.woff2", weight: "400" },
+    { path: "../../public/fonts/Akrobat-SemiBold.woff2", weight: "500" },
+    { path: "../../public/fonts/Akrobat-Bold.woff2", weight: "600" },
+  ],
+  display: "swap",
+  variable: "--font-sans",
+});
 
-// export async function generateMetadata({
-//   params,
-// }: {
-//   params: { lang: Locale };
-// }) {
-//   const common = {
-//     creator: "playoffthecuff",
-//     generator: "Next.js",
-//     metadataBase: new URL("https://ribetki.vercel.com/"),
-//     alternates: {
-//       canonical: "/",
-//       languages: {
-//         en: "/en",
-//         ru: "/ru",
-//       },
-//     },
-//   };
-//   const en = {
-//     title: "Julia Ribetki",
-//     description: "Modern art",
-//     keywords: ["Modern art", "Oeuvre", "Creation"],
-//     authors: [
-//       {
-//         name: "Julia Ribetki",
-//         url: "https://ribetki.vercel.com/en/",
-//       },
-//     ],
-//     openGraph: {
-//       ...openGraphShare,
-//       title: "Julia Ribetki",
-//       description: "personal website of Julia Ribetki",
-//       locale: "en",
-//     },
-//     ...common,
-//   };
-
-//   const ru = {
-//     title: "Юлия Рибетки",
-//     description: "Современное искусство",
-//     keywords: ["Современное искусство", "Творчество", "Произведение"],
-//     authors: [
-//       {
-//         name: "Юлия Рибетки",
-//         url: "https://ribetki.vercel.com/ru/",
-//       },
-//     ],
-//     openGraph: {
-//       ...openGraphShare,
-//       title: "Юлия Рибетки",
-//       description: "персональный веб-сайт Юлии Рибетки",
-//       locale: "ru",
-//     },
-//     ...common,
-//   };
-
-//   return {
-//     author: "sdf",
-//     creator: "playoffthecuff",
-//     generator: "Next.js",
-//     metadataBase: new URL("https://ribetki.vercel.com/"),
-//     alternates: {
-//       canonical: "/",
-//       languages: {
-//         en: "/en",
-//         ru: "/ru",
-//       },
-//     },
-//   };
-// }
+const fontRabbit = localFont({
+  src: "../../public/fonts/rabbits-elf.woff2",
+  display: "swap",
+  variable: "--font-rabbit",
+});
 
 export const viewport: Viewport = {
   themeColor: "#030712",
 };
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { lang: Locale };
-}): Promise<Metadata> {
-  // const data = await fetchFavicon();
+export async function generateMetadata(
+  props: {
+    params: Promise<{ lang: Locale }>;
+  }
+): Promise<Metadata> {
+  const params = await props.params;
 
   const common = {
     creator: "playoffthecuff",
@@ -136,13 +67,6 @@ export async function generateMetadata({
         "application/rss+xml": "https://ribetki.vercel.com/en/feed.xml",
       },
     },
-    // icons: {
-    //   icon: [data.svgUrl, data.png96Url, data.icoUrl],
-    //   apple: data.applePngUrl,
-    //   other: {
-    //     url: data.png512Url,
-    //   },
-    // },
   };
 
   const openGraphShare = {
@@ -200,96 +124,35 @@ export async function generateMetadata({
   return params.lang === "ru" ? { ...ru } : { ...en };
 }
 
-export default async function Layout({
+export default async function RootLayout({
   children,
   params,
 }: Readonly<{
   children: React.ReactNode;
-  params: { lang: Locale };
+  params: Promise<{ lang: Locale }>;
 }>) {
-  const dictionary = await getDictionary(params.lang);
-  const data = await fetchFavicon();
-  const svg = await fetch(data.logoUrl).then((r) => r.text());
-
+  const lang = (await params).lang;
+  const dictionary = await getDictionary(lang);
   return (
-    <html
-      lang={params.lang}
-      className={clsx(
-        "h-full scrollbar-thumb-muted-foreground scrollbar-track-muted antialiased",
-        GeistSans.variable,
-        GeistMono.variable,
-      )}
-      suppressHydrationWarning
-    >
-      <head>
-        {/* <meta
-          name="description"
-          content={
-            params.lang === "en" ? "Modern art" : "Современное искусство"
-          }
-        /> */}
-        {/* <meta
-          name="author"
-          content={params.lang === "en" ? "Julia Ribetki" : "Юлия Рибетки"}
-        />
-        <meta
-          name="keywords"
-          content={
-            params.lang === "en"
-              ? "Modern art,Oeuvre,Creation"
-              : "Современное искусство,Творчество,Произведение"
-          }
-        />
-        <meta
-          property="og:locale"
-          content={params.lang === "en" ? "en" : "ru"}
-        />
-        <meta
-          property="og:title"
-          content={params.lang === "en" ? "Julia Ribetki" : "Юлия Рибетки"}
-        />
-        <meta
-          property="og:description"
-          content={
-            params.lang === "en"
-              ? "personal website of Julia Ribetki"
-              : "персональный веб-сайт Юлии Рибетки"
-          }
-        />
-        <meta
-          name="twitter:title"
-          content={params.lang === "en" ? "Julia Ribetki" : "Юлия Рибетки"}
-        />
-        <meta
-          name="twitter:description"
-          content={
-            params.lang === "en"
-              ? "personal website of Julia Ribetki"
-              : "персональный веб-сайт Юлии Рибетки"
-          }
-        /> */}
-        {/* <link rel="icon" href={data.svgUrl} type="image/svg+xml" />
-        <link rel="icon" href={data.png96Url} type="image/png" sizes="96x96" />
-        <link rel="shortcut icon" href={data.icoUrl} />
-        <link
-          rel="apple-touch-icon"
-          href={data.applePngUrl}
-          sizes="180x180"
-        ></link>
-        <link rel="manifest" href={data.manifestUrl} /> */}
-        {/* <meta property="og:image" content={data.svgUrl} /> */}
-      </head>
-      <body className={clsx("min-h-full flex flex-col font-sans overflow-x-hidden transition-opacity duration-300", marckScript.variable)}>
+    <html lang={lang} suppressHydrationWarning>
+      <body
+        className={clsx(
+          "min-h-full flex flex-col font-sans overflow-x-hidden transition-opacity duration-300 antialiased",
+          fontSans.variable,
+          fontMono.variable,
+          fontRabbit.variable
+        )}
+      >
         <ThemeProvider
           attribute="class"
+          defaultTheme="system"
           enableSystem
           disableTransitionOnChange
-          defaultTheme="system"
         >
           <I18nProvider dictionary={dictionary}>
-            <TooltipProvider delayDuration={400}>
-              <Header svg={svg} />
-              <SonnerToaster />
+            <TooltipProvider>
+              <Header />
+              <Toaster />
               {children}
             </TooltipProvider>
           </I18nProvider>

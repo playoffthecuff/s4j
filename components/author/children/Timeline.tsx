@@ -1,5 +1,5 @@
+import { TimelineType } from "@/app/[lang]/(with-footer)/about/fetchAuthor";
 import { Accordion } from "@/components/ui";
-import { TimelineType } from "@/lib/types/sanity-data";
 import { TimelineEntry } from "./TimelineEntry";
 
 export function Timeline({

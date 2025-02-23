@@ -1,17 +1,20 @@
+import { fetchAuthor } from "@/app/[lang]/(with-footer)/about/fetchAuthor";
 import { MainInfo, Mentions } from "@/components/author";
 import { Timeline } from "@/components/author/children";
 import { Separator } from "@/components/ui";
 import { Locale } from "@/i18n-config";
-import { fetchAuthor } from "@/lib/utils/apiService";
 import { Metadata } from "next";
-import React from "react";
 
-export async function generateMetadata({ params }: { params: { lang: Locale, slug: string } }): Promise<Metadata> {
+export async function generateMetadata(props: {
+  params: Promise<{ lang: Locale; slug: string }>;
+}): Promise<Metadata> {
+  const params = await props.params;
   const data = await fetchAuthor(params.lang);
   const pre = params.lang === "ru" ? `Автор` : `About`;
   const siteName = params.lang === "ru" ? `Юлия Рибетки` : `Julia Ribetki`;
   const title = `${pre} | ${siteName}`;
-  const description = params.lang === "ru" ? `Автор. Биография. Цитаты.` : `About. Bio. Quotes.`;
+  const description =
+    params.lang === "ru" ? `Автор. Биография. Цитаты.` : `About. Bio. Quotes.`;
   const url = data.mainInfo?.image ? data.mainInfo.image.url : "";
   const width = data.mainInfo?.image?.width ?? 0;
   const height = data.mainInfo?.image?.height ?? 0;
@@ -28,7 +31,7 @@ export async function generateMetadata({ params }: { params: { lang: Locale, slu
       },
     ],
     locale: `${params.lang}`,
-    type: 'website',
+    type: "website",
   };
   return {
     alternates: {
@@ -41,28 +44,31 @@ export async function generateMetadata({ params }: { params: { lang: Locale, slu
     title,
     description,
     openGraph,
-  }
+  };
 }
 
-export default async function Page({ params }: { params: { lang: Locale } }) {
+export default async function Page(props: {
+  params: Promise<{ lang: Locale }>;
+}) {
+  const params = await props.params;
   const d = await fetchAuthor(params.lang);
 
   return (
     <div className="max-w-3xl mx-auto mt-[7.5rem] mb-16 px-4">
-      {d.mainInfo && <MainInfo data={d.mainInfo} className="px-2" />}
+      {d.mainInfo && <MainInfo data={d.mainInfo} />}
       {d.timeline && (
         <>
-          {d.mainInfo && <Separator className="my-12" />}
+          {d.mainInfo && <Separator className="mt-8 mb-10" />}
           <Timeline
             entries={d.timeline}
-            className="max-w-[720px] mx-auto px-2"
+            className="max-w-[720px] mx-auto px-1"
           />
         </>
       )}
       {d.mentions && (
         <>
-          {d.mainInfo && <Separator className="my-12" />}
-          <Mentions data={d.mentions} className="px-2" />
+          {d.mainInfo && <Separator className="mt-8 mb-16" />}
+          <Mentions data={d.mentions} className="min-[576px]:px-0 px-5"/>
         </>
       )}
     </div>

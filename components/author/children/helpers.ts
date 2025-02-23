@@ -1,6 +1,10 @@
 import { Locale } from "@/i18n-config";
 
-export const formatDate = (monthVisible: boolean, date: string, lng: Locale) => {
+export const formatDate = (
+  monthVisible: boolean,
+  date: string,
+  lng: Locale
+) => {
   const d = date.split("-");
   const dictionary = {
     ru: [
@@ -33,13 +37,13 @@ export const formatDate = (monthVisible: boolean, date: string, lng: Locale) => 
     ],
   };
   d[1] = monthVisible ? dictionary[lng][+d[1]] : "";
-  d[2] = '';
+  d[2] = "";
   return d.filter((v) => v !== "").join(" ");
 };
 
 export const filterDate = (monthVisible: boolean, date: string) => {
   const d = date.split("-");
   if (!monthVisible) d[1] = "";
-  d[2] = '';
+  d[2] = "";
   return d.filter((v) => v !== "").join(".");
 };

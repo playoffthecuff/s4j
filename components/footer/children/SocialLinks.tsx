@@ -1,9 +1,17 @@
-import { fetchCredentials } from "@/lib/utils/apiService";
+import { fetchCredentials } from "@/components/footer/children/fetchCredentials";
+import { TooltipIcon, TooltipTranslationIcon } from "@/components/tooltips";
+import { Button } from "@/components/ui";
+import { Locale } from "@/i18n-config";
 import { MessageForm } from "./MessageForm";
-import { InlineSvgTooltipButton } from "@/components/buttons";
+import { PushNotificationManager } from "@/components/subscription";
 
-export async function SocialLinks() {
-  const data = await fetchCredentials();
+export async function SocialLinks({ lang }: { lang: Locale }) {
+  const data = await fetchCredentials(lang);
+  const subject = encodeURIComponent(
+    lang === "en"
+      ? "message from ribetki.vercel.com"
+      : "сообщение с ribetki.vercel.com"
+  );
   return (
     <div className="max-w-7xl mx-auto px-4 flex justify-center gap-5 flex-wrap">
       {data.socialsWithSvg &&
@@ -15,36 +23,64 @@ export async function SocialLinks() {
                 key={d.link}
                 target="_blank"
                 className="rounded-md"
-                aria-label={d.label.en}
+                aria-label={d.label ?? undefined}
               >
-                <InlineSvgTooltipButton label={d.label} svg={d.svg} />
+                <TooltipIcon text={d.label ?? ""} offset={8}>
+                  <Button
+                    variant="outline"
+                    size="icon"
+                    dangerouslySetInnerHTML={{ __html: d.svg }}
+                  />
+                </TooltipIcon>
               </a>
-            ),
+            )
         )}
-      {data.emailWithSvg.visibility && (
+      {data.emailWithSvg && (
         <a
-          href={`mailto:${data.emailWithSvg.email}`}
+          href={`mailto:${data.emailWithSvg.email}?subject=${subject}`}
           className="rounded-md"
           aria-label="email"
         >
-          <InlineSvgTooltipButton
-            translation="email"
-            svg={data.emailWithSvg.svg}
-          />
+          <TooltipTranslationIcon translation="email" offset={8}>
+            <Button
+              variant="outline"
+              size="icon"
+              dangerouslySetInnerHTML={{ __html: data.emailWithSvg.svg }}
+            />
+          </TooltipTranslationIcon>
         </a>
       )}
-      {data.phoneWithSvg.visibility && (
+      {data.phoneWithSvg && (
         <a
           href={`tel:${data.phoneWithSvg.phone}`}
           className="rounded-md"
           aria-label="phone number"
         >
-          <InlineSvgTooltipButton
-            translation="phone"
-            svg={data.phoneWithSvg.svg}
-          />
+          <TooltipTranslationIcon translation="phone" offset={8}>
+            <Button
+              variant="outline"
+              size="icon"
+              dangerouslySetInnerHTML={{ __html: data.phoneWithSvg.svg }}
+            />
+          </TooltipTranslationIcon>
         </a>
       )}
+      {data.rssWithSvg && (
+        <a
+          href={data.rssWithSvg.link}
+          className="rounded-md"
+          aria-label="rss-feed"
+        >
+          <TooltipTranslationIcon translation="rss" offset={8}>
+            <Button
+              variant="outline"
+              size="icon"
+              dangerouslySetInnerHTML={{ __html: data.rssWithSvg.svg }}
+            />
+          </TooltipTranslationIcon>
+        </a>
+      )}
+      <PushNotificationManager />
       <MessageForm />
     </div>
   );

@@ -1,6 +1,6 @@
 "use client";
 
-import { Moon, Sun, MonitorCog } from "lucide-react";
+import { MonitorCog, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 
 import {

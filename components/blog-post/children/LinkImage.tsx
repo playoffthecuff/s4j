@@ -1,8 +1,8 @@
-import { Eye } from "lucide-react";
-import Link from "next/link";
-import Image from "next/image";
+import { GalleryImage } from "@/app/[lang]/types";
 import { cn } from "@/lib/utils";
-import { ImageData } from "@/lib/types/sanity-data";
+import { Eye } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
 export function LinkImage({
   href,
@@ -11,14 +11,13 @@ export function LinkImage({
   imgClass,
 }: {
   href: string;
-  data: ImageData;
+  data: GalleryImage;
   className?: string;
   imgClass?: string;
 }) {
   return (
     <Link
       href={`${href}/${data.slug}`}
-      prefetch
       className={cn("block group relative", className)}
     >
       <div>
@@ -29,7 +28,7 @@ export function LinkImage({
           )}
           priority
           src={data.url}
-          blurDataURL={data.lqip}
+          blurDataURL={data.lqip ?? undefined}
           placeholder="blur"
           width={data.width}
           height={data.height}
@@ -37,7 +36,7 @@ export function LinkImage({
         />
         <Eye className="absolute bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-400 text-white" />
       </div>
-      <div className="text-base px-1 truncate opacity-100 group-hover:opacity-70 transition-opacity duration-400 text-white">
+      <div className="text-lg tracking-wide px-1 truncate opacity-100 group-hover:opacity-70 transition-opacity duration-400 text-white">
         {data.title}
       </div>
     </Link>

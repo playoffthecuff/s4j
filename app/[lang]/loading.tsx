@@ -1,4 +1,3 @@
-// import { SpinnerIcon } from "@/components/icons";
 import ClockSpinner from "@/components/spinner/clock";
 
 export default function Loading() {

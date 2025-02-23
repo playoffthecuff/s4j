@@ -1,10 +1,10 @@
 "use client";
 
 import { WhatsappIcon } from "@/components/icons";
-import { Button } from "../../ui/button";
-import { Tooltip, TooltipContent, TooltipTrigger } from "../../ui/tooltip";
 import { useI18n } from "@/lib/utils/i18context";
 import { useEffect, useState } from "react";
+import { Button } from "../../ui/button";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../../ui/tooltip";
 
 export function WhatsappShare({
   className,
@@ -31,7 +31,7 @@ export function WhatsappShare({
             <a
               target="_blank"
               href={encodeURI(
-                `https://api.whatsapp.com/send?text=${text} ${link}`,
+                `https://api.whatsapp.com/send?text=${text} ${link}`
               )}
               aria-label="share on whatsapp"
             >
@@ -39,9 +39,7 @@ export function WhatsappShare({
             </a>
           </Button>
         </TooltipTrigger>
-        <TooltipContent
-          className={`bg-background/60 backdrop-blur-md px-2 py-1 rounded-sm z-30 text-base`}
-        >
+        <TooltipContent>
           <p>{t.whatsappShareTooltip}</p>
         </TooltipContent>
       </Tooltip>

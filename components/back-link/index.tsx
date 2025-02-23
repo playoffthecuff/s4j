@@ -4,7 +4,13 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { ReactNode, useEffect, useState } from "react";
 
-export function BackLink({ fallback, children }: { fallback: string, children: ReactNode }) {
+export function BackLink({
+  fallback,
+  children,
+}: {
+  fallback: string;
+  children: ReactNode;
+}) {
   const [prev, setPrev] = useState<string | null>(null);
   const router = useRouter();
   useEffect(() => {

@@ -1,17 +1,17 @@
 "use client";
 
+import clsx from "clsx";
 import { useState } from "react";
 import {
-  ShareButton,
+  CopyButton,
   FacebookShare,
   LinkedInShare,
   RedditShare,
+  ShareButton,
   TelegramShare,
-  CopyButton,
-  VkShare,
   TwitterShare,
+  VkShare,
 } from "./children";
-import clsx from "clsx";
 
 export function ShareMenuRect({
   className,
@@ -36,7 +36,7 @@ export function ShareMenuRect({
           "h-12 w-12 absolute transform-gpu duration-300",
           open
             ? "z-30 -translate-y-[104px] opacity-100"
-            : "-translate-y-full opacity-0",
+            : "-translate-y-full opacity-0"
         )}
       />
       <LinkedInShare
@@ -46,7 +46,7 @@ export function ShareMenuRect({
           "h-12 w-12 absolute transform-gpu duration-500",
           open
             ? "z-20 -translate-y-full -translate-x-28 opacity-100"
-            : "-translate-y-full opacity-0",
+            : "-translate-y-full opacity-0"
         )}
       />
       <RedditShare
@@ -55,7 +55,7 @@ export function ShareMenuRect({
           "h-12 w-12 absolute transform-gpu duration-600",
           open
             ? "z-20 -translate-y-[104px] -translate-x-[168px] opacity-100"
-            : "-translate-y-full opacity-0",
+            : "-translate-y-full opacity-0"
         )}
       />
       <TelegramShare
@@ -64,7 +64,7 @@ export function ShareMenuRect({
           "h-12 w-12 absolute transform-gpu duration-400",
           open
             ? "z-30 -translate-y-[104px] -translate-x-[56px] opacity-100"
-            : "-translate-y-full opacity-0",
+            : "-translate-y-full opacity-0"
         )}
       />
       <CopyButton
@@ -72,7 +72,7 @@ export function ShareMenuRect({
           "h-12 w-12 absolute transform-gpu duration-500",
           open
             ? "z-40 -translate-y-full -translate-x-[168px] opacity-100"
-            : "-translate-y-full opacity-0",
+            : "-translate-y-full opacity-0"
         )}
       />
       <VkShare
@@ -82,7 +82,7 @@ export function ShareMenuRect({
           "h-12 w-12 absolute transform-gpu duration-500",
           open
             ? "z-20 -translate-y-[104px] -translate-x-28 opacity-100"
-            : "-translate-y-full opacity-0",
+            : "-translate-y-full opacity-0"
         )}
       />
       <TwitterShare
@@ -91,7 +91,7 @@ export function ShareMenuRect({
           "h-12 w-12 absolute transform-gpu duration-300",
           open
             ? "z-30 -translate-y-full -translate-x-[56px] opacity-100"
-            : "-translate-y-full opacity-0",
+            : "-translate-y-full opacity-0"
         )}
       />
     </div>

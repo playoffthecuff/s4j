@@ -1,4 +1,4 @@
-import { Img } from "@/lib/types/sanity-data";
+import { GalleryImage } from "@/app/[lang]/types";
 import { CSSProperties } from "react";
 
 export type CommonProps = {
@@ -6,7 +6,7 @@ export type CommonProps = {
   blockWidth: number;
   columnsCount: number;
   gap: number;
-  items: Img[];
+  items: GalleryImage[];
   maxCells: number;
   pX: number;
   rowsByImgCount: number;
@@ -18,7 +18,7 @@ interface DataForRender extends CommonProps {
   windowWidth: number;
 }
 
-interface ImgExt extends Img {
+interface ImgExt extends GalleryImage {
   columnCells: number;
   rowCells: number;
 }
@@ -27,10 +27,10 @@ const calcInitRowHeight = (
   height: number,
   gap: number,
   rowsByImgCount: number,
-  precision: number = 10,
+  precision: number = 10
 ) =>
   Math.round(
-    ((height - gap * (rowsByImgCount - 1)) * precision) / rowsByImgCount,
+    ((height - gap * (rowsByImgCount - 1)) * precision) / rowsByImgCount
   ) / precision;
 
 const calcRowHeight = (
@@ -38,7 +38,7 @@ const calcRowHeight = (
   gap: number,
   aspect: number,
   rowsByImgCount: number,
-  spacers: number,
+  spacers: number
 ) => {
   const tRW = aspect * columnsCount * rowsByImgCount;
   const vw = 100 / tRW;
@@ -70,7 +70,7 @@ export const getRenderData = (data: DataForRender) => {
   const queries = Array.from(
     { length: columnsCount - 1 },
     (_, i) =>
-      `max-width: ${columnWidth * (columnsCount - i) + (columnsCount - i - 1) * gap + 2 * pX}px`,
+      `max-width: ${columnWidth * (columnsCount - i) + (columnsCount - i - 1) * gap + 2 * pX}px`
   );
   const defaultBreakPoint = [
     {
@@ -90,7 +90,7 @@ export const getRenderData = (data: DataForRender) => {
         gap,
         aspect,
         rowsByImgCount,
-        spacers,
+        spacers
       ),
       gridTemplateColumns,
     };
@@ -100,16 +100,26 @@ export const getRenderData = (data: DataForRender) => {
   const itemsExt: ImgExt[] = items.map((i) => {
     const step = (maxWidth - minWidth) / maxCells;
 
-    const computedColumnCells = Math.ceil(Math.max(i.width - minWidth, 1) / step);
+    const computedColumnCells = Math.ceil(
+      Math.max(i.width - minWidth, 1) / step
+    );
 
     const computedRowCells = Math.round(
-      (i.height * (columnWidth * computedColumnCells - (computedColumnCells - 1) * gap)) /
+      (i.height *
+        (columnWidth * computedColumnCells - (computedColumnCells - 1) * gap)) /
         (initRowHeight + gap) /
-        i.width,
+        i.width
     );
-    const maxWindowColumns = Math.floor((windowWidth - 2 * pX + gap) / (columnWidth + gap));
+    const maxWindowColumns = Math.floor(
+      (windowWidth - 2 * pX + gap) / (columnWidth + gap)
+    );
     const columnCells = Math.min(computedColumnCells, maxWindowColumns);
-    const rowCells = Math.round(computedRowCells / (columnCells === computedColumnCells ? 1 : computedColumnCells / maxWindowColumns));
+    const rowCells = Math.round(
+      computedRowCells /
+        (columnCells === computedColumnCells
+          ? 1
+          : computedColumnCells / maxWindowColumns)
+    );
     return { ...i, columnCells, rowCells };
   });
   return { totalBreakPoints, itemsExt };

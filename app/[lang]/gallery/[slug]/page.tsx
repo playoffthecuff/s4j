@@ -1,24 +1,23 @@
-import { G2 } from "@/components/gallery/g2";
-import { Locale } from "@/i18n-config";
 import {
   fetchGalleryImage,
   fetchGalleryImageSlugs,
-} from "@/lib/utils/apiService";
+} from "@/app/[lang]/fetchImage";
+import { Gallery } from "@/components/gallery";
+import { Locale } from "@/i18n-config";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { lang: Locale; slug: string };
+export async function generateMetadata(props: {
+  params: Promise<{ lang: Locale; slug: string }>;
 }): Promise<Metadata> {
+  const params = await props.params;
   const data = await fetchGalleryImage(params.slug, params.lang);
   const siteName = params.lang === "ru" ? `Юлия Рибетки` : `Julia Ribetki`;
   const title = `${data?.title ?? ""} | ${siteName}`;
-  const description = data?.description.slice(0, 150);
-  const url = data?.image.url ?? "";
-  const width = data?.image.width ?? 0;
-  const height = data?.image.height ?? 0;
+  const description = data?.description?.slice(0, 150) ?? "";
+  const url = data?.url ?? "";
+  const width = data?.width ?? 0;
+  const height = data?.height ?? 0;
   const openGraph = {
     title,
     description,
@@ -48,17 +47,15 @@ export async function generateMetadata({
   };
 }
 
-export default async function Page({
-  params,
-}: {
-  params: { lang: Locale; slug: string };
+export default async function Page(props: {
+  params: Promise<{ lang: Locale; slug: string }>;
 }) {
+  const params = await props.params;
   const slugs = await fetchGalleryImageSlugs();
   const image = await fetchGalleryImage(params.slug, params.lang);
   if (!image || !slugs.length) notFound();
-  // return <Gallery image={image} slugs={slugs} backLink="/gallery" />;
   return (
-    <G2
+    <Gallery
       data={image}
       slugs={slugs}
       backLink="./"

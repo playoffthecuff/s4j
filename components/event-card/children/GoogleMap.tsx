@@ -22,7 +22,7 @@ export function GoogleMap({
         className,
         variant === "thin" && "sm:w-80",
         theme === "dark" &&
-          "hue-rotate-180 contrast-75 invert-[1] grayscale-[25%]",
+          "hue-rotate-180 contrast-75 invert-100 grayscale-[25%]"
       )}
     >
       <iframe

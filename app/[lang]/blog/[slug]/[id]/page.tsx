@@ -1,24 +1,23 @@
-import { G2 } from "@/components/gallery/g2";
-import { Locale } from "@/i18n-config";
 import {
   fetchBlogImageSlugs,
   fetchGalleryImage,
-} from "@/lib/utils/apiService";
+} from "@/app/[lang]/fetchImage";
+import { Gallery } from "@/components/gallery";
+import { Locale } from "@/i18n-config";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { lang: Locale; slug: string; id: string };
+export async function generateMetadata(props: {
+  params: Promise<{ lang: Locale; slug: string; id: string }>;
 }): Promise<Metadata> {
+  const params = await props.params;
   const data = await fetchGalleryImage(params.id, params.lang);
   const siteName = params.lang === "ru" ? `Юлия Рибетки` : `Julia Ribetki`;
   const title = `${data?.title ?? ""} | ${siteName}`;
-  const description = data?.description.slice(0, 150);
-  const url = data?.image.url ?? "";
-  const width = data?.image.width ?? 0;
-  const height = data?.image.height ?? 0;
+  const description = data?.description?.slice(0, 150) ?? "";
+  const url = data?.url ?? "";
+  const width = data?.width ?? 0;
+  const height = data?.height ?? 0;
   const openGraph = {
     title,
     description,
@@ -48,26 +47,25 @@ export async function generateMetadata({
   };
 }
 
-export default async function Page({
-  params,
-}: {
-  params: { lang: Locale; slug: string; id: string };
+export default async function Page(props: {
+  params: Promise<{ lang: Locale; slug: string; id: string }>;
 }) {
+  const params = await props.params;
   const bis = await fetchBlogImageSlugs(params.lang, params.slug);
   const image = await fetchGalleryImage(params.id, params.lang);
-  const slugs = [
-    ...new Set([bis.titleImageSlug, ...(bis.imageSlugs ?? [])]),
-  ].filter((v) => v !== null);
-  if (!image || !slugs.length) notFound();
-  // return <Gallery image={image} slugs={slugs} backLink="/gallery" />;
+  const slugsArr = [];
+  if (bis) slugsArr.push(bis.titleImageSlug);
+  if (bis?.imageSlugs?.length) slugsArr.push(...bis.imageSlugs);
+  const slugs = [...new Set(slugsArr)].filter((v) => v !== null);
+  if (!bis || !image || !slugs.length) notFound();
   return (
-    <G2
+    <Gallery
       data={image}
       slugs={slugs}
       backLink="./"
       bcLinks={[
-        { link: "blog", text: params.lang === "ru" ? "Блог" : "Blog" },
-        { link: params.slug, text: bis.title },
+        { link: "../", text: params.lang === "ru" ? "Блог" : "Blog" },
+        { link: "./", text: params.lang === "ru" ? "Статья" : "Article" },
       ]}
       menuLinks={["gallery", "events", "about"]}
     />

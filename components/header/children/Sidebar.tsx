@@ -1,20 +1,20 @@
 "use client";
-import Link from "next/link";
+import useSmallLandscape from "@/components/header/children/use-small-landscape";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui";
+import { Locale } from "@/i18n-config";
+import { useClickOutside } from "@/lib/hooks/use-click-outside";
+import useLocale from "@/lib/hooks/use-locale";
+import { cn } from "@/lib/utils";
+import { useI18n } from "@/lib/utils/i18context";
+import clsx from "clsx";
+import { MonitorCog, Moon, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { RefObject, useEffect, useState } from "react";
-import { useI18n } from "@/lib/utils/i18context";
-import { cn } from "@/lib/utils";
-import clsx from "clsx";
-import { Locale } from "@/i18n-config";
 import { EnFlag } from "./EnFlag";
 import { RuFlag } from "./RuFlag";
-import { useClickOutside } from "@/lib/hooks/use-click-outside";
-import { SearchForm } from "./SearchFrom";
-import useSmallLandscape from "@/lib/hooks/useSmallLandscape";
-import { useTheme } from "next-themes";
-import { MonitorCog, Moon, Sun } from "lucide-react";
-import useLocale from "@/lib/hooks/useLocale";
+import { SearchForm } from "./SearchForm";
 
 export function Sidebar({
   className,
@@ -28,7 +28,7 @@ export function Sidebar({
   onTabClick?: () => void;
   tabbed?: boolean;
   cb: () => void;
-  cbRef: RefObject<HTMLElement>;
+  cbRef: RefObject<HTMLElement | null>;
   values: string[];
 }) {
   const pathname = usePathname();
@@ -36,13 +36,6 @@ export function Sidebar({
   const t = useI18n();
   const [v, setV] = useState(pathname.split("/")[2]);
   useEffect(() => setV(pathname.split("/")[2]), [pathname]);
-  // const [lang, setLang] = useState<"ru" | "en">("en");
-  // useEffect(() => {
-  //   if (!pathname) return;
-  //   const segments = pathname.split("/");
-  //   const l = segments[1] as Locale;
-  //   setLang(l);
-  // }, [pathname]);
   const locale = useLocale();
 
   const close = () => {
@@ -82,7 +75,7 @@ export function Sidebar({
         "rounded-bl-xl shadow-menu bg-background",
         "transform-gpu duration-600 origin-right",
         tabbed ? "scale-x-100" : "scale-x-0",
-        className,
+        className
       )}
     >
       <div
@@ -102,8 +95,8 @@ export function Sidebar({
           <TabsList
             className={clsx(
               "flex-col",
-              "h-fit select-none flex-1 max-w-none p-0 bg-muted",
-              isSmallLandscaped && "flex-row",
+              "h-fit select-none flex-1 max-w-none p-0 bg-muted text-foreground tracking-wider",
+              isSmallLandscaped && "flex-row"
             )}
           >
             <div
@@ -113,68 +106,27 @@ export function Sidebar({
                 <TabsTrigger
                   value={el}
                   disabled={v === el}
-                  className="w-full text-base justify-start tracking-wide px-2.5 data-[disabled]:pointer-events-none hover:text-muted-foreground"
+                  className="w-full text-lg justify-start tracking-wider px-2.5 data-disabled:pointer-events-none hover:text-muted-foreground"
                   onClick={onTabClick}
                   asChild
                   key={el}
                 >
-                  <Link href={`/${locale}/${el}`} tabIndex={tabbed ? 0 : -1} prefetch>
+                  <Link
+                    href={`/${locale}/${el}`}
+                    tabIndex={tabbed ? 0 : -1}
+                  >
                     {t[el]}
                   </Link>
                 </TabsTrigger>
               ))}
-              {/* <TabsTrigger
-                asChild
-                className="w-full text-base justify-start tracking-wide px-2.5 data-[disabled]:pointer-events-none hover:text-muted-foreground"
-                value="blog"
-                onClick={onTabClick}
-                disabled={v === "blog"}
-              >
-                <Link href="./blog" tabIndex={tabbed ? 0 : -1} prefetch>
-                  {t.blog}
-                </Link>
-              </TabsTrigger>
               <TabsTrigger
                 asChild
-                className="w-full text-base justify-start tracking-wide px-2.5 data-[disabled]:pointer-events-none hover:text-muted-foreground"
-                value="gallery"
-                onClick={onTabClick}
-                disabled={v === "gallery"}
-              >
-                <Link href="./gallery" tabIndex={tabbed ? 0 : -1} prefetch>
-                  {t.gallery}
-                </Link>
-              </TabsTrigger>
-              <TabsTrigger
-                asChild
-                className="w-full text-base justify-start tracking-wide px-2.5 data-[disabled]:pointer-events-none hover:text-muted-foreground"
-                value="events"
-                onClick={onTabClick}
-                disabled={v === "events"}
-              >
-                <Link href="./events" tabIndex={tabbed ? 0 : -1} prefetch>
-                  {t.events}
-                </Link>
-              </TabsTrigger>
-              <TabsTrigger
-                asChild
-                className="w-full text-base justify-start tracking-wide px-2.5 data-[disabled]:pointer-events-none hover:text-muted-foreground"
-                value="about"
-                onClick={onTabClick}
-                disabled={v === "about"}
-              >
-                <Link href="./about" tabIndex={tabbed ? 0 : -1} prefetch>
-                  {t.about}
-                </Link>
-              </TabsTrigger> */}
-              <TabsTrigger
-                asChild
-                className="w-full p-0 text-base justify-start"
+                className="w-full p-0 text-lg justify-start"
                 value="search"
               >
                 <SearchForm
                   className={clsx(
-                    v === "search" ? "bg-background" : "bg-muted",
+                    v === "search" ? "bg-background" : "bg-muted"
                   )}
                   onEnter={close}
                   variant="wide"
@@ -184,12 +136,12 @@ export function Sidebar({
             <div
               className={clsx(
                 "w-full gap-0.5 flex flex-col border-x-2 border-b-2 rounded-md",
-                isSmallLandscaped && "border-none pr-1 gap-1",
+                isSmallLandscaped && "border-none pr-1 gap-1"
               )}
             >
               <div className="p-1 bg-background rounded-md">
                 <TabsTrigger
-                  className="w-full flex justify-between text-base tracking-wide pl-2.5 pr-[9px] hover:bg-muted"
+                  className="w-full flex justify-between text-lg tracking-wider pl-2.5 pr-[9px] hover:bg-muted"
                   value="light"
                   onClick={setLight}
                   disabled={th === "light"}
@@ -199,7 +151,7 @@ export function Sidebar({
                   <Sun className="h-[1.2rem] w-[1.2rem]" />
                 </TabsTrigger>
                 <TabsTrigger
-                  className="w-full flex justify-between text-base tracking-wide pl-2.5 pr-[9px] hover:bg-muted"
+                  className="w-full flex justify-between text-lg tracking-wider pl-2.5 pr-[9px] hover:bg-muted"
                   value="dark"
                   onClick={setDark}
                   disabled={th === "dark"}
@@ -209,7 +161,7 @@ export function Sidebar({
                   <Moon className="h-[1.2rem] w-[1.2rem]" />
                 </TabsTrigger>
                 <TabsTrigger
-                  className="w-full flex justify-between text-base tracking-wide pl-2.5 pr-[9px] hover:bg-muted"
+                  className="w-full flex justify-between text-lg tracking-wider pl-2.5 pr-[9px] hover:bg-muted"
                   value="system"
                   onClick={setSystem}
                   disabled={th === "system"}
@@ -222,7 +174,7 @@ export function Sidebar({
               <div className="p-1 bg-background rounded-md min-w-40">
                 <TabsTrigger
                   asChild
-                  className="w-full flex justify-between text-base tracking-wide pl-2.5 pr-[6.5px] hover:bg-muted data-[disabled]:opacity-50 data-[disabled]:pointer-events-none"
+                  className="w-full flex justify-between text-lg tracking-wider pl-2.5 pr-[6.5px] hover:bg-muted data-disabled:opacity-50 data-disabled:pointer-events-none"
                   value="en"
                   disabled={locale === "en"}
                   tabIndex={locale === "en" ? -1 : 0}
@@ -240,7 +192,7 @@ export function Sidebar({
                 </TabsTrigger>
                 <TabsTrigger
                   asChild
-                  className="w-full flex justify-between text-base tracking-wide pl-2.5 pr-[6.5px] hover:bg-muted data-[disabled]:opacity-50 data-[disabled]:pointer-events-none"
+                  className="w-full flex justify-between text-lg tracking-wider pl-2.5 pr-[6.5px] hover:bg-muted data-disabled:opacity-50 data-disabled:pointer-events-none"
                   value="ru"
                   disabled={locale === "ru"}
                   tabIndex={locale === "ru" ? -1 : 0}
@@ -250,7 +202,7 @@ export function Sidebar({
                     href={redirectedPathname("ru")}
                     className="flex items-center justify-between w-full"
                   >
-                    <p>{t.russian}</p>
+                    <p lang={locale === "en" ? "ru" : "en"}>{t.russian}</p>
                     <div>
                       <RuFlag />
                     </div>

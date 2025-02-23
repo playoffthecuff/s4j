@@ -1,14 +1,14 @@
+import { Stage } from "@/app/[lang]/(with-footer)/about/fetchAuthor";
+import { BezierTransitionIcon } from "@/components/icons";
 import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui";
+import clsx from "clsx";
 import { Tag } from "lucide-react";
 import { PortableText } from "next-sanity";
-import { Stage } from "@/lib/types/sanity-data";
 import { filterDate } from "./helpers";
-import clsx from "clsx";
-import { BezierTransitionIcon } from "@/components/icons";
 
 export interface TimelineEntryProps extends Stage {
   index?: number;
@@ -31,34 +31,33 @@ export function TimelineEntry({
     <AccordionItem
       disabled={!content}
       value={"" + index}
-      className="text-muted-foreground hover:text-foreground border-0 data-[state=open]:text-foreground"
+      className="border-0 data-[state=open]:text-foreground pr-2"
     >
-      <div
-        className={clsx("w-full h-3 ml-[14px]", index && "border-l-4")}
-      ></div>
-      <AccordionTrigger disabled={!content} className="p-0 hover:no-underline">
+      <div className={clsx("w-full h-4 ml-[15px]", index && "border-l-2")} />
+      <AccordionTrigger
+        disabled={!content}
+        className="p-0 data-[state=open]:text-(--tw-prose-body) hover:text-foreground hover:cursor-pointer text-muted-foreground hover:no-underline disabled:pointer-events-none disabled:hover:text-muted-foreground disabled:[&>svg]:text-muted"
+      >
         <div className="flex w-full">
           <div className="relative">
-            <div
-              className={clsx("h-2 ml-[14px]", index && "border-l-4")}
-            ></div>
             {index !== 0 && (
               <BezierTransitionIcon
                 width={20}
-                className="absolute bottom-[38px] left-1.5 text-border rotate-180"
+                className="absolute bottom-[37.75px] left-1.5 text-border rotate-180"
               />
             )}
+            <div className={clsx("h-2 ml-[15px]", index !== 0 && "border-l-2")} />
             <div className="w-8 h-8 rounded-full bg-border flex justify-center items-center">
               <Tag width={16} height={16} />
             </div>
             {!isLast && (
               <BezierTransitionIcon
                 width={20}
-                className="absolute top-[38px] left-1.5 text-border"
+                className="absolute top-[37.75px] left-1.5 text-border"
               />
             )}
             <div
-              className={clsx("h-2 ml-[14px]", !isLast && "border-l-2")}
+              className={clsx("h-2 ml-[15px]", !isLast && "border-l-2")}
             ></div>
           </div>
           <div className="px-4 text-start">
@@ -75,11 +74,15 @@ export function TimelineEntry({
           </div>
         </div>
       </AccordionTrigger>
-      <div
-        className={clsx("w-full h-2 ml-[14px]", !isLast && "border-l-4")}
-      ></div>
-      <AccordionContent className="ml-[14px] pl-[30px] pr-6 border-l-4 border-t-4 pt-1 pb-4 prose dark:prose-invert">
-        {content && <PortableText value={content} />}
+      <div className={clsx("w-full h-2 ml-[15px]", !isLast && "border-l-2")} />
+      <AccordionContent className="border-l-2 ml-[15px] pt-4 pr-2 relative">
+        <BezierTransitionIcon
+          width={9}
+          className="absolute top-[5px] left-px text-border -rotate-90 scale-x-200"
+        />
+        <div className="border-t-2 pt-1 prose dark:prose-invert pl-[30px] pr-3 max-w-full">
+          {content && <PortableText value={content} />}
+        </div>
       </AccordionContent>
     </AccordionItem>
   );

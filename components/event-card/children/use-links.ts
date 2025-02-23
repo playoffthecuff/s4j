@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import { CalendarEvent } from "@/lib/types/sanity-data";
-import { calendarLinksGenerator } from "./helpers";
+import { CalendarEvent, calendarLinksGenerator } from "./helpers";
 
 export default function useLinks(e: CalendarEvent) {
   const [googleLink, setGoogleLink] = useState("");
@@ -14,6 +13,6 @@ export default function useLinks(e: CalendarEvent) {
     setO365Link(calendarLinksGenerator.office365(e));
     setOutlookLink(calendarLinksGenerator.outlook(e));
     setYahooLink(calendarLinksGenerator.yahoo(e));
-  });
+  }, [e]);
   return {googleLink, icsLink, o365Link, outlookLink, yahooLink}
 }

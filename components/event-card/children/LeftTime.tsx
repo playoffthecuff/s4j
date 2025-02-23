@@ -1,6 +1,6 @@
 import { HourGlassClockIcon } from "@/components/icons";
-import { getTimeDifference, phrasesFuture, phrasesPast } from "./helpers";
 import clsx from "clsx";
+import { getTimeDifference, phrasesFuture, phrasesPast } from "./helpers";
 
 export function LeftTime({
   dt,
@@ -18,7 +18,7 @@ export function LeftTime({
   const phrases = d >= new Date() ? phrasesFuture : phrasesPast;
 
   return (
-    <p className={clsx("text-base py-2 items-center flex gap-3", className)}>
+    <p className={clsx("text-lg py-2 items-center flex gap-3", className)}>
       {pre && <span>{pre}</span>}
       <HourGlassClockIcon style={{ width: "24px", height: "24px" }} />
       <span>
