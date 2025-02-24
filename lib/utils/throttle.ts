@@ -1,5 +1,7 @@
-// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
-export default function throttle(fn: Function, t: number) {
+export default function throttle<T extends (...args: unknown[]) => unknown>(
+  fn: T,
+  t: number
+) {
   let last = 0;
   return function (...args: unknown[]) {
     const now = Date.now();

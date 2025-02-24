@@ -1,7 +1,9 @@
-// eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
-export default function debounce(fn: Function, delay: number) {
+export default function debounce<T extends (...args: unknown[]) => unknown>(
+  fn: T,
+  delay: number
+) {
   let timer: NodeJS.Timeout;
-  return function (...args: unknown[]) {
+  return function (...args: Parameters<T>) {
     clearTimeout(timer);
     timer = setTimeout(() => fn(...args), delay);
   };

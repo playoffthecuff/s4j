@@ -8,7 +8,7 @@ import {
 } from "@/components/ui";
 import { useI18n } from "@/lib/utils/i18context";
 import { ChevronLeft, ChevronRight, List } from "lucide-react";
-import { TooltipIcon } from "../../tooltips/TooltipIcon";
+import { TooltipIcon } from "@/components/tooltips/";
 
 export function PaginationNavigation({
   prev,
