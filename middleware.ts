@@ -25,6 +25,8 @@ export function middleware(req: NextRequest) {
     [
       "/favicon.ico",
       "/icn.png",
+      "/icon.png",
+      "/apple-icon.png",
       "/badge.png",
       "/sw.js",
       "/manifest.webmanifest",

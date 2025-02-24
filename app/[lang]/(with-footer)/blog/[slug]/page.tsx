@@ -21,7 +21,7 @@ export async function generateMetadata(props: {
   const openGraph = {
     title,
     description,
-    url: `https://ribetki.vercel.com/${params.lang}/blog/${params.slug}`,
+    url: `https://ribetki.vercel.app/${params.lang}/blog/${params.slug}`,
     siteName: siteName,
     images: [
       {

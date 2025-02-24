@@ -19,7 +19,7 @@ export async function generateMetadata(props: {
   const openGraph = {
     title,
     description,
-    url: `https://ribetki.vercel.com/${params.lang}/gallery/${params.slug}`,
+    url: `https://ribetki.vercel.app/${params.lang}/gallery/${params.slug}`,
     siteName: siteName,
     images: [
       {

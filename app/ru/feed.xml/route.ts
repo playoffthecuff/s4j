@@ -6,8 +6,8 @@ export async function GET() {
   const feed = new RSS({
     title: "Юлия Рибетки",
     description: "Персональный веб-сайт",
-    site_url: "https://ribetki.vercel.com/ru",
-    feed_url: `https://ribetki.vercel.com/ru/feed.xml`,
+    site_url: "https://ribetki.vercel.app/ru",
+    feed_url: `https://ribetki.vercel.app/ru/feed.xml`,
     copyright: `${new Date().getFullYear()} Юлия Рибетки`,
     language: "ru",
     pubDate: new Date(),
@@ -15,8 +15,8 @@ export async function GET() {
   posts?.map((p) => {
     feed.item({
       title: p.title,
-      guid: `https://ribetki.vercel.com/ru/blog/${p.slug}`,
-      url: `https://ribetki.vercel.com/ru/blog/${p.slug}`,
+      guid: `https://ribetki.vercel.app/ru/blog/${p.slug}`,
+      url: `https://ribetki.vercel.app/ru/blog/${p.slug}`,
       date: p.publishedAt,
       description: "",
     });

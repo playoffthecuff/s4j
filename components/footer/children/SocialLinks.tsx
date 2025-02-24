@@ -9,8 +9,8 @@ export async function SocialLinks({ lang }: { lang: Locale }) {
   const data = await fetchCredentials(lang);
   const subject = encodeURIComponent(
     lang === "en"
-      ? "message from ribetki.vercel.com"
-      : "сообщение с ribetki.vercel.com"
+      ? "message from ribetki.vercel.app"
+      : "сообщение с ribetki.vercel.app"
   );
   return (
     <div className="max-w-7xl mx-auto px-4 flex justify-center gap-5 flex-wrap">

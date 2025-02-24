@@ -56,7 +56,7 @@ export async function generateMetadata(
   const common = {
     creator: "playoffthecuff",
     generator: "Next.js",
-    metadataBase: new URL("https://ribetki.vercel.com/"),
+    metadataBase: new URL("https://ribetki.vercel.app/"),
     alternates: {
       canonical: "/",
       languages: {
@@ -64,13 +64,13 @@ export async function generateMetadata(
         ru: "/ru",
       },
       types: {
-        "application/rss+xml": "https://ribetki.vercel.com/en/feed.xml",
+        "application/rss+xml": "https://ribetki.vercel.app/en/feed.xml",
       },
     },
   };
 
   const openGraphShare = {
-    url: "https://ribetki.vercel.com",
+    url: "https://ribetki.vercel.app",
     images: [
       {
         url: "/favicon/logo.svg",
@@ -88,7 +88,7 @@ export async function generateMetadata(
     authors: [
       {
         name: "Julia Ribetki",
-        url: "https://ribetki.vercel.com/en/",
+        url: "https://ribetki.vercel.app/en/",
       },
     ],
     openGraph: {
@@ -107,7 +107,7 @@ export async function generateMetadata(
     authors: [
       {
         name: "Юлия Рибетки",
-        url: "https://ribetki.vercel.com/ru/",
+        url: "https://ribetki.vercel.app/ru/",
       },
     ],
     openGraph: {
@@ -120,7 +120,7 @@ export async function generateMetadata(
   };
   if (params.lang === "ru")
     ru.alternates.types["application/rss+xml"] =
-      "https://ribetki.vercel.com/ru/feed.xml";
+      "https://ribetki.vercel.app/ru/feed.xml";
   return params.lang === "ru" ? { ...ru } : { ...en };
 }
 

@@ -57,25 +57,25 @@ export function PushNotificationManager() {
         process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!
       ),
     });
+    const subStr = JSON.stringify(sub);
     setSubscription(sub);
-    const serializedSub = JSON.parse(JSON.stringify(sub));
-    await subscribeUser(serializedSub);
+    await subscribeUser(subStr);
     const description = new Date().toLocaleString();
-    if (!!sub) toast.success(t.successSubscribedToPushTooltip, { description });
+    if (!!subStr)
+      toast.success(t.successSubscribedToPushTooltip, { description });
   }
 
   async function unsubscribeFromPush() {
+    if (!subscription) return;
+    await unsubscribeUser(JSON.stringify(subscription));
     await subscription?.unsubscribe();
     setSubscription(null);
-    await unsubscribeUser();
-    if (localStorage) {
-      localStorage.removeItem("pushSubscription");
-    }
     const description = new Date().toLocaleString();
     toast.success(t.successUnsubscribedFromPushTooltip, { description });
   }
 
   async function sendTestNotification() {
+    console.log(subscription);
     if (subscription) {
       await sendNotification("test title", message);
       setMessage("");

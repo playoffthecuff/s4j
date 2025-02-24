@@ -2,10 +2,8 @@
 
 import { createTransport } from "nodemailer";
 import Mail from "nodemailer/lib/mailer";
-import webpush, { PushSubscription } from "web-push";
-import fs from "fs/promises";
-
-const FILE_PATH = "./subscriptions.json";
+import webpush, { PushSubscription as WebPushSub } from "web-push";
+import redis from "./redis";
 
 export async function sendTelegramMessage(text: string) {
   try {
@@ -50,7 +48,7 @@ export async function sendEmailMessage(text: string) {
       from: "j.ribetki@mail.ee",
       to: "jribetki@gmail.com",
       subject:
-        "Сообщение из формы обратной связи личного сайта (ribetki.vercel.com)",
+        "Сообщение из формы обратной связи личного сайта (ribetki.vercel.app)",
       text,
     };
     await transporter.sendMail(mailOptions);
@@ -67,55 +65,56 @@ webpush.setVapidDetails(
   process.env.VAPID_PRIVATE_KEY!
 );
 
-let subscription: PushSubscription | null = null;
-
-async function saveSubscription(sub: PushSubscription) {
-  await fs.writeFile(FILE_PATH, JSON.stringify(sub));
-}
-
-async function getSubscription(): Promise<PushSubscription | null> {
+export async function subscribeUser(subStr: string) {
+  const { endpoint }: WebPushSub = JSON.parse(subStr);
   try {
-    const data = await fs.readFile(FILE_PATH, "utf-8");
-    return JSON.parse(data);
-  } catch {
-    return null;
+    const result = await redis.set(`push:${endpoint}`, subStr);
+    return result;
+  } catch (error) {
+    console.log(error);
   }
-}
-
-export async function subscribeUser(sub: PushSubscription) {
-  subscription = sub;
-  await saveSubscription(sub);
-  // In a production environment, you would want to store the subscription in a database
-  // For example: await db.subscriptions.create({ data: sub })
   return { success: true };
 }
 
-export async function unsubscribeUser() {
-  subscription = null;
-  // In a production environment, you would want to remove the subscription from the database
-  // For example: await db.subscriptions.delete({ where: { ... } })
-  return { success: true };
+export async function unsubscribeUser(sub: string) {
+  const subscription: WebPushSub = JSON.parse(sub);
+  const { endpoint } = subscription;
+  try {
+    const result = await redis.del(`push:${endpoint}`);
+    return result > 0;
+  } catch (e) {
+    console.log(e);
+    return false;
+  }
 }
 
 export async function sendNotification(title: string, body: string) {
-  subscription ??= await getSubscription();
-  if (!subscription) {
-    return;
-  }
-
   try {
-    await webpush.sendNotification(
-      subscription,
-      JSON.stringify({
-        title,
-        body,
-        icon: "/icon.png",
-      }),
-      { TTL: 2419200 }
-    );
-    return { success: true };
-  } catch (error) {
-    console.error("Error sending push notification:", error);
-    return { success: false, error: "Failed to send notification" };
+    const keys = await redis.keys("push:*");
+    if (!keys.length) return;
+    for (const key of keys) {
+      const subscriptionString = await redis.get(key);
+      if (!subscriptionString) continue;
+      const subscription: WebPushSub = JSON.parse(subscriptionString);
+      try {
+        const sentResult = await webpush.sendNotification(
+          subscription,
+          JSON.stringify({
+            title,
+            body,
+            icon: "/icon.png",
+          }),
+          { TTL: 2419200 }
+        );
+      } catch (e) {
+        console.log(
+          "Error sending push notification: ",
+          subscription.endpoint,
+          e
+        );
+      }
+    }
+  } catch (e) {
+    console.log("Error during cycle sending push notification: ", e);
   }
 }
