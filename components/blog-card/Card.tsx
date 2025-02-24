@@ -25,12 +25,12 @@ export function BlogPostCard({
         "border-2 rounded-xl overflow-hidden flex gap-4",
         className
       )}
-      id="card-article"
+      data-card-article
     >
       <Link
         href={`./blog/${data.slug}`}
         className="relative flex rounded-lg overflow-hidden group bg-neutral-950 group"
-        id="card-figure"
+        data-card-figure
       >
         {data.titleImageData ? (
           <Image
@@ -49,7 +49,7 @@ export function BlogPostCard({
       </Link>
       <section
         className="flex flex-col flex-1 justify-between gap-4 tracking-wide"
-        id="card-section"
+        data-card-section
       >
         <div className="flex flex-col">
           <Link
@@ -63,7 +63,7 @@ export function BlogPostCard({
           <Separator className="h-0.5 mb-3 mt-2.5" />
           <p
             className={clsx("description text-foreground hyphens-auto text-lg")}
-            id="card-text"
+            data-card-text
           >
             <DateBlock dt={data.publishedAt} className="float-right ml-2" />
             <MarkedText text={textContent} marks={marks} />

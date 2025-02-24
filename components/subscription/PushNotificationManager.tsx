@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  sendNotification,
   subscribeUser,
   unsubscribeUser,
 } from "@/lib/actions";
@@ -29,7 +28,6 @@ export function PushNotificationManager() {
   const [subscription, setSubscription] = useState<PushSubscription | null>(
     null
   );
-  const [message, setMessage] = useState("");
 
   const t = useI18n();
 
@@ -74,34 +72,17 @@ export function PushNotificationManager() {
     toast.success(t.successUnsubscribedFromPushTooltip, { description });
   }
 
-  async function sendTestNotification() {
-    console.log(subscription);
-    if (subscription) {
-      await sendNotification("test title", message);
-      setMessage("");
-    }
-  }
-
   return (
     isSupported && (
-      <>
-        <TriggerButton
-          handleOff={unsubscribeFromPush}
-          handleOn={subscribeToPush}
-          isOn={!!subscription}
-          offIcon={<BellOff />}
-          onIcon={<Bell />}
-          offText={t.subscribeToPushTooltip}
-          onText={t.unsubscribeFromPushTooltip}
-        ></TriggerButton>
-        <input
-          type="text"
-          placeholder="Enter notification message"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-        />
-        <button onClick={sendTestNotification}>Send Test</button>
-      </>
+      <TriggerButton
+        handleOff={unsubscribeFromPush}
+        handleOn={subscribeToPush}
+        isOn={!!subscription}
+        offIcon={<BellOff />}
+        onIcon={<Bell />}
+        offText={t.subscribeToPushTooltip}
+        onText={t.unsubscribeFromPushTooltip}
+      ></TriggerButton>
     )
   );
 }

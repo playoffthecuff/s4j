@@ -36,13 +36,14 @@ export function SearchForm({
     setRn(rn);
     setV(e.target.value);
   };
-  const ref = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
   const handleFocus = () => {
     setV(m);
     setF(true);
     setTimeout(() => {
-      if (ref.current) {
-        ref.current.setSelectionRange(m.length, m.length);
+      if (inputRef.current) {
+        inputRef.current.setSelectionRange(m.length, m.length);
       }
     }, 0);
   };
@@ -63,6 +64,8 @@ export function SearchForm({
     router.push(`/${locale}/search/${rn}`);
     setM("");
     setV("");
+    buttonRef.current?.blur();
+    inputRef.current?.blur();
     if (onEnter) onEnter();
   };
   const handleKeydown: KeyboardEventHandler<HTMLButtonElement> = (e) => {
@@ -83,7 +86,7 @@ export function SearchForm({
       onSubmit={handleSubmit}
     >
       <input
-        ref={ref}
+        ref={inputRef}
         value={v}
         onChange={handleChange}
         onBlur={handleBlur}
@@ -119,6 +122,7 @@ export function SearchForm({
         onBlur={handleButtonBlur}
         onFocus={handleButtonFocus}
         variant="link"
+        ref={buttonRef}
         size="icon"
         aria-label="Search"
         data-disabled={!v}

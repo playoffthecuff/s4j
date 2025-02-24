@@ -147,7 +147,7 @@ export function BlogPost({
           </>
         )}
         {data && data.content && (
-          <section className="prose dark:prose-invert text-lg tracking-wide [&>a>div>img]:mt-1 [&>a>div>img]:mb-0">
+          <section className="prose dark:prose-invert text-lg tracking-wide [&>a>div>img]:mt-1 [&>a>div>img]:mb-0" data-blog-post>
             <PortableText value={data.content} components={components} />
           </section>
         )}

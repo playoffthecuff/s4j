@@ -1,4 +1,4 @@
-.prose {
+[data-blog-post] {
   h1,h2,h3,h4,h5,h6 {
     font-weight: 500;
   }
@@ -36,7 +36,7 @@
     hyphens: auto;
   }
 
-  & p {
+  p:first-of-type {
     line-height: 26px;
     margin-bottom: 16px;
     margin-top: 16px;

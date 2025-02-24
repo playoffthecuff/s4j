@@ -1,9 +1,9 @@
-#card-article {
+[data-card-article] {
   container-type: size;
   container-name: article;
   height: 284px;
 
-  #card-section {
+  [data-card-section] {
     padding-top: 12px;
     padding-right: 16px;
     padding-bottom: 16px;
@@ -11,16 +11,16 @@
     height: 100%;
   }
 
-  #card-figure {
+  [data-card-figure] {
     aspect-ratio: 1;
   }
 
   @media screen and (width > 1279px) {
-    &:nth-child(2n) > #card-figure {
+    &:nth-child(2n) > [data-card-figure] {
       order: 1;
     }
 
-    &:nth-child(2n) > #card-section {
+    &:nth-child(2n) > [data-card-section] {
       padding-right: 0;
       padding-left: 16px;
     }
@@ -29,11 +29,11 @@
   @media screen and (width < 1280px) {
     height: 616px;
     flex-direction: column;
-    #card-figure {
+    [data-card-figure] {
       height: 328px;
     }
-    #card-figure,
-    #card-section {
+    [data-card-figure],
+    [data-card-section] {
       width: 100%;
     }
     &:nth-child(2n) > figure {
@@ -42,7 +42,7 @@
     &:nth-child(2n) > section {
       padding-right: 16px;
     }
-    #card-section {
+    [data-card-section] {
       padding-top: 0;
       padding-left: 16px;
       padding-right: 16px;
@@ -53,12 +53,12 @@
   @media screen and (width < 980px) and (aspect-ratio > 1) {
     flex-direction: row;
     height: 284px;
-    #card-figure {
+    [data-card-figure] {
       width: calc(50% - 8px);
       height: 100%;
     }
 
-    #card-section {
+    [data-card-section] {
       padding-top: 12px;
       padding-left: 0;
       height: 100%;
@@ -68,12 +68,12 @@
   @media screen and (width < 720px) {
     flex-direction: row;
     height: 284px;
-    #card-section {
+    [data-card-section] {
       padding-top: 12px;
       padding-left: 0;
       height: 100%;
     }
-    #card-figure {
+    [data-card-figure] {
       width: calc(50% - 8px);
       height: 100%;
     }
@@ -83,11 +83,11 @@
     flex-direction: column;
     height: calc(100vw + 252px);
     width: 100%;
-    #card-figure {
+    [data-card-figure] {
       height: calc(100vw - 32px);
       width: 100%;
     }
-    #card-section {
+    [data-card-section] {
       padding-top: 0;
       padding-left: 16px;
       height: 268px;
@@ -95,14 +95,14 @@
   }
 }
 
-#card-text {
+[data-card-text] {
   display: -webkit-box;
   -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-#card-text:first-letter {
+[data-card-text]:first-letter {
   color: hsl(var(--muted-foreground));
   font-size: 54px;
   line-height: 56px;
@@ -113,8 +113,8 @@
 }
 
 @container article (aspect-ratio > 1) {
-  #card-figure,
-  #card-section {
+  [data-card-figure],
+  [data-card-section] {
     width: calc(50% - 8px);
   }
 }

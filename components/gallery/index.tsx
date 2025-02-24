@@ -5,6 +5,7 @@ import clamp from "@/lib/utils/clamp";
 import { useI18n } from "@/lib/utils/i18context";
 import sleep from "@/lib/utils/sleep";
 import throttle from "@/lib/utils/throttle";
+import clsx from "clsx";
 import {
   ChevronLeft,
   ChevronRight,
@@ -28,7 +29,6 @@ import { ShareMenuQuarter } from "../share-menu";
 import TransitionLink from "../transition-link";
 import { Separator } from "../ui";
 import { getSizes } from "./helpers";
-import clsx from "clsx";
 
 export function Gallery({
   data,
@@ -170,6 +170,7 @@ export function Gallery({
         boundsRef.current.maxY
       ),
     };
+
     if (animationFrameIdRef.current === null) {
       animationFrameIdRef.current = requestAnimationFrame(() => {
         setTranslate(lastPositionRef.current.x, lastPositionRef.current.y);
@@ -177,6 +178,7 @@ export function Gallery({
       });
     }
   };
+  const throttledHandleMouseMove = throttle(handleMouseMove, 5);
 
   const handleTouchMove = (e: React.TouchEvent) => {
     if (e.touches.length === 0) return;
@@ -199,6 +201,7 @@ export function Gallery({
     };
     setTranslate(lastPositionRef.current.x, lastPositionRef.current.y);
   };
+  const throttledHandleTouchMove = throttle(handleTouchMove, 1);
   const handleTouchStart = (e: React.TouchEvent) => {
     if (e.touches.length > 0) {
       const touch = e.touches[0];
@@ -258,10 +261,11 @@ export function Gallery({
         lastMousePositionRef.current.y = e.clientY;
       }
     };
-    container.addEventListener("mousemove", throttle(handleMouseMove, 50));
+    const throttledHandleMouseMove = throttle(handleMouseMove, 50);
+    container.addEventListener("mousemove", throttledHandleMouseMove);
 
     return () => {
-      container.removeEventListener("mousemove", handleMouseMove);
+      container.removeEventListener("mousemove", throttledHandleMouseMove);
       if (hideTimeoutRef.current) clearTimeout(hideTimeoutRef.current);
     };
   }, []);
@@ -501,6 +505,7 @@ export function Gallery({
           data.height
         );
         const zoomContainer = zoomContainerRef.current;
+
         let dx = 0;
         let dy = 0;
         if (zoomContainer) {
@@ -537,7 +542,7 @@ export function Gallery({
     return () => {
       window.removeEventListener("resize", updateSize);
     };
-  }, [data.height, data.width]);
+  }, [data.height, data.width, zoomContainerRef.current?.offsetWidth, zoomContainerRef.current?.offsetHeight]);
 
   const { theme } = useTheme();
 
@@ -559,7 +564,10 @@ export function Gallery({
     >
       <div className="w-full h-[calc(100vh-2rem)] fixed left-0 top-0 z-10 flex">
         <div
-          className={clsx("w-1/3 h-full", prev !== data.slug && "cursor-chevron-left")}
+          className={clsx(
+            "w-1/3 h-full",
+            prev !== data.slug && "cursor-chevron-left"
+          )}
           ref={leftControlRef}
           onClick={prev !== data.slug ? goPrev : undefined}
         />
@@ -569,7 +577,10 @@ export function Gallery({
           onClick={showZoomedImg}
         />
         <div
-          className={clsx("w-1/3 h-full", next !== data.slug && "cursor-chevron-right")}
+          className={clsx(
+            "w-1/3 h-full",
+            next !== data.slug && "cursor-chevron-right"
+          )}
           ref={rightControlRef}
           onClick={next !== data.slug ? goNext : undefined}
         />
@@ -616,7 +627,7 @@ export function Gallery({
             <BreadCrumbs
               crumbLinks={bcLinks}
               menuLinks={menuLinks.map((ml) => ({ link: ml, text: t[ml] }))}
-              paigeLink={data.title}
+              pageLink={data.title}
             />
             <Separator className="opacity-70" />
             <div className="max-w-7xl relative mx-auto">
@@ -676,9 +687,9 @@ export function Gallery({
             zIndex: 50,
             overflow: "hidden",
           }}
-          onMouseMove={throttle(handleMouseMove, 5)}
+          onMouseMove={throttledHandleMouseMove}
           onTouchStart={handleTouchStart}
-          onTouchMove={throttle(handleTouchMove, 1)}
+          onTouchMove={throttledHandleTouchMove}
           className="invisible opacity-0 transition-opacity duration-400 fixed z-50 cursor-move"
           onClick={hideZoomedImg}
         >

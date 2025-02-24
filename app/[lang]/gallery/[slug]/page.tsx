@@ -60,7 +60,7 @@ export default async function Page(props: {
       slugs={slugs}
       backLink="./"
       bcLinks={[
-        { link: "gallery", text: params.lang === "ru" ? "Галерея" : "Gallery" },
+        { link: "", text: params.lang === "ru" ? "Галерея" : "Gallery" },
       ]}
       menuLinks={["blog", "events", "about"]}
     />

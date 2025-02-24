@@ -2,6 +2,7 @@
 import useLocale from "@/lib/hooks/use-locale";
 import { Home } from "lucide-react";
 import Link from "next/link";
+import { Fragment } from "react";
 import {
   Breadcrumb,
   BreadcrumbEllipsis,
@@ -17,7 +18,6 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "../ui";
-import { Fragment } from "react";
 
 export type BreadCrumbLink = {
   link: string;
@@ -27,11 +27,11 @@ export type BreadCrumbLink = {
 export default function BreadCrumbs({
   menuLinks,
   crumbLinks,
-  paigeLink,
+  pageLink,
 }: {
   menuLinks: BreadCrumbLink[];
   crumbLinks: BreadCrumbLink[];
-  paigeLink: string;
+  pageLink: string;
 }) {
   const locale = useLocale();
   return (
@@ -42,7 +42,7 @@ export default function BreadCrumbs({
             className="transition-colors  hover:text-muted-foreground"
             href={`/${locale}`}
           >
-            <Home className="p-0.5" style={{strokeWidth: 1.5}}/>
+            <Home className="p-0.5" style={{ strokeWidth: 1.5 }} />
           </Link>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
@@ -70,11 +70,11 @@ export default function BreadCrumbs({
         {crumbLinks.map((cl, i) => (
           <Fragment key={i}>
             <BreadcrumbItem>
-              <Tooltip >
+              <Tooltip>
                 <TooltipTrigger asChild>
                   <Link
                     className="transition-color hover:text-muted-foreground underline truncate max-w-16"
-                    href={`${cl.link}`}
+                    href={`./${cl.link}`}
                   >
                     {cl.text}
                   </Link>
@@ -90,15 +90,15 @@ export default function BreadCrumbs({
           </Fragment>
         ))}
         <BreadcrumbItem>
-          <Tooltip >
+          <Tooltip>
             <TooltipTrigger asChild>
               <BreadcrumbPage className="capitalize truncate max-w-16 text-muted-foreground">
-                {paigeLink}
+                {pageLink}
               </BreadcrumbPage>
             </TooltipTrigger>
-            {paigeLink.length > 6 && (
+            {pageLink.length > 6 && (
               <TooltipContent className="bg-background/60 backdrop-blur-md text-base">
-                <p>{paigeLink}</p>
+                <p>{pageLink}</p>
               </TooltipContent>
             )}
           </Tooltip>

@@ -12,7 +12,7 @@ export default async function Layout({
   const lang = (await params).lang;
   return (
     <>
-      <main className="max-w-7xl mx-auto w-full min-h-[calc(100vh-79px)]">
+      <main className="max-w-7xl mx-auto w-full min-h-screen">
         <ShadowViewPort />
         {children}
       </main>
