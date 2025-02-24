@@ -97,7 +97,7 @@ export async function sendNotification(title: string, body: string) {
       if (!subscriptionString) continue;
       const subscription: WebPushSub = JSON.parse(subscriptionString);
       try {
-        const sentResult = await webpush.sendNotification(
+        await webpush.sendNotification(
           subscription,
           JSON.stringify({
             title,
