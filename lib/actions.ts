@@ -114,6 +114,7 @@ export async function sendNotification(title: string, body: string) {
         );
       }
     }
+    return { success: true };
   } catch (e) {
     console.log("Error during cycle sending push notification: ", e);
   }

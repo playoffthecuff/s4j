@@ -1,4 +1,4 @@
-export default function throttle<T extends (...args: unknown[]) => unknown>(
+export default function throttle<T extends (...args: any[]) => unknown>(
   fn: T,
   t: number
 ) {

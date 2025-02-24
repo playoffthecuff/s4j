@@ -22,8 +22,8 @@ export async function POST(request: Request) {
     const message = "Content updated. Контент обновлён.";
     const title = "Check the site. Проверьте сайт.";
     const notificationResult = await sendNotification(title, message);
-
-    return Response.json({ success: true, notificationSent: notificationResult.success });
+    const success = notificationResult?.success ?? false;
+    return Response.json({ success });
   } catch (error) {
     return Response.json(
       { success: false, message: `Webhook error: ${(error as Error).message}` },
