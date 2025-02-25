@@ -562,7 +562,7 @@ export function Gallery({
       ref={containerRef}
       style={backgroundColor ? { backgroundColor } : {}}
     >
-      <div className="w-full h-[calc(100vh-2rem)] fixed left-0 top-0 z-10 flex">
+      <div className="w-full h-[calc(100dvh-2rem)] fixed left-0 top-0 z-10 flex">
         <div
           className={clsx(
             "w-1/3 h-full",
@@ -599,13 +599,13 @@ export function Gallery({
       </div>
       <div>
         <figure
-          className="flex items-center h-screen w-screen transition-opacity duration-400"
+          className="flex items-center h-dvh w-screen transition-opacity duration-400"
           ref={figureRef}
         >
           <Image
             alt={data.title}
             src={data.url}
-            className="max-w-[100vw] left-[50vw] -translate-x-1/2 object-contain w-auto h-screen cursor-custom-zoom-in fixed"
+            className="max-w-[100vw] left-[50vw] -translate-x-1/2 object-contain w-auto h-dvh cursor-custom-zoom-in fixed"
             ref={imageRef}
             width={data.width}
             height={0}
