@@ -599,13 +599,13 @@ export function Gallery({
       </div>
       <div>
         <figure
-          className="flex items-center h-dvh w-screen transition-opacity duration-400"
+          className="flex items-center h-svh w-screen transition-opacity duration-400"
           ref={figureRef}
         >
           <Image
             alt={data.title}
             src={data.url}
-            className="max-w-[100vw] left-[50vw] -translate-x-1/2 object-contain w-auto h-dvh cursor-custom-zoom-in fixed"
+            className="max-w-[100vw] left-[50vw] -translate-x-1/2 object-contain w-auto h-svh cursor-custom-zoom-in fixed"
             ref={imageRef}
             width={data.width}
             height={0}
