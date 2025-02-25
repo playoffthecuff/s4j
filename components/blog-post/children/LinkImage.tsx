@@ -29,7 +29,7 @@ export function LinkImage({
           priority
           src={data.url}
           blurDataURL={data.lqip ?? undefined}
-          placeholder="blur"
+          placeholder={data.lqip ? "blur" : "empty"}
           width={data.width}
           height={data.height}
           alt={data.title || " "}

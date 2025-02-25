@@ -18,7 +18,7 @@ export function MainInfo({
       {data.image && (
         <figure className="min-[576px]:m-0 min-[576px]:ml-4 mb-4 min-[576px]:mb-0 float-right w-full h-full min-[576px]:w-[272px] min-[576px]:h-[272px] relative aspect-square">
           <Image
-            placeholder={"blur"}
+            placeholder={data.image.lqip ? "blur" : "empty"}
             blurDataURL={data.image.lqip ?? undefined}
             className="rounded-xl"
             src={data.image.url}

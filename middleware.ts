@@ -19,6 +19,7 @@ function getLocale(request: NextRequest): string | undefined {
 
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
+  console.log("pathname: ", pathname);
   if (locales.some((l) => pathname.startsWith(`/${l}`) || pathname === `/${l}`))
     return;
   if (
@@ -27,6 +28,7 @@ export function middleware(req: NextRequest) {
       "/icn.png",
       "/icon.png",
       "/apple-icon.png",
+      "/api/webhook",
       "/badge.png",
       "/sw.js",
       "/manifest.webmanifest",

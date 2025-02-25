@@ -48,7 +48,7 @@ export function SearchCard({
         {data.titleImageData ? (
           <Image
             className="object-cover group-hover:opacity-50 transition-opacity duration-250"
-            placeholder="blur"
+            placeholder={data.titleImageData.lqip ? "blur" : "empty"}
             src={data.titleImageData.url}
             blurDataURL={data.titleImageData.lqip ?? undefined}
             fill

@@ -75,7 +75,7 @@ export default function Masonry({
           <Image
             className="border group-hover:opacity-50 transition-opacity duration-250 relative object-cover"
             style={{ borderRadius: rounding }}
-            placeholder="blur"
+            placeholder={i.lqip ? "blur" : "empty"}
             blurDataURL={i.lqip ?? undefined}
             fill
             alt={i.description ?? ""}
