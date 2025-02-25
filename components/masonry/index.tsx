@@ -65,7 +65,6 @@ export default function Masonry({
         <Link
           key={i.slug}
           href={`gallery/${i.slug}`}
-          scroll={false}
           className="relative bg-neutral-950 group"
           style={{
             gridRow: `span ${i.rowCells}`,

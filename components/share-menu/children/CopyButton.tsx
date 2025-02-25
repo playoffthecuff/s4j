@@ -6,7 +6,13 @@ import { useState } from "react";
 import { Button } from "../../ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../ui/tooltip";
 
-export function CopyButton({ className }: { className?: string }) {
+export function CopyButton({
+  className,
+  onClick,
+}: {
+  className?: string;
+  onClick?: () => void;
+}) {
   const t = useI18n();
   const [copied, setCopied] = useState(false);
 
@@ -21,16 +27,19 @@ export function CopyButton({ className }: { className?: string }) {
         console.log("Something went wrong", err);
       });
   };
+  const handleClick = () => {
+    if (onClick) onClick();
+  }
 
   return (
-    <div className={className}>
+    <div className={className} onClick={handleClick}>
       {copied ? (
         <Tooltip open>
           <TooltipTrigger asChild>
             <Button
               variant="outline"
               size="icon"
-              className="h-10 w-10 rounded-full bg-background/60 hover:bg-border/60 backdrop-blur-md"
+              className="h-10 w-10 rounded-full bg-background/80 hover:bg-border/60 backdrop-blur-md"
             >
               <Check />
             </Button>

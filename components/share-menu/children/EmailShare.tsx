@@ -10,19 +10,24 @@ export function EmailShare({
   className,
   text,
   title,
+  onClick,
 }: {
   className?: string;
   text: string;
   title: string;
+  onClick?: () => void;
 }) {
   const t = useI18n();
   const [link, setLink] = useState("");
   useEffect(() => {
     if (typeof window !== undefined) setLink(window.location.href);
   }, []);
+  const handleClick = () => {
+    if (onClick) onClick();
+  };
 
   return (
-    <div className={className}>
+    <div className={className} onClick={handleClick}>
       <Tooltip>
         <TooltipTrigger asChild>
           <Button

@@ -5,10 +5,19 @@ import { Share2 } from "lucide-react";
 import { Button } from "../../ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../ui/tooltip";
 
-export function TezShare({ className }: { className?: string }) {
+export function TezShare({
+  className,
+  onClick,
+}: {
+  className?: string;
+  onClick?: () => void;
+}) {
   const t = useI18n();
+  const handleClick = () => {
+    if (onClick) onClick();
+  };
   return (
-    <div className={className}>
+    <div className={className} onClick={handleClick}>
       <Tooltip>
         <TooltipTrigger asChild>
           <Button
