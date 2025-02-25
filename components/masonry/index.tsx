@@ -83,7 +83,7 @@ export default function Masonry({
             src={i.url}
           />
           <Eye className="absolute bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-400 text-white" />
-          <figcaption className="absolute bottom-4 right-1/2 translate-x-1/2 w-11/12 opacity-0 group-hover:opacity-100 transition-opacity duration-400 text-white">
+          <figcaption className="absolute bottom-0 px-3.25 pb-3 w-full leading-tight opacity-0 group-hover:opacity-100 transition-opacity duration-400 text-white text-lg tracking-wide font-medium">
             {i.title}
           </figcaption>
         </Link>

@@ -8,6 +8,10 @@
   animation: smoky 8s 4s both;
 }
 
+.charStatic {
+  display: inline-block;
+}
+
 .char:nth-child(even) {
   animation-name: smoky-mirror;
 }
@@ -17,7 +21,7 @@
     text-shadow: 0 0 40px hsl(var(--foreground));
   }
   to {
-    transform: translate3d(15rem, -8rem, 0) rotate(-40deg) skewX(70deg)
+    transform: translate(9rem, -8rem) rotate(-40deg) skewX(70deg)
       scale(1.5);
     text-shadow: 0 0 20px hsl(var(--foreground));
     opacity: 0;
@@ -30,7 +34,7 @@
     text-shadow: 0 0 40px hsl(var(--foreground));
   }
   to {
-    transform: translate3d(18rem, -8rem, 0) rotate(-40deg) skewX(-70deg)
+    transform: translate(18rem, -8rem) rotate(-40deg) skewX(-70deg)
       scale(2);
     text-shadow: 0 0 20px hsl(var(--foreground));
     opacity: 0;
