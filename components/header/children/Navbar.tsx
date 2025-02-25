@@ -60,7 +60,7 @@ export function Navbar({
             </TabsTrigger>
           ))}
           <TabsTrigger className="p-0" value="search">
-            <SearchForm />
+            <SearchForm variant="thin"/>
           </TabsTrigger>
         </TabsList>
       </Tabs>

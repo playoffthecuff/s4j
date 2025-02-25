@@ -100,12 +100,12 @@ export function SearchForm({
           "outline-0 bg-transparent",
           "disabled:cursor-not-allowed disabled:opacity-50",
           "font-medium placeholder:text-muted-foreground",
-          variant === "thin" && "w-24 focus:w-48",
-          variant === "medium" && "w-[108px] focus:w-52",
-          variant === "wide" && "w-40 focus:w-[280px]",
-          bf && variant === "thin" && "w-48",
+          variant === "thin" && "w-24 focus:w-52",
+          variant === "medium" && "w-27 focus:w-52",
+          variant === "wide" && "w-40 focus:w-60",
+          bf && variant === "thin" && "w-52",
           bf && variant === "medium" && "w-52",
-          bf && variant === "wide" && "w-[280px]",
+          bf && variant === "wide" && "w-60",
           bf && "bf"
         )}
       />
