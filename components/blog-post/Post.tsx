@@ -126,7 +126,7 @@ export function BlogPost({
           <LinkImage
             href={`./${slug}`}
             data={data.titleImageData}
-            className="mr-3 max-[560px]:mr-0 float-left max-[560px]:float-none"
+            className="mr-4 max-[560px]:mr-0 float-left max-[560px]:float-none"
             imgClass={clsx(
               "max-[560px]:w-full max-[560px]:h-auto max-[560px]:max-h-[600px] max-[560px]:object-cover",
               data.titleImageData.width > data.titleImageData.height
@@ -137,22 +137,30 @@ export function BlogPost({
         )}
         {data && (
           <>
-            <FlatDateBlock
-              dt={data.publishedAt}
-              className="float-right mt-0.5"
-            />
             <h1 className="text-3xl font-medium mt-6 mb-4 tracking-wide">
               {data.title}
+              <FlatDateBlock
+                dt={data.publishedAt}
+                className="float-right mt-0.5 text-base"
+              />
             </h1>
           </>
         )}
         {data && data.content && (
-          <section className="prose dark:prose-invert text-lg tracking-wide [&>a>div>img]:mt-1 [&>a>div>img]:mb-0" data-blog-post>
+          <section
+            className="prose dark:prose-invert text-lg tracking-wide [&>a>div>img]:mt-1 [&>a>div>img]:mb-0"
+            data-blog-post
+          >
             <PortableText value={data.content} components={components} />
           </section>
         )}
       </article>
-      <PaginationNavigation className="pt-16" prev={prev} next={next} stepBack={paginationStep}/>
+      <PaginationNavigation
+        className="pt-16"
+        prev={prev}
+        next={next}
+        stepBack={paginationStep}
+      />
     </div>
   );
 }

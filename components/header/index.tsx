@@ -15,7 +15,7 @@ export function Header() {
       id="header"
       className={clsx(
         "shadow-down dark:shadow-night-down fixed z-20 bg-background top-0 left-0 transition-transform duration-400 w-full",
-        scrollDirection === "down" ? "-translate-y-[56px]" : "-translate-y-0"
+        scrollDirection === "down" ? "-translate-y-[56px] shadow-none" : "-translate-y-0"
       )}
     >
       <div>
