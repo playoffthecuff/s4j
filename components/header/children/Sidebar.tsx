@@ -100,7 +100,7 @@ export function Sidebar({
             )}
           >
             <div
-              className={clsx("p-[5px] w-fit flex flex-col rounded-t-md gap-1")}
+              className={clsx("p-1.5 w-fit flex flex-col rounded-t-md gap-0.75")}
             >
               {values.map((el) => (
                 <TabsTrigger
@@ -126,7 +126,7 @@ export function Sidebar({
               >
                 <SearchForm
                   className={clsx(
-                    v === "search" ? "bg-background" : "bg-muted"
+                    v === "search" ? "bg-background" : "bg-muted", isSmallLandscaped && "mt-1"
                   )}
                   onEnter={close}
                   variant="wide"
@@ -136,7 +136,7 @@ export function Sidebar({
             <div
               className={clsx(
                 "w-full gap-0.5 flex flex-col border-x-2 border-b-2 rounded-md",
-                isSmallLandscaped && "border-none pr-1 gap-1"
+                isSmallLandscaped && "border-none pr-0.5 pt-0.5 pb-0.5"
               )}
             >
               <div className="p-1 bg-background rounded-md">

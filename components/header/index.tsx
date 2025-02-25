@@ -4,20 +4,18 @@ import useLocale from "@/lib/hooks/use-locale";
 import useScrollDirection from "@/components/header/use-scroll-direction";
 import clsx from "clsx";
 import { Burger, Logo, Navbar, Settings } from "./children";
-import useScrolling from "./use-scrolling";
 
 export const pages = ["blog", "gallery", "events", "about"];
 
 export function Header() {
   const scrollDirection = useScrollDirection();
-  const scrolling = useScrolling();
   const locale = useLocale();
   return (
     <header
       id="header"
       className={clsx(
         "shadow-down dark:shadow-night-down fixed z-20 bg-background top-0 left-0 transition-transform duration-400 w-full",
-        scrollDirection === "down" ? "-translate-y-[64px]" : "-translate-y-0"
+        scrollDirection === "down" ? "-translate-y-[56px]" : "-translate-y-0"
       )}
     >
       <div>
@@ -29,7 +27,7 @@ export function Header() {
             values={pages}
           />
           <Settings className="max-md:hidden relative" />
-          <Burger className="md:hidden" isClose={scrolling} />
+          <Burger className="md:hidden" />
         </div>
       </div>
     </header>
