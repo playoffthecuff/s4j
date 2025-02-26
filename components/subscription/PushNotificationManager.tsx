@@ -1,9 +1,6 @@
 "use client";
 
-import {
-  subscribeUser,
-  unsubscribeUser,
-} from "@/lib/actions";
+import { subscribeUser, unsubscribeUser } from "@/lib/actions";
 import { useI18n } from "@/lib/utils/i18context";
 import { Bell, BellOff } from "lucide-react";
 import { useEffect, useState } from "react";
