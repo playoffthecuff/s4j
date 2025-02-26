@@ -88,7 +88,6 @@ export function SearchCard({
           <Separator className="h-0.5 mb-3 mt-2.5" />
           <p
             className={clsx("description text-foreground hyphens-auto text-lg", "text")}
-            data-card-text
           >
             <DateBlock dt={data.publishedAt} className="float-right ml-2" />
             <MarkedText text={textContent} marks={[searchText]} />

@@ -5,6 +5,7 @@ import clsx from "clsx";
 import { PortableText, PortableTextReactComponents } from "next-sanity";
 import { useTheme } from "next-themes";
 import { useEffect, useRef } from "react";
+import { ShareMenuQuarter } from "../share-menu";
 import { LinkImage, PaginationNavigation } from "./children";
 import { FlatDateBlock } from "./children/FlatDateBlock";
 import "./post.css";
@@ -120,7 +121,7 @@ export function BlogPost({
   }, [data.darkColor, data.lightColor, theme]);
 
   return (
-    <div className={className}>
+    <div className={clsx("relative", className)}>
       <article className="w-full max-w-3xl mx-auto" ref={containerRef}>
         {data && data.titleImageData && (
           <LinkImage
@@ -160,6 +161,11 @@ export function BlogPost({
         prev={prev}
         next={next}
         stepBack={paginationStep}
+      />
+      <ShareMenuQuarter
+        className="absolute bottom-0 right-4"
+        text=""
+        title={data.title ?? ""}
       />
     </div>
   );

@@ -54,7 +54,6 @@ export function Gallery({
   const interfaceRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
   const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const headerTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const zoomContainerRef = useRef<HTMLDivElement>(null);
   const zoomImageRef = useRef<HTMLImageElement>(null);
   const animationFrameIdRef = useRef<number | null>(null);
@@ -273,10 +272,7 @@ export function Gallery({
   useEffect(() => {
     const header = document.getElementById("header");
     if (header) {
-      headerTimeoutRef.current = setTimeout(
-        () => (header.style.translate = "0 -64px"),
-        100
-      );
+      header.style.translate = "0 -64px";
     }
     if (!header) return;
     const hideHeader = () => {
@@ -284,10 +280,6 @@ export function Gallery({
     };
     const showHeader = () => {
       header.style.translate = "0 0";
-      if (headerTimeoutRef.current) {
-        clearTimeout(headerTimeoutRef.current);
-        headerTimeoutRef.current = null;
-      }
     };
     const handleScrollEnd = () => {
       if (
@@ -302,7 +294,6 @@ export function Gallery({
     window.addEventListener("scrollend", handleScrollEnd);
     return () => {
       window.removeEventListener("scrollend", handleScrollEnd);
-      if (headerTimeoutRef.current) clearTimeout(headerTimeoutRef.current);
       header.style.translate = "";
     };
   }, []);
@@ -560,7 +551,7 @@ export function Gallery({
     <div
       className={className}
       ref={containerRef}
-      style={backgroundColor ? { backgroundColor } : {}}
+      style={backgroundColor ? { backgroundColor } : undefined}
     >
       <div className="w-full h-[calc(100dvh-2rem)] fixed left-0 top-0 z-10 flex">
         <div
@@ -675,7 +666,7 @@ export function Gallery({
               <ShareMenuQuarter
                 className="absolute bottom-4 right-4"
                 text={data.description ?? ""}
-                title={data.description ?? ""}
+                title={data.title ?? ""}
               />
             </div>
           </div>
