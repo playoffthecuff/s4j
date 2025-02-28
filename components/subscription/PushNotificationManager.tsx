@@ -79,7 +79,7 @@ export function PushNotificationManager() {
         onIcon={<Bell />}
         offText={t.subscribeToPushTooltip}
         onText={t.unsubscribeFromPushTooltip}
-        aria-label={
+        ariaLabel={
           !subscription
             ? t.subscribeToPushTooltip
             : t.unsubscribeFromPushTooltip

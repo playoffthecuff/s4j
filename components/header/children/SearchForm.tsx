@@ -110,29 +110,26 @@ export function SearchForm({
         )}
       />
       <Button
-        asChild
         className={cn(
           "w-8 h-8",
           "text-muted-foreground hover:text-foreground text-base",
           "focus-visible:outline-2 focus-visible:outline-ring/60",
-          "data-[disabled=true]:pointer-events-none data-[disabled=true]:cursor-not-allowed",
+          "aria-disabled:pointer-events-none aria-disabled:cursor-not-allowed",
           "transition-colors [&_svg]:size-4 [&_svg]:stroke-2.2",
-          f && "data-[disabled=true]:opacity-50"
+          f && "aria-disabled:opacity-50"
         )}
         onBlur={handleButtonBlur}
         onFocus={handleButtonFocus}
         variant="link"
         ref={buttonRef}
         size="icon"
-        aria-label="Search"
-        data-disabled={!v}
+        aria-label={t.search}
+        aria-disabled={!v}
+        tabIndex={v ? 0 : -1}
         onClick={handleSubmit}
         onKeyDown={handleKeydown}
-        tabIndex={0}
       >
-        <div>
           <Search strokeWidth={2} aria-hidden="true" style={{width: 18, height: 18}}/>
-        </div>
       </Button>
     </form>
   );

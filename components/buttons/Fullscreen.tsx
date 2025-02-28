@@ -35,6 +35,7 @@ export function FullscreenButton({
       onClick={handleClick}
       offset={8}
       zClass="z-10"
+      ariaLabel={fs ? t.windowedTooltip : t.fullscreenTooltip}
     >
       <div
         className={clsx(

@@ -46,6 +46,7 @@ export function Gallery({
 }) {
   const t = useI18n();
   const [zoomable, setZoomable] = useState(false);
+  const [loaded, setLoaded] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const leftControlRef = useRef<HTMLDivElement>(null);
   const rightControlRef = useRef<HTMLDivElement>(null);
@@ -178,7 +179,6 @@ export function Gallery({
     }
   };
   const throttledHandleMouseMove = throttle(handleMouseMove, 5);
-
   const handleTouchMove = (e: React.TouchEvent) => {
     if (e.touches.length === 0) return;
     const touch = e.touches[0];
@@ -213,6 +213,16 @@ export function Gallery({
   const handleMinimize = () => {
     if (document) document.exitFullscreen();
   };
+
+  useEffect(() => {
+    const setLoadedHook = () => setLoaded(true);
+    if (document.readyState === "complete") {
+      setLoadedHook();
+    } else {
+      window.addEventListener("load", setLoadedHook);
+    }
+    return () => window.removeEventListener("load", setLoadedHook);
+  }, []);
 
   useEffect(() => {
     setZoomable(document.fullscreenEnabled);
@@ -272,14 +282,15 @@ export function Gallery({
   useEffect(() => {
     const header = document.getElementById("header");
     if (header) {
-      header.style.translate = "0 -64px";
+      header.style.translate = "0 -56px";
     }
     if (!header) return;
     const hideHeader = () => {
-      header.style.translate = "0 -64px";
+      header.style.translate = "0 -56px";
     };
     const showHeader = () => {
       header.style.translate = "0 0";
+      header.classList.remove("shadow-none");
     };
     const handleScrollEnd = () => {
       if (
@@ -533,7 +544,13 @@ export function Gallery({
     return () => {
       window.removeEventListener("resize", updateSize);
     };
-  }, [data.height, data.width, zoomContainerRef.current?.offsetWidth, zoomContainerRef.current?.offsetHeight]);
+  }, [
+    data.height,
+    data.width,
+    zoomContainerRef.current?.offsetWidth,
+    zoomContainerRef.current?.offsetHeight,
+    loaded
+  ]);
 
   const { theme } = useTheme();
 
@@ -599,6 +616,7 @@ export function Gallery({
             className="max-w-[100vw] left-[50vw] -translate-x-1/2 object-contain w-auto h-svh cursor-custom-zoom-in fixed"
             ref={imageRef}
             width={data.width}
+            quality={100}
             height={0}
             placeholder={data.lqip ? "blur" : "empty"}
             blurDataURL={data.lqip ?? undefined}
@@ -612,7 +630,7 @@ export function Gallery({
           <div className="border-muted backdrop-blur-lg bg-muted/60 text-center w-screen pr-[calc(100vw-100%)]">
             <div className="max-w-7xl mx-auto p-2.5">
               <h1 className="text-2xl">{data.title}</h1>
-              <p className="mt-1 text-lg">{data.description}</p>
+              <p className="mt-1 text-lg tracking-wide">{data.description}</p>
             </div>
             <Separator className="opacity-70" />
             <BreadCrumbs
@@ -628,6 +646,7 @@ export function Gallery({
                   className="z-10 bg-background/60 hover:bg-border/60"
                   offset={8}
                   disabled={prev === data.slug}
+                  ariaLabel={t.previousSlideTooltip}
                 >
                   <TransitionLink
                     href={prev}
@@ -652,6 +671,7 @@ export function Gallery({
                   className="z-10 bg-background/60 hover:bg-border/60"
                   offset={8}
                   disabled={prev === data.slug}
+                  ariaLabel={t.nextSlideTooltip}
                 >
                   <TransitionLink
                     href={next}
@@ -671,37 +691,40 @@ export function Gallery({
             </div>
           </div>
         </div>
-        <div
-          ref={zoomContainerRef}
-          style={{
-            position: "fixed",
-            zIndex: 50,
-            overflow: "hidden",
-          }}
-          onMouseMove={throttledHandleMouseMove}
-          onTouchStart={handleTouchStart}
-          onTouchMove={throttledHandleTouchMove}
-          className="invisible opacity-0 transition-opacity duration-400 fixed z-50 cursor-move"
-          onClick={hideZoomedImg}
-        >
-          <Image
-            src={data.url}
-            alt={data.title}
+        {loaded && (
+          <figure
+            ref={zoomContainerRef}
             style={{
-              position: "absolute",
-              minHeight: "100%",
-              minWidth: "100%",
-              transform: "translate(0px, 0px)",
+              position: "fixed",
+              zIndex: 50,
+              overflow: "hidden",
             }}
-            width={data.width}
-            height={data.height}
-            className="transform-gpu bg-background"
-            ref={zoomImageRef}
-            priority
-            placeholder={data.lqip ? "blur" : "empty"}
-            blurDataURL={data.lqip ?? undefined}
-          />
-        </div>
+            onMouseMove={throttledHandleMouseMove}
+            onTouchStart={handleTouchStart}
+            onTouchMove={throttledHandleTouchMove}
+            className="invisible opacity-0 transition-opacity duration-400 fixed z-50 cursor-move"
+            onClick={hideZoomedImg}
+          >
+            <Image
+              src={data.url}
+              alt={data.title}
+              style={{
+                position: "absolute",
+                minHeight: "100%",
+                minWidth: "100%",
+                transform: "translate(0px, 0px)",
+              }}
+              width={data.width}
+              height={data.height}
+              className="transform-gpu bg-background"
+              ref={zoomImageRef}
+              quality={100}
+              priority
+              placeholder={data.lqip ? "blur" : "empty"}
+              blurDataURL={data.lqip ?? undefined}
+            />
+          </figure>
+        )}
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ import { TooltipButton } from "@/components/buttons";
 import clsx from "clsx";
 import { ReactNode } from "react";
 
-export function ToggleButton({
+export function TriggerButton({
   className,
   onIcon,
   offIcon,
@@ -13,6 +13,7 @@ export function ToggleButton({
   offText,
   handleOn,
   handleOff,
+  ariaLabel,
 }: {
   className?: string;
   onIcon: ReactNode;
@@ -22,11 +23,11 @@ export function ToggleButton({
   offText: string;
   handleOn: () => void;
   handleOff: () => void;
+  ariaLabel?: string;
 }) {
-
   const handleClick = () => {
     if (isOn) {
-      handleOff()
+      handleOff();
     } else {
       handleOn();
     }
@@ -38,6 +39,7 @@ export function ToggleButton({
       onClick={handleClick}
       offset={8}
       zClass="z-10"
+      ariaLabel={ariaLabel}
     >
       <div
         className={clsx(

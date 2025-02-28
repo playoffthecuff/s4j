@@ -22,6 +22,7 @@ export function ShareButton({
       onClick={handleClick}
       offset={8}
       zClass="z-50"
+      ariaLabel={open ? t.closeTooltip : t.shareTooltip}
     >
       <X
         className={clsx(

@@ -15,6 +15,7 @@ export function TooltipButton({
   open,
   onOpenChange,
   zClass = "z-20",
+  ariaLabel,
 }: {
   text: string;
   children: ReactNode;
@@ -28,6 +29,7 @@ export function TooltipButton({
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
   zClass?: string;
+  ariaLabel?: string;
 }) {
   return (
     <Tooltip
@@ -39,12 +41,7 @@ export function TooltipButton({
       <TooltipContent
         sideOffset={offset}
         side={side}
-        className={
-          (clsx(
-            ""
-          ),
-          zClass)
-        }
+        className={(clsx(""), zClass)}
       >
         <p>{text}</p>
       </TooltipContent>
@@ -55,6 +52,7 @@ export function TooltipButton({
           tabIndex={-1}
           disabled={disabled}
           onClick={onClick}
+          aria-label={ariaLabel}
         >
           {children}
         </Button>

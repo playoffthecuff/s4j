@@ -47,6 +47,7 @@ export function PopoverToggleTooltipButton({
         <Button
           variant="outline"
           className="px-2 bg-background/60 hover:bg-border/60 backdrop-blur-md w-10"
+          aria-label={open ? activeText : initText}
         >
           <Tooltip >
             <TooltipTrigger asChild>
