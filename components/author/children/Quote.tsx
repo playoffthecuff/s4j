@@ -1,6 +1,6 @@
 import { MentionType } from "@/app/[lang]/(with-footer)/about/fetchAuthor";
 import { cn } from "@/lib/utils";
-import { Alert, AlertDescription, AlertTitle } from "../../ui/alert";
+import { Alert, AlertDescription } from "../../ui/alert";
 
 export function Quote({
   className,
