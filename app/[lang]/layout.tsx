@@ -19,13 +19,6 @@ const fontMono = JetBrains_Mono({
   subsets: ["latin"],
 });
 
-// const fontScript = Marck_Script({
-//   weight: "400",
-//   display: "block",
-//   variable: "--font-script",
-//   subsets: ["cyrillic"],
-// });
-
 const fontSans = localFont({
   src: [
     { path: "../../public/fonts/Akrobat-Regular.woff2", weight: "400" },
@@ -58,10 +51,10 @@ export async function generateMetadata(
     generator: "Next.js",
     metadataBase: new URL("https://ribetki.vercel.app/"),
     alternates: {
-      canonical: "/",
       languages: {
         en: "/en",
         ru: "/ru",
+        "x-default": "/",
       },
       types: {
         "application/rss+xml": "https://ribetki.vercel.app/en/feed.xml",

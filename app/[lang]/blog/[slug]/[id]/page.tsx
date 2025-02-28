@@ -35,10 +35,14 @@ export async function generateMetadata(props: {
   };
   return {
     alternates: {
-      canonical: `/blog/${params.slug}/${params.id}`,
+      canonical:
+        params.lang === "en"
+          ? `/en/blog/${params.slug}/${params.id}`
+          : `/ru/blog/${params.slug}/${params.id}`,
       languages: {
         en: `/en/blog/${params.slug}/${params.id}`,
         ru: `/ru/blog/${params.slug}/${params.id}`,
+        "x-default": `/blog/${params.slug}/${params.id}`,
       },
     },
     title,

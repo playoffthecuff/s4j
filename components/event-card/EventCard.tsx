@@ -116,7 +116,7 @@ export function EventCard({
             className="mr-2.5 mt-0.5 text-primary bg-secondary inline-block float-start"
           />
           {event && event.content && (
-            <section className="prose dark:prose-invert text-lg">
+            <section className="prose dark:prose-invert text-lg [&>ul]:list-inside">
               <PortableText value={event.content} components={components} />
             </section>
           )}

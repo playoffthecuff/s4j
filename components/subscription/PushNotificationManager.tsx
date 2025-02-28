@@ -79,6 +79,11 @@ export function PushNotificationManager() {
         onIcon={<Bell />}
         offText={t.subscribeToPushTooltip}
         onText={t.unsubscribeFromPushTooltip}
+        aria-label={
+          !subscription
+            ? t.subscribeToPushTooltip
+            : t.unsubscribeFromPushTooltip
+        }
       ></TriggerButton>
     )
   );

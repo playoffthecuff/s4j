@@ -15,10 +15,11 @@ export async function generateMetadata(props: {
     params.lang === "ru" ? "Галерея | Юлия Рибетки" : "Gallery | Julia Ribetki";
   return {
     alternates: {
-      canonical: "/gallery/",
+      canonical: params.lang === "en" ? "/en/gallery" : "/ru/gallery",
       languages: {
         en: "/en/gallery",
         ru: "/ru/gallery",
+        "x-default": "/gallery",
       },
     },
     title,

@@ -25,8 +25,11 @@ export default function CalendarMenu({ e }: { e: CalendarEvent }) {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="hover:bg-muted rounded-sm transition-colors hover:cursor-pointer">
-        <Tooltip >
+      <DropdownMenuTrigger
+        className="hover:bg-muted rounded-sm transition-colors hover:cursor-pointer"
+        aria-label={t.addToCalendar}
+      >
+        <Tooltip>
           <TooltipTrigger asChild>
             <CalendarPlus className="w-10 h-10 p-2 stroke-2" />
           </TooltipTrigger>
@@ -77,7 +80,7 @@ export default function CalendarMenu({ e }: { e: CalendarEvent }) {
           </a>
         </DropdownMenuItem>
         <DropdownMenuItem>
-          <a href={icsLink} className="flex gap-3 items-center text-lg" >
+          <a href={icsLink} className="flex gap-3 items-center text-lg">
             <IcsIcon style={{ width: "24px", height: "24px" }} />
             File .ics
           </a>

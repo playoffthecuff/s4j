@@ -72,6 +72,7 @@ export function BlogPostCard({
         <LinkButton
           className="w-full"
           translateName="readMore"
+          ariaLabel={data.title}
           variant="secondary"
           link={`./blog/${data.slug}`}
         />

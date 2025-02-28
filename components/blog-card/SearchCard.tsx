@@ -98,6 +98,7 @@ export function SearchCard({
           translateName="readMore"
           variant="secondary"
           link={`/${locale}/search/${searchText}/${type}/${data.slug}`}
+          ariaLabel={data.title}
         />
       </section>
     </article>

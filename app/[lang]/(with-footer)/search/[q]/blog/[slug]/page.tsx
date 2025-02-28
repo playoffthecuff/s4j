@@ -33,10 +33,14 @@ export async function generateMetadata(props: {
   };
   return {
     alternates: {
-      canonical: `/blog/${params.slug}`,
+      canonical:
+        params.lang === "en"
+          ? `/en/search/blog/${params.slug}`
+          : `/ru/search/blog/${params.slug}`,
       languages: {
-        en: `/en/blog/${params.slug}`,
-        ru: `/ru/blog/${params.slug}`,
+        en: `/en/search/blog/${params.slug}`,
+        ru: `/ru/search/blog/${params.slug}`,
+        "x-default": `/search/blog/${params.slug}`,
       },
     },
     title,
@@ -46,7 +50,7 @@ export async function generateMetadata(props: {
 }
 
 export default async function Page(props: {
-  params: Promise<{ slug: string; lang: Locale, q: string }>;
+  params: Promise<{ slug: string; lang: Locale; q: string }>;
 }) {
   const params = await props.params;
   const data = await fetchBlogArticle(params.slug, params.lang);

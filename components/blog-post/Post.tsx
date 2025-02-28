@@ -49,7 +49,7 @@ export function BlogPost({
           <LinkImage
             href={`./${slug}`}
             data={value.imageData}
-            className="ml-3 max-[560px]:ml-0 float-right max-[560px]:float-none"
+            className="nth-of-type-[even]:mr-3 nth-of-type-[odd]:ml-3 max-[560px]:ml-0 nth-of-type-[even]:float-left nth-of-type-[odd]:float-right max-[560px]:float-none"
             imgClass={clsx(
               "max-[560px]:w-full max-[560px]:h-auto max-[560px]:max-h-[600px] max-[560px]:object-cover",
               value.imageData.width > value.imageData.height
@@ -67,12 +67,10 @@ export function BlogPost({
     const container = containerRef.current;
     if (!container) return;
     const section = container.querySelector("section");
-    const { firstElementChild } = container;
-    const firstAHeight =
-      firstElementChild?.tagName === "A"
-        ? (firstElementChild as HTMLAnchorElement).offsetHeight
-        : 0;
+    const firstA = container.querySelector("a");
+    const firstAHeight = firstA?.tagName === "A" ? firstA.offsetHeight : 0;
     const firstP = section?.querySelector("p");
+    const deltaHeight = (firstP?.getBoundingClientRect()?.top ?? 0) - (section?.getBoundingClientRect()?.top ?? 0);
 
     const paragraphs = container.querySelectorAll("p");
     paragraphs.forEach((p) => {
@@ -96,7 +94,7 @@ export function BlogPost({
       }
     });
     if (firstAHeight && firstP && matches) {
-      firstP.style.minHeight = `${firstAHeight}px`;
+      firstP.style.minHeight = `${firstAHeight - deltaHeight}px`;
     } else if (firstP) {
       firstP.style.minHeight = `0px`;
     }
@@ -123,6 +121,17 @@ export function BlogPost({
   return (
     <div className={clsx("relative", className)}>
       <article className="w-full max-w-3xl mx-auto" ref={containerRef}>
+        {data && (
+          <>
+            <h1 className="text-3xl font-medium mt-6 mb-4 tracking-wide">
+              {data.title}
+              <FlatDateBlock
+                dt={data.publishedAt}
+                className="float-right mt-0.5 text-base"
+              />
+            </h1>
+          </>
+        )}
         {data && data.titleImageData && (
           <LinkImage
             href={`./${slug}`}
@@ -136,20 +145,9 @@ export function BlogPost({
             )}
           />
         )}
-        {data && (
-          <>
-            <h1 className="text-3xl font-medium mt-6 mb-4 tracking-wide">
-              {data.title}
-              <FlatDateBlock
-                dt={data.publishedAt}
-                className="float-right mt-0.5 text-base"
-              />
-            </h1>
-          </>
-        )}
         {data && data.content && (
           <section
-            className="prose dark:prose-invert text-lg tracking-wide [&>a>div>img]:mt-1 [&>a>div>img]:mb-0"
+            className="prose dark:prose-invert text-lg tracking-wide [&>a>div>img]:mt-1 [&>a>div>img]:mb-0 [&>ul]:list-inside"
             data-blog-post
           >
             <PortableText value={data.content} components={components} />

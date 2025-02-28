@@ -19,10 +19,11 @@ export async function generateMetadata(props: {
     params.lang === "ru" ? "Блог | Юлия Рибетки" : "Blog | Julia Ribetki";
   return {
     alternates: {
-      canonical: "/blog/",
+      canonical: params.lang === "en" ? "/en/blog" : "/ru/blog",
       languages: {
         en: "/en/blog",
         ru: "/ru/blog",
+        "x-default": "/blog",
       },
     },
     title,

@@ -33,10 +33,14 @@ export async function generateMetadata(props: {
   };
   return {
     alternates: {
-      canonical: `/gallery/${params.slug}`,
+      canonical:
+        params.lang === "en"
+          ? `/en/search/gallery/${params.slug}`
+          : `/ru/search/gallery/${params.slug}`,
       languages: {
-        en: `/en/gallery/${params.slug}`,
-        ru: `/ru/gallery/${params.slug}`,
+        en: `/en/search/gallery/${params.slug}`,
+        ru: `/ru/search/gallery/${params.slug}`,
+        "x-default": `/gallery/${params.slug}`,
       },
     },
     title,

@@ -28,7 +28,7 @@ export function MainInfo({
           />
         </figure>
       )}
-      <section className="prose dark:prose-invert text-lg tracking-wide">
+      <section className="prose dark:prose-invert text-lg tracking-wide [&>ul]:list-inside">
         {data.annotation && <PortableText value={data.annotation} />}
       </section>
     </article>

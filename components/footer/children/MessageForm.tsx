@@ -24,7 +24,7 @@ export function MessageForm() {
   };
   const handleClick = () => {
     if (v && open) sendMessage();
-  }
+  };
 
   return (
     <Popover open={open} onOpenChange={handleOpen} defaultOpen>
@@ -32,6 +32,7 @@ export function MessageForm() {
         <Button
           variant="secondary"
           className="p-0 w-10"
+          aria-label={open ? t.sendMessageTooltip : t.writeTooltip}
           disabled={open && !v}
         >
           <Tooltip>
@@ -65,7 +66,7 @@ export function MessageForm() {
               side={open ? "right" : "top"}
               sideOffset={20}
               className={clsx(
-                "bg-background/60 backdrop-blur-md px-2 py-1 text-base font-normal",
+                "bg-background/60 backdrop-blur-md px-2 py-1 text-base font-normal"
               )}
             >
               <p>{open ? t.sendMessageTooltip : t.writeTooltip}</p>

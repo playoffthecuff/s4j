@@ -17,10 +17,11 @@ export async function generateMetadata(props: {
     params.lang === "ru" ? "События | Юлия Рибетки" : "Events | Julia Ribetki";
   return {
     alternates: {
-      canonical: "/events/",
+      canonical: params.lang === "en" ? "/en/events" : "/ru/events",
       languages: {
         en: "/en/events",
         ru: "/ru/events",
+        "x-default": "/events",
       },
     },
     title,

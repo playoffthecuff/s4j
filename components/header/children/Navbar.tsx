@@ -1,5 +1,10 @@
 "use client";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui";
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+} from "@/components/ui";
 import useLocale from "@/lib/hooks/use-locale";
 import { cn } from "@/lib/utils";
 import { useI18n } from "@/lib/utils/i18context";
@@ -31,39 +36,36 @@ export function Navbar({
   }
 
   return (
-    <nav className={cn("flex", className)}>
-      <Tabs
-        orientation={orientation}
-        value={v}
-        className={clsx("relative flex items-center justify-between mx-auto")}
+      <NavigationMenu
+        className={cn("flex p-0.5 rounded-md bg-muted", className)}
+        orientation={orientation}        value={v}
+        tabIndex={-1}
+        onClick={handleClick}
       >
-        <TabsList
-          className={clsx(
-            "h-fit select-none p-0.5 flex-1 max-w-none gap-1 text-foreground tracking-wider",
-            orientation === "vertical" && "flex-col gap-4 w-[90px]"
-          )}
-          onClick={handleClick}
-          tabIndex={-1}
-        >
+        <NavigationMenuList className="font-medium tracking-wider ">
           {values.map((el) => (
-            <TabsTrigger
-              value={el}
-              disabled={v === el && pathName.split("/").length < 4}
-              className="hover:text-muted-foreground text-lg data-disabled:pointer-events-none data-[state=active]:text-muted-foreground data-[state=active]:hover:text-foreground py-1"
-              tabIndex={0}
-              asChild
-              key={el}
-            >
-              <Link href={`/${locale}/${el}`}>
-                {t[el]}
+            <NavigationMenuItem key={el} tabIndex={0} value={el}>
+              <Link href={`/${locale}/${el}`} legacyBehavior passHref>
+                <NavigationMenuLink
+                  className={clsx(
+                    "group inline-flex h-9 w-max items-center justify-center text-lg rounded-b-sm bg-muted px-3 py-2",
+                    "hover:text-muted-foreground focus:bg-accent focus:text-accent-foreground",
+                    "aria-disabled:pointer-events-none data-[active]:bg-background data-[active]:text-muted-foreground",
+                    "ring-ring/10 dark:ring-ring/20 dark:outline-ring/40 outline-ring/50",
+                    "transition-[color,box-shadow] focus-visible:ring-4 focus-visible:outline-1"
+                  )}
+                  active={el === v}
+                  aria-disabled={v === el && pathName.split("/").length < 4}
+                >
+                  {t[el]}
+                </NavigationMenuLink>
               </Link>
-            </TabsTrigger>
+            </NavigationMenuItem>
           ))}
-          <TabsTrigger className="p-0" value="search">
-            <SearchForm variant="thin"/>
-          </TabsTrigger>
-        </TabsList>
-      </Tabs>
-    </nav>
+          <NavigationMenuItem value="search" className="aria-selected:bg-background" aria-selected={v === "search"}>
+            <SearchForm variant="thin" />
+          </NavigationMenuItem>
+        </NavigationMenuList>
+      </NavigationMenu>
   );
 }

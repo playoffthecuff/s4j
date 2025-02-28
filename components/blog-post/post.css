@@ -1,5 +1,10 @@
 [data-blog-post] {
-  h1,h2,h3,h4,h5,h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-weight: 500;
   }
   h2 {
@@ -36,20 +41,20 @@
     hyphens: auto;
   }
 
-  p:first-of-type {
+  p {
     line-height: 26px;
     margin-bottom: 16px;
     margin-top: 16px;
     hyphens: auto;
+  }
 
-    &:first-letter {
-      color: hsl(var(--muted-foreground));
-      font-size: 54px;
-      line-height: 52px;
-      vertical-align: top;
-      float: left;
-      margin-right: 2px;
-      text-transform: uppercase;
-    }
-  } 
+  p:first-of-type:first-letter {
+    color: hsl(var(--muted-foreground));
+    font-size: 55.5px;
+    line-height: 48px;
+    vertical-align: top;
+    float: left;
+    margin-right: 2px;
+    text-transform: uppercase;
+  }
 }

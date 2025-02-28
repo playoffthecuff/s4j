@@ -35,7 +35,7 @@ export function TooltipIcon({
       <TooltipContent
         sideOffset={offset}
         side={side}
-        className="bg-background/60 backdrop-blur-md text-base z-20"
+        className="bg-background/60 backdrop-blur-md text-base z-20 font-normal"
       >
         <p>{text}</p>
       </TooltipContent>

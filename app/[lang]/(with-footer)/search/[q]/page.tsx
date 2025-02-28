@@ -22,10 +22,14 @@ export async function generateMetadata(props: {
     params.lang === "ru" ? "Юлия Рибетки | Поиск" : "Julia Ribetki | Search";
   return {
     alternates: {
-      canonical: `/search/${params.q}`,
+      canonical:
+        params.lang === "en"
+          ? `/en/search/${params.q}`
+          : `/ru/search/${params.q}`,
       languages: {
         en: `/en/search/${params.q}`,
         ru: `/ru/search/${params.q}`,
+        "x-default": `/search/${params.q}`,
       },
     },
     title,

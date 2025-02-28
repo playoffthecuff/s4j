@@ -70,7 +70,7 @@ export function TimelineEntry({
                 </>
               )}
             </p>
-            <p>{heading}</p>
+            <p className="text-lg tracking-wide">{heading}</p>
           </div>
         </div>
       </AccordionTrigger>
@@ -80,7 +80,7 @@ export function TimelineEntry({
           width={9}
           className="absolute top-[5px] left-px text-border -rotate-90 scale-x-200"
         />
-        <div className="border-t-2 pt-1 prose dark:prose-invert pl-[30px] pr-3 max-w-full">
+        <div className="border-t-2 pt-1 prose dark:prose-invert pl-[30px] pr-3 max-w-full [&>ul]:list-inside tracking-wide text-lg">
           {content && <PortableText value={content} />}
         </div>
       </AccordionContent>

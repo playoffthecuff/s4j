@@ -70,7 +70,6 @@
   --shadow-view-top: 0 4px 48px 24px var(--dark-shadow);
   --shadow-view-bottom: 0px 4px 48px 24px var(--dark-shadow);
 
-  --font-script: "Marck Script";
   --font-rabbit: "fontRabbit";
 
   --cursor-chevron-right: url("data:image/svg+xml,%3Csvg width='20' height='32' viewBox='0 0 10 16' fill='none' xmlns='http://www.w3.org/2000/svg'%0Astyle='filter:url(%23shadow);'%3E%3Cdefs%3E%3Cfilter id='shadow'%3E%3CfeDropShadow dx='0.4' dy='0.4' stdDeviation='0.8' /%3E%3C/filter%3E%3C/defs%3E%3Cpath d='M2 14L8 8L2 2' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E "), auto;
@@ -105,15 +104,6 @@
     }
   }
 }
-
-/*
-  The default border color has changed to `currentColor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
 
 @layer base {
   *,
@@ -182,12 +172,12 @@
     --popover-foreground: 240 10% 3.9%;
     --primary: 240 5.9% 10%;
     --primary-foreground: 0 0% 98%;
-    --secondary: 240 4.8% 95.9%;
+    --secondary: 240 4.8% 92.9%;
     --tertiary: 240 4.8% 88.2%;
     --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
+    --muted: 240 4.8% 92.9%;
     --muted-foreground: 240 3.8% 46.1%;
-    --accent: 240 4.8% 95.9%;
+    --accent: 240 4.8% 92.9%;
     --accent-foreground: 240 5.9% 10%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
@@ -239,6 +229,15 @@
     @apply border-border;
   }
   html {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
     @apply bg-background text-foreground;
   }
 }
