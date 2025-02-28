@@ -90,61 +90,6 @@ export function Sidebar({
             "radial-gradient(circle at 0% 100%, transparent 12px, hsl(var(--background)) 0)",
         }}
       />
-      {/* <div
-        className="h-4 w-4 absolute left-0 top-2 -translate-x-3 -translate-y-1"
-        style={{
-          background:
-            "radial-gradient(circle at 0% 100%, transparent 12px, hsl(var(--background)) 0)",
-        }}
-      />
-
-      <nav className="flex">
-        <Tabs
-          orientation="vertical"
-          value={v}
-          className={clsx("relative flex items-center justify-between mx-auto")}
-        >
-          <TabsList
-            className={clsx(
-              "flex-col",
-              "h-fit select-none flex-1 max-w-none p-0 bg-muted text-foreground tracking-wider",
-              isSmallLandscaped && "flex-row"
-            )}
-          >
-            <div
-              className={clsx(
-                "p-1.5 w-fit flex flex-col rounded-t-md gap-0.75"
-              )}
-            >
-              {values.map((el) => (
-                <TabsTrigger
-                  value={el}
-                  disabled={v === el}
-                  className="w-full text-lg justify-start tracking-wider px-2.5 data-disabled:pointer-events-none hover:text-muted-foreground"
-                  onClick={onTabClick}
-                  asChild
-                  key={el}
-                >
-                  <Link href={`/${locale}/${el}`} tabIndex={tabbed ? 0 : -1}>
-                    {t[el]}
-                  </Link>
-                </TabsTrigger>
-              ))}
-              <TabsTrigger
-                asChild
-                className="w-full p-0 text-lg justify-start"
-                value="search"
-              >
-                <SearchForm
-                  className={clsx(
-                    v === "search" ? "bg-background" : "bg-muted",
-                    isSmallLandscaped && "mt-1"
-                  )}
-                  onEnter={close}
-                  variant="wide"
-                />
-              </TabsTrigger>
-            </div> */}
       <NavigationMenu
         className={cn(
           "p-0.5 rounded-md bg-muted flex-col",
@@ -188,7 +133,7 @@ export function Sidebar({
             </NavigationMenuItem>
           </div>
         </NavigationMenuList>
-        <NavigationMenuList className={clsx("mt-1 w-full rounded-md block", isSmallLandscaped && "w-40 mt-0")}>
+        <NavigationMenuList className={clsx("mt-1 w-51 rounded-md block", isSmallLandscaped && "w-40 mt-0")}>
           <div className={clsx("flex flex-col flex-1 w-full bg-background rounded-sm p-1", isSmallLandscaped && "gap-1")}>
             <NavigationMenuItem
               value="light"
@@ -205,7 +150,7 @@ export function Sidebar({
               className="h-9 cursor-pointer flex justify-between rounded-sm items-center tracking-wide text-lg font-medium pl-2.5 pr-[9px] hover:bg-muted w-full aria-disabled:pointer-events-none aria-disabled:opacity-50"
               tabIndex={0}
               aria-disabled={th === "night"}
-              onClick={setLight}
+              onClick={setDark}
             >
               <p>{t.dark}</p>
               <Moon className="h-[1.2rem] w-[1.2rem]" />
@@ -259,89 +204,6 @@ export function Sidebar({
           </div>
         </NavigationMenuList>
       </NavigationMenu>
-      {/* <Tabs
-        orientation="vertical"
-        value={v}
-        className={clsx(
-          "relative w-full gap-0.5 border-x-2 border-b-2 rounded-md",
-          isSmallLandscaped && "border-none pr-0.5 pt-0.5 pb-0.5"
-        )}
-      >
-        <TabsList
-          className={clsx(
-            "flex-col",
-            "h-fit select-none flex-1 max-w-none p-0 bg-muted text-foreground tracking-wider",
-            isSmallLandscaped && "flex-row"
-          )}
-        >
-          <TabsTrigger
-            className="w-full flex justify-between text-lg tracking-wider pl-2.5 pr-[9px] hover:bg-muted"
-            value="light"
-            onClick={setLight}
-            disabled={th === "light"}
-            tabIndex={0}
-          >
-            <p>{t.light}</p>
-            <Sun className="h-[1.2rem] w-[1.2rem]" />
-          </TabsTrigger>
-          <TabsTrigger
-            className="w-full flex justify-between text-lg tracking-wider pl-2.5 pr-[9px] hover:bg-muted disabled:pointer-events-none disabled:opacity-50"
-            value="dark"
-            onClick={setDark}
-            disabled={th === "dark"}
-            tabIndex={0}
-          >
-            <p>{t.dark}</p>
-            <Moon className="h-[1.2rem] w-[1.2rem]" />
-          </TabsTrigger>
-          <TabsTrigger
-            className="w-full flex justify-between text-lg tracking-wider pl-2.5 pr-[9px] hover:bg-muted"
-            value="system"
-            onClick={setSystem}
-            disabled={th === "system"}
-            tabIndex={0}
-          >
-            <p>{t.system}</p>
-            <MonitorCog className="h-[1.2rem] w-[1.2rem]" />
-          </TabsTrigger>
-        </TabsList>
-      </Tabs> */}
-      {/* <TabsTrigger
-                  asChild
-                  className="w-full flex justify-between text-lg tracking-wider pl-2.5 pr-[6.5px] hover:bg-muted data-disabled:opacity-50 data-disabled:pointer-events-none"
-                  value="ru"
-                  disabled={locale === "ru"}
-                  tabIndex={locale === "ru" ? -1 : 0}
-                  onClick={onTabClick}
-                >
-                  <Link
-                    href={redirectedPathname("ru")}
-                    className="flex items-center justify-between w-full"
-                  >
-                    <p lang={locale === "en" ? "ru" : "en"}>{t.russian}</p>
-                    <div>
-                      <RuFlag />
-                    </div>
-                  </Link>
-                </TabsTrigger>
-                <TabsTrigger
-                  asChild
-                  className="w-full flex justify-between text-lg tracking-wider pl-2.5 pr-[6.5px] hover:bg-muted data-disabled:opacity-50 data-disabled:pointer-events-none"
-                  value="ru"
-                  disabled={locale === "ru"}
-                  tabIndex={locale === "ru" ? -1 : 0}
-                  onClick={onTabClick}
-                >
-                  <Link
-                    href={redirectedPathname("ru")}
-                    className="flex items-center justify-between w-full"
-                  >
-                    <p lang={locale === "en" ? "ru" : "en"}>{t.russian}</p>
-                    <div>
-                      <RuFlag />
-                    </div>
-                  </Link>
-                </TabsTrigger> */}
     </aside>
   );
 }
