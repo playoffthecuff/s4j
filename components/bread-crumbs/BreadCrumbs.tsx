@@ -41,6 +41,7 @@ export default function BreadCrumbs({
           <Link
             className="transition-colors  hover:text-muted-foreground"
             href={`/${locale}`}
+            aria-label={locale === "en" ? "go to home page" : "перейти на домашнюю страницу"}
           >
             <Home className="p-0.5" style={{ strokeWidth: 1.5 }} />
           </Link>
@@ -58,6 +59,7 @@ export default function BreadCrumbs({
                   <Link
                     className="transition-colors w-full h-full px-2 py-1.5 capitalize -mt-px mb-px"
                     href={`/${locale}/${ml.link}`}
+                    aria-label={`${locale === "en" ? "go to" : "перейти на страницу"} ${ml.link}${locale === "en" ? " page" : ""}`}
                   >
                     {ml.text}
                   </Link>
@@ -75,6 +77,7 @@ export default function BreadCrumbs({
                   <Link
                     className="transition-color hover:text-muted-foreground underline truncate max-w-16"
                     href={`./${cl.link}`}
+                    aria-label={`${locale === "en" ? "go to" : "перейти на страницу"} ${cl.text} ${locale === "en" ? "page" : ""}`}
                   >
                     {cl.text}
                   </Link>

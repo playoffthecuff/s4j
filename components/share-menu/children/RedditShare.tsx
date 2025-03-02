@@ -38,7 +38,7 @@ export function RedditShare({
               href={encodeURI(
                 `https://www.reddit.com/submit?url=${link}&title=${text}`
               )}
-              aria-label="share on reddit"
+              aria-label={t.shareOnReddit}
             >
               <RedditIcon width={20} height={20} />
             </a>

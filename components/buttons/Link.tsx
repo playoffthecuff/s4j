@@ -25,10 +25,10 @@ export function LinkButton({
       className={clsx("tracking-wider", className)}
       variant={variant}
       asChild
-      aria-label={`${t[translateName]}${ariaLabel ? " " + t.ariaAbout + " " + ariaLabel : ""}`}
     >
       <Link href={link} className="no-underline" style={{ fontSize: 18 }}>
-        {t[translateName]}
+        <span className="sr-only">{`${t[translateName]}${ariaLabel ? " " + t.ariaAbout + " " + ariaLabel : ""}`}</span>
+        <p>{t[translateName]}</p>
       </Link>
     </Button>
   );

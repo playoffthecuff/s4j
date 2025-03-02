@@ -36,7 +36,7 @@ export function FacebookShare({
               href={encodeURI(
                 `https://www.facebook.com/sharer/sharer.php?u=${link}`
               )}
-              aria-label="share on facebook"
+              aria-label={t.shareOnFacebook}
             >
               <Facebook />
             </a>

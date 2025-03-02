@@ -67,5 +67,13 @@
   "windowedTooltip": "Оконный режим",
   "writeMePlaceholder": "Введите ваше сообщение здесь",
   "writeTooltip": "Написать сообщение",
-  "zoomClickHintTooltip": "приблизить / отдалить"
+  "zoomClickHintTooltip": "приблизить / отдалить",
+  "shareOnLinkedIn": "Поделиться в LinkedIn",
+  "shareOnFacebook": "Поделиться в Facebook",
+  "shareByEmail": "Поделиться по почте",
+  "shareOnReddit":  "Поделиться на Reddit",
+  "shareOnTelegram": "Поделиться в Telegram",
+  "shareOnTwitter": "Поделиться в Twitter",
+  "shareOnVK": "Поделиться в VK",
+  "shareOnWhatsapp": "Поделиться в Whatsapp"
 }

@@ -8,15 +8,18 @@ import { LinkButton } from "../buttons";
 import { ImagePlaceholderIcon } from "../icons";
 import { Separator } from "../ui";
 import { DateBlock, MarkedText } from "./children";
+import { Locale } from "@/i18n-config";
 
 export function BlogPostCard({
   className,
   data,
   marks,
+  lang,
 }: {
   className?: string;
   data: BlogLightArticle;
   marks?: string[];
+  lang?: Locale;
 }) {
   const textContent = data.content ? data.content.join("").slice(0, 400) : "";
   return (
@@ -31,6 +34,7 @@ export function BlogPostCard({
         href={`./blog/${data.slug}`}
         className="relative flex rounded-lg overflow-hidden group bg-neutral-950 group"
         data-card-figure
+        aria-label={`${lang === "en" ? "Read more about" : "Читать далее о"} ${data.title ?? ""}`}
       >
         {data.titleImageData ? (
           <Image
@@ -39,8 +43,8 @@ export function BlogPostCard({
             src={data.titleImageData.url}
             blurDataURL={data.titleImageData.lqip ?? undefined}
             fill
-            alt={data.titleImageData.title}
-            sizes="(max-width: 1279px) 400px, (max-width: 979px) 464px, (max-width: 856px) 400px, (max-width: 719px) 334px, (max-width: 579px) 544px, 300px"
+            alt=""
+            sizes="(max-width: 1279px) 32vw, (max-width: 979px) 48vw, (max-width: 559px) 96vw, 300px"
           />
         ) : (
           <ImagePlaceholderIcon className="w-full" />
@@ -55,6 +59,7 @@ export function BlogPostCard({
           <Link
             href={`./blog/${data.slug}`}
             className="text-foreground hover:text-muted-foreground"
+            aria-label={`${lang === "en" ? "Read more about" : "Читать далее о"} ${data.title ?? ""}`}
           >
             <h2 className="text-[22px] font-medium tracking-wider truncate">
               <MarkedText text={data.title} marks={marks} />

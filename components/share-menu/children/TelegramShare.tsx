@@ -38,7 +38,7 @@ export function TelegramShare({
               href={encodeURI(
                 `https://telegram.me/share/url?url=${link}&text=${text}`
               )}
-              aria-label="share on telegram"
+              aria-label={t.shareOnTelegram}
             >
               <TelegramIcon width={20} height={20} />
             </a>

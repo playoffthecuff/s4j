@@ -40,6 +40,7 @@ export function CopyButton({
               variant="outline"
               size="icon"
               className="h-10 w-10 rounded-full bg-background/80 hover:bg-border/60 backdrop-blur-md"
+              aria-label={t.copiedTooltip}
             >
               <Check />
             </Button>
@@ -56,6 +57,7 @@ export function CopyButton({
               size="icon"
               className="h-10 w-10 rounded-full bg-background/60 hover:bg-border/60"
               onClick={handleCopy}
+              aria-label={t.copyToClipboardTooltip}
             >
               <Copy />
             </Button>

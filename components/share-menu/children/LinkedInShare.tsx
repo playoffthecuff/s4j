@@ -40,7 +40,7 @@ export function LinkedInShare({
               href={encodeURI(
                 `https://www.linkedin.com/shareArticle?mini=true&url=${link}&title=${title}&summary=${text}&source=Julia Ribetki official website`
               )}
-              aria-label="share on linkedin"
+              aria-label={t.shareOnLinkedIn}
             >
               <Linkedin />
             </a>

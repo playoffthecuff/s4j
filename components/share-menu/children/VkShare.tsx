@@ -40,7 +40,7 @@ export function VkShare({
               href={encodeURI(
                 `https://vk.com/share.php?url=${link}&title=${title}&description=${text}%&noparse=true`
               )}
-              aria-label="share on vk"
+              aria-label={t.shareOnVK}
             >
               <VkIcon width={24} height={24} />
             </a>

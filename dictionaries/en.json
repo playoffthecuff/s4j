@@ -68,5 +68,13 @@
   "windowedTooltip": "Windowed",
   "writeMePlaceholder": "Type your message here",
   "writeTooltip": "Write message",
-  "zoomClickHintTooltip": "zoom in / out"
+  "zoomClickHintTooltip": "zoom in / out",
+  "shareOnLinkedIn": "Share on Linkedin",
+  "shareOnFacebook": "Share on Facebook",
+  "shareByEmail": "Share by Email",
+  "shareOnReddit":  "Share on Reddit",
+  "shareOnTelegram": "Share on Telegram",
+  "shareOnTwitter": "Share on Twitter",
+  "shareOnVK": "Share on VK",
+  "shareOnWhatsapp": "Share on Whatsapp"
 }

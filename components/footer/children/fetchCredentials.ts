@@ -61,7 +61,7 @@ export async function fetchCredentials(l: Locale) {
        "rssData": {
         "visibility": rss.visibility,
         "iconUrl": rss.icon.asset -> url,
-        "link": ${l === "ru" ? "rss.linkRu" : "linkEn"},
+        "link": ${l === "ru" ? "rss.linkRu" : "rss.linkEn"},
       }
     }
   `;

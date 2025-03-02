@@ -38,7 +38,7 @@ export function WhatsappShare({
               href={encodeURI(
                 `https://api.whatsapp.com/send?text=${text} ${link}`
               )}
-              aria-label="share on whatsapp"
+              aria-label={t.shareOnWhatsapp}
             >
               <WhatsappIcon width={20} height={20} />
             </a>

@@ -16,7 +16,7 @@ import { MonitorCog, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { RefObject, useEffect, useState } from "react";
+import { KeyboardEventHandler, RefObject, useEffect, useState } from "react";
 import { EnFlag } from "./EnFlag";
 import { RuFlag } from "./RuFlag";
 import { SearchForm } from "./SearchForm";
@@ -73,6 +73,24 @@ export function Sidebar({
     return segments.join("/");
   };
 
+  const handleEnterPressOnLight: KeyboardEventHandler<HTMLLIElement> = (event) => {
+    if(event.key === 'Enter'){
+      setLight();
+    }
+  };
+
+  const handleEnterPressOnDark: KeyboardEventHandler<HTMLLIElement> = (event) => {
+    if(event.key === 'Enter'){
+      setDark();
+    }
+  };
+
+  const handleEnterPressOnSystem: KeyboardEventHandler<HTMLLIElement> = (event) => {
+    if(event.key === 'Enter'){
+      setSystem();
+    }
+  };
+
   return (
     <aside
       className={cn(
@@ -99,8 +117,7 @@ export function Sidebar({
         value={v}
         tabIndex={-1}
       >
-        <NavigationMenuList className="font-medium tracking-wider">
-          <div className={clsx("w-full flex flex-col gap-1.25 p-1 pb-0", isSmallLandscaped && "pl-0.5")}>
+        <NavigationMenuList className={clsx("font-medium tracking-wider w-full flex flex-col gap-1.25 p-1 pb-0", isSmallLandscaped && "pl-0.5")}>
             {values.map((el) => (
               <NavigationMenuItem key={el} value={el} className="w-full">
                 <Link href={`/${locale}/${el}`} legacyBehavior passHref>
@@ -115,6 +132,7 @@ export function Sidebar({
                     active={el === v}
                     aria-disabled={v === el}
                     onClick={onTabClick}
+                    tabIndex={el === v ? -1 : 0}
                   >
                     {t[el]}
                   </NavigationMenuLink>
@@ -131,78 +149,86 @@ export function Sidebar({
             >
               <SearchForm variant="wide" />
             </NavigationMenuItem>
-          </div>
         </NavigationMenuList>
-        <NavigationMenuList className={clsx("mt-1 w-51 rounded-md block", isSmallLandscaped && "w-40 mt-0")}>
-          <div className={clsx("flex flex-col flex-1 w-full bg-background rounded-sm p-1", isSmallLandscaped && "gap-1")}>
-            <NavigationMenuItem
-              value="light"
-              className="h-9 cursor-pointer flex justify-between rounded-sm items-center tracking-wide text-lg font-medium pl-2.5 pr-[9px] hover:bg-muted aria-disabled:pointer-events-none w-full aria-disabled:opacity-50"
-              tabIndex={0}
-              aria-disabled={th === "light"}
-              onClick={setLight}
-            >
-              <p>{t.light}</p>
-              <Sun className="h-[1.2rem] w-[1.2rem]" />
-            </NavigationMenuItem>
-            <NavigationMenuItem
-              value="light"
-              className="h-9 cursor-pointer flex justify-between rounded-sm items-center tracking-wide text-lg font-medium pl-2.5 pr-[9px] hover:bg-muted w-full aria-disabled:pointer-events-none aria-disabled:opacity-50"
-              tabIndex={0}
-              aria-disabled={th === "night"}
-              onClick={setDark}
-            >
-              <p>{t.dark}</p>
-              <Moon className="h-[1.2rem] w-[1.2rem]" />
-            </NavigationMenuItem>
-            <NavigationMenuItem
-              value="system"
-              onClick={setSystem}
-              className="h-9 cursor-pointer flex justify-between rounded-sm items-center tracking-wide text-lg font-medium pl-2.5 pr-[9px] hover:bg-muted w-full aria-disabled:pointer-events-none aria-disabled:opacity-50"
-              tabIndex={0}
-              aria-disabled={th === "system"}
-            >
-              <p>{t.system}</p>
-              <MonitorCog className="h-[1.2rem] w-[1.2rem]" />
-            </NavigationMenuItem>
-          </div>
-          <div className={clsx("w-full bg-background rounded-sm mt-0.75 flex flex-col p-1", isSmallLandscaped && "gap-1")}>
-            <NavigationMenuItem
-              value="en"
-              className="aria-selected:bg-background w-full rounded-sm pl-2.5 pr-2 h-9 hover:bg-muted aria-disabled:pointer-events-none aria-disabled:opacity-50"
-              tabIndex={locale === "en" ? -1 : 0}
-              aria-disabled={locale === "en"}
-              onClick={onTabClick}
-            >
-              <Link
-                href={redirectedPathname("en")}
-                className="flex justify-between items-center w-full h-full tracking-wide text-lg font-medium"
+        <ul className={clsx("mt-1 rounded-md block w-full", isSmallLandscaped && "w-40 mt-0")}>
+          <li>
+            <ul className={clsx("flex flex-col flex-1 w-full bg-background rounded-sm p-1", isSmallLandscaped && "gap-1")}>
+              <NavigationMenuItem
+                value="light"
+                className="h-9 cursor-pointer flex justify-between rounded-sm items-center tracking-wide text-lg font-medium pl-2.5 pr-[9px] hover:bg-muted aria-disabled:pointer-events-none w-full aria-disabled:opacity-50"
+                tabIndex={th === "light" ? -1 : 0}
+                aria-disabled={th === "light"}
+                onClick={setLight}
+                onKeyDown={handleEnterPressOnLight}
               >
-                <p>{t.english}</p>
-                <div>
-                  <EnFlag />
-                </div>
-              </Link>
-            </NavigationMenuItem>
-            <NavigationMenuItem
-              value="ru"
-              className="aria-selected:bg-background w-full rounded-sm pl-2.5 pr-2 h-9 hover:bg-muted aria-disabled:pointer-events-none aria-disabled:opacity-50"
-              tabIndex={locale === "ru" ? -1 : 0}
-              aria-disabled={locale === "ru"}
-              onClick={onTabClick}
-            >
-              <Link
-                href={redirectedPathname("ru")}
-                className="flex justify-between items-center w-full h-full tracking-wide text-lg font-medium"
+                <p>{t.light}</p>
+                <Sun className="h-[1.2rem] w-[1.2rem]" />
+              </NavigationMenuItem>
+              <NavigationMenuItem
+                value="dark"
+                className="h-9 cursor-pointer flex justify-between rounded-sm items-center tracking-wide text-lg font-medium pl-2.5 pr-[9px] hover:bg-muted w-full aria-disabled:pointer-events-none aria-disabled:opacity-50"
+                tabIndex={th === "dark" ? -1 : 0}
+                aria-disabled={th === "dark"}
+                onClick={setDark}
+                onKeyDown={handleEnterPressOnDark}
               >
-                <p>{t.russian}</p>
-                <div>
-                  <RuFlag />
-                </div>
-              </Link>
-            </NavigationMenuItem>
-          </div>
-        </NavigationMenuList>
+                <p>{t.dark}</p>
+                <Moon className="h-[1.2rem] w-[1.2rem]" />
+              </NavigationMenuItem>
+              <NavigationMenuItem
+                value="system"
+                onClick={setSystem}
+                className="h-9 cursor-pointer flex justify-between rounded-sm items-center tracking-wide text-lg font-medium pl-2.5 pr-[9px] hover:bg-muted w-full aria-disabled:pointer-events-none aria-disabled:opacity-50"
+                tabIndex={th === "system" ? -1 : 0}
+                aria-disabled={th === "system"}
+                onKeyDown={handleEnterPressOnSystem}
+              >
+                <p>{t.system}</p>
+                <MonitorCog className="h-[1.2rem] w-[1.2rem]" />
+              </NavigationMenuItem>
+            </ul>
+          </li>
+          <li>
+            <ul className={clsx("w-full bg-background rounded-sm mt-0.75 flex flex-col p-1", isSmallLandscaped && "gap-1")}>
+              <NavigationMenuItem
+                value="en"
+                className="aria-selected:bg-background w-full rounded-sm h-9 hover:bg-muted aria-disabled:pointer-events-none aria-disabled:opacity-50"
+                tabIndex={-1}
+                aria-disabled={locale === "en"}
+                onClick={onTabClick}
+              >
+                <Link
+                  href={redirectedPathname("en")}
+                  className="flex justify-between pl-2.5 pr-2 items-center w-full h-full tracking-wide text-lg font-medium"
+                  tabIndex={locale === "en" ? -1 : 0}
+                >
+                  <p>{t.english}</p>
+                  <div>
+                    <EnFlag />
+                  </div>
+                </Link>
+              </NavigationMenuItem>
+              <NavigationMenuItem
+                value="ru"
+                className="aria-selected:bg-background w-full rounded-sm h-9 hover:bg-muted aria-disabled:pointer-events-none aria-disabled:opacity-50"
+                tabIndex={-1}
+                aria-disabled={locale === "ru"}
+                onClick={onTabClick}
+              >
+                <Link
+                  href={redirectedPathname("ru")}
+                  className="flex pl-2.5 pr-2 justify-between items-center w-full h-full tracking-wide text-lg font-medium"
+                  tabIndex={locale === "ru" ? -1 : 0}
+                >
+                  <p>{t.russian}</p>
+                  <div>
+                    <RuFlag />
+                  </div>
+                </Link>
+              </NavigationMenuItem>
+            </ul>
+          </li>
+        </ul>
       </NavigationMenu>
     </aside>
   );

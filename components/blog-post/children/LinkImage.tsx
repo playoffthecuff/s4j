@@ -18,9 +18,9 @@ export function LinkImage({
   return (
     <Link
       href={`${href}/${data.slug}`}
-      className={cn("block group relative", className)}
+      className={cn("block group", className)}
     >
-      <div>
+      <div className="relative">
         <Image
           className={cn(
             "border rounded-md my-0 group-hover:opacity-50 transition-opacity",

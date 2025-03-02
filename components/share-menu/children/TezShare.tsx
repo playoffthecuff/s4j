@@ -19,7 +19,7 @@ export function TezShare({
   return (
     <div className={className} onClick={handleClick}>
       <Tooltip>
-        <TooltipTrigger asChild>
+        <TooltipTrigger asChild aria-label={t.shareTooltip}>
           <Button
             size="icon"
             variant="outline"

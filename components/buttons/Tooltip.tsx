@@ -45,14 +45,18 @@ export function TooltipButton({
       >
         <p>{text}</p>
       </TooltipContent>
-      <TooltipTrigger asChild className={className} style={style}>
+      <TooltipTrigger
+        asChild
+        className={className}
+        style={style}
+        aria-label={ariaLabel}
+      >
         <Button
           variant="outline"
           size="icon"
           tabIndex={-1}
           disabled={disabled}
           onClick={onClick}
-          aria-label={ariaLabel}
         >
           {children}
         </Button>

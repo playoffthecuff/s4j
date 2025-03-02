@@ -104,7 +104,7 @@
 
 [data-card-text]:first-letter {
   color: hsl(var(--muted-foreground));
-  font-size: 58.5px;
+  font-size: 59px;
   line-height: 51.5px;
   vertical-align: top;
   float: left;

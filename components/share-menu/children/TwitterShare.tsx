@@ -38,7 +38,7 @@ export function TwitterShare({
               href={encodeURI(
                 `https://twitter.com/intent/tweet?url=${link}&text=${text}`
               )}
-              aria-label="share on twitter"
+              aria-label={t.shareOnTwitter}
             >
               <Twitter className="w-9 h-9" />
             </a>

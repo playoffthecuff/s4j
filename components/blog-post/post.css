@@ -50,7 +50,7 @@
 
   p:first-of-type:first-letter {
     color: hsl(var(--muted-foreground));
-    font-size: 55.5px;
+    font-size: 57px;
     line-height: 48px;
     vertical-align: top;
     float: left;

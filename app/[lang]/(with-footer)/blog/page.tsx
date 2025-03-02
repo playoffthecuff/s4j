@@ -40,7 +40,7 @@ export default async function Page(props: {
   return (
     <div className={cn("mt-[7.5rem] mb-16 px-4", css.container)}>
       {articles.map((v, i) => (
-        <BlogPostCard data={v} key={i} />
+        <BlogPostCard data={v} key={i} lang={params.lang}/>
       ))}
     </div>
   );

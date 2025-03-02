@@ -40,7 +40,7 @@ export function EmailShare({
               href={encodeURI(
                 `mailto:?subject=${title}&body=${text}%0A${link}`
               )}
-              aria-label="share by email"
+              aria-label={t.shareByEmail}
             >
               <EmailIcon width={24} height={24} />
             </a>
