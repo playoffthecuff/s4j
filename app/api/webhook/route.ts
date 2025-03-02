@@ -17,7 +17,7 @@ export async function POST(request: Request) {
       );
     }
 
-    revalidatePath("/");
+    revalidatePath("/", "layout");
 
     const message = "Content updated. Контент обновлён.";
     const title = "Check the site. Проверьте сайт.";
