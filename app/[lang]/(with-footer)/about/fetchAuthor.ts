@@ -56,7 +56,7 @@ const fetchTimeline = async (l: Locale) => {
       endDate,
       'heading': heading.${l},
       'content': content.${l},
-    },
+    } | order(startDate desc),
   }`;
   const d: TimelineType | null = await client.fetch(q);
   return d;

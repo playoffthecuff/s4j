@@ -55,14 +55,14 @@ export default async function Page(props: {
   const d = await fetchAuthor(params.lang);
 
   return (
-    <div className="max-w-3xl mx-auto mt-[7.5rem] mb-16 px-4">
+    <div className="max-w-4xl mx-auto mt-[7.5rem] mb-16 px-4">
       {d.mainInfo && <MainInfo data={d.mainInfo} />}
       {d.timeline && (
         <>
           {d.mainInfo && <Separator className="mt-8 mb-10" />}
           <Timeline
             entries={d.timeline}
-            className="max-w-[720px] mx-auto px-1"
+            className="mx-auto px-1"
           />
         </>
       )}
