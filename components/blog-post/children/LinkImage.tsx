@@ -9,11 +9,13 @@ export function LinkImage({
   data,
   className,
   imgClass,
+  showText = false,
 }: {
   href: string;
   data: GalleryImage;
   className?: string;
   imgClass?: string;
+  showText?: boolean;
 }) {
   return (
     <Link
@@ -37,9 +39,11 @@ export function LinkImage({
         />
         <Eye className="absolute bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-400 text-white" />
       </div>
-      <figcaption className="text-lg font-normal underline tracking-wide px-1 truncate opacity-100 group-hover:opacity-70 transition-opacity duration-400 text-white">
-        {data.title}
-      </figcaption>
+      {showText && (
+        <figcaption className="text-lg font-normal underline tracking-wide px-1 truncate opacity-100 group-hover:opacity-70 transition-opacity duration-400 text-white">
+          {data.title}
+        </figcaption>
+      )}
     </Link>
   );
 }

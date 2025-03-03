@@ -51,7 +51,7 @@ export function BlogPost({
             data={value.imageData}
             className="nth-of-type-[even]:mr-3 nth-of-type-[odd]:ml-3 max-[560px]:ml-0 nth-of-type-[even]:float-left nth-of-type-[odd]:float-right max-[560px]:float-none"
             imgClass={clsx(
-              "max-[560px]:w-full max-[560px]:h-auto max-[560px]:max-h-[600px] max-[560px]:object-cover",
+              "max-[560px]:w-full max-[560px]:h-auto max-[560px]:max-h-[600px] min-[560px]:max-w-[300px] max-[560px]:object-cover",
               value.imageData.width > value.imageData.height
                 ? "max-w-96 h-auto max-[560px]:max-w-full"
                 : "h-80 w-auto"
