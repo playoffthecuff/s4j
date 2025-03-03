@@ -25,6 +25,24 @@ export const fetchGalleryImage = async (slug: string, l: Locale) => {
   return d;
 };
 
+export const fetchGalleryAllImage = async (slug: string, l: Locale) => {
+  const query = `
+    *[_type == 'galleryImage' && slug.current == '${slug}'] {
+      'width': image.asset->metadata.dimensions.width,
+      'height': image.asset->metadata.dimensions.height,
+      'lqip': image.asset->metadata.lqip,
+      'url': image.asset->url,
+      'description': description.${l},
+      'title': title.${l},
+      'slug': slug.current,
+      "lightColor": lightColor.rgb,
+      "darkColor": darkColor.rgb,
+    }[0]`;
+  const d: GalleryImage | null = await client.fetch(query);
+  return d;
+};
+
+
 export const fetchGalleryImageSlugs = async () => {
   const query = `
     *[_type == 'galleryImage' && visible == true] {

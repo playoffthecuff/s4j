@@ -215,14 +215,60 @@ export function Gallery({
   };
 
   useEffect(() => {
-    const setLoadedHook = () => setLoaded(true);
+    const updateSize = () => {
+      if (typeof window !== undefined) {
+        const windowWidth = window.innerWidth;
+        const windowHeight = window.innerHeight;
+        const { width, height } = getSizes(
+          windowWidth,
+          windowHeight,
+          data.width,
+          data.height
+        );
+        const zoomContainer = zoomContainerRef.current;
+
+        let dx = 0;
+        let dy = 0;
+        if (zoomContainer) {
+          kxRef.current = zoomContainer.offsetWidth / windowWidth;
+          kyRef.current = zoomContainer.offsetHeight / windowHeight;
+          dx = (windowWidth - width) / 2;
+          dy = (windowHeight - height) / 2;
+          zoomContainer.style.width = `${width}px`;
+          zoomContainer.style.height = `${height}px`;
+          zoomContainer.style.left = `${dx}px`;
+          zoomContainer.style.top = `${dy}px`;
+          const windowAspect = windowWidth / windowHeight;
+          const imageAspect = data.width / data.height;
+          zoomContainerCursorRef.current =
+            (data.height > windowHeight && data.width > windowWidth) ||
+            imageAspect === windowAspect
+              ? "move"
+              : imageAspect > windowAspect
+                ? "ew-resize"
+                : "ns-resize";
+          zoomContainer.style.cursor = zoomContainerCursorRef.current;
+          setTranslate(0, 0);
+        }
+        boundsRef.current = {
+          minX: Math.min(0 - dx, windowWidth - width - dx),
+          maxX: -dx,
+          minY: Math.min(0 - dy, windowHeight - height - dy),
+          maxY: -dy,
+        };
+      }
+    }
+    const setLoadedHook = () => {
+      setLoaded(true);
+      setTimeout(updateSize, 20);
+    };
     if (document.readyState === "complete") {
       setLoadedHook();
     } else {
       window.addEventListener("load", setLoadedHook);
     }
     return () => window.removeEventListener("load", setLoadedHook);
-  }, []);
+  }, [data.height, data.width]);
 
   useEffect(() => {
     setZoomable(document.fullscreenEnabled);
@@ -549,7 +595,6 @@ export function Gallery({
     data.width,
     zoomContainerRef.current?.offsetWidth,
     zoomContainerRef.current?.offsetHeight,
-    loaded
   ]);
 
   const { theme } = useTheme();

@@ -1,6 +1,6 @@
 import {
   fetchBlogImageSlugs,
-  fetchGalleryImage,
+  fetchGalleryAllImage,
 } from "@/app/[lang]/fetchImage";
 import { Gallery } from "@/components/gallery";
 import { Locale } from "@/i18n-config";
@@ -11,7 +11,7 @@ export async function generateMetadata(props: {
   params: Promise<{ lang: Locale; slug: string; id: string }>;
 }): Promise<Metadata> {
   const params = await props.params;
-  const data = await fetchGalleryImage(params.id, params.lang);
+  const data = await fetchGalleryAllImage(params.id, params.lang);
   const siteName = params.lang === "ru" ? `Юлия Рибетки` : `Julia Ribetki`;
   const title = `${data?.title ?? ""} | ${siteName}`;
   const description = data?.description?.slice(0, 150) ?? "";
@@ -56,7 +56,7 @@ export default async function Page(props: {
 }) {
   const params = await props.params;
   const bis = await fetchBlogImageSlugs(params.lang, params.slug);
-  const image = await fetchGalleryImage(params.id, params.lang);
+  const image = await fetchGalleryAllImage(params.id, params.lang);
   const slugsArr = [];
   if (bis) slugsArr.push(bis.titleImageSlug);
   if (bis?.imageSlugs?.length) slugsArr.push(...bis.imageSlugs);
