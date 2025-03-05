@@ -67,10 +67,6 @@ export async function generateMetadata(
       googleBot: {
         index: false,
         follow: false,
-        noimageindex: false,
-        'max-video-preview': -1,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
       },
     },
   };
