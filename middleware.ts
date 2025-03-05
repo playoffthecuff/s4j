@@ -24,6 +24,7 @@ export function middleware(req: NextRequest) {
   if (
     [
       "/favicon.ico",
+      "/robots.txt",
       "/icn.png",
       "/icon.png",
       "/apple-icon.png",
