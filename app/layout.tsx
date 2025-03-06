@@ -1,10 +1,10 @@
+import { ThemeProvider } from "@/components/theme-provider";
 import { i18n } from "@/i18n-config";
 import clsx from "clsx";
 import type { Viewport } from "next";
 import { JetBrains_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
 
 export async function generateStaticParams() {
   return i18n.locales.map((l) => ({ lang: l }));
@@ -43,6 +43,9 @@ export default async function RootLayout({
 
   return (
     <html lang="en" suppressHydrationWarning>
+    <head>
+    <meta name="robots" content="noindex, nofollow">
+    </head>
       <body
         className={clsx(
           "min-h-full flex flex-col font-sans overflow-x-hidden transition-opacity duration-300 antialiased",
