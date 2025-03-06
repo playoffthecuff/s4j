@@ -1,10 +1,10 @@
-import { ThemeProvider } from "@/components/theme-provider";
 import { i18n } from "@/i18n-config";
 import clsx from "clsx";
 import type { Viewport } from "next";
 import { JetBrains_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
+import { ThemeProvider } from "@/components/theme-provider";
 
 export async function generateStaticParams() {
   return i18n.locales.map((l) => ({ lang: l }));
@@ -26,7 +26,7 @@ const fontSans = localFont({
 });
 
 const fontRabbit = localFont({
-  src: "../public/fonts/rabbits-elf.woff2",
+  src: "../../public/fonts/rabbits-elf.woff2",
   display: "swap",
   variable: "--font-rabbit",
 });

@@ -1,8 +1,0 @@
-.dropdown {
-  height: auto;
-  transition: height 0.4s;
-}
-
-.collapsed {
-  height: 140px;
-}
