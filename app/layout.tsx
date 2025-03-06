@@ -26,7 +26,7 @@ const fontSans = localFont({
 });
 
 const fontRabbit = localFont({
-  src: "../../public/fonts/rabbits-elf.woff2",
+  src: "../public/fonts/rabbits-elf.woff2",
   display: "swap",
   variable: "--font-rabbit",
 });
