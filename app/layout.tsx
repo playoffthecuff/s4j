@@ -44,7 +44,7 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
     <head>
-    <meta name="robots" content="noindex, nofollow">
+    <meta name="robots" content="noindex, nofollow"/>
     </head>
       <body
         className={clsx(
